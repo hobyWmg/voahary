@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+{{parent()}}
+{# <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css"/> #}
+{% endblock %}
+{% block header %}
+    <h1>
+       Entité
+    </h1>
+{% endblock %}
+
+{% block content %}
+ {% embed 'Embed/box.html.twig' %}
+		 {% block title %}
+            <i class="fa fa-list"></i>
+            Liste des entités
+         {% endblock %}
+        {% block boxContent %}
+            <div class="form-filter">
+                <div class="col-md-8"></div>
+                <div class="col-md-4">
+                    {% import ':Macro:buttons.html.twig' as buttons %}
+                    <div class="pull-right">
+                        {{ buttons.create({
+                            url: path('arssam_entity_create')
+                        }) }}
+                    </div>
+                </div>
+            </div>
+            {% from '@App/Entite/macros.html.twig' import list  %}
+            {% import ':Macro:misc.html.twig' as misc %}
+            {{ list(entites) }}
+            {% endblock %}
+    {% endembed %}
+{% endblock %}

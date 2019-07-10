@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Velirano - admin</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{asset('bundles/app/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    {# <link href="{{asset('bundles/app/bootstrap/css/fontawesome.css')}}" rel="stylesheet"> #}
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <!-- Custom styles for this template -->
+    <link href="{{asset('bundles/app/admin.css')}}" rel="stylesheet">
+
+</head>
+
+<body>
+    {% include "admin/flash.html.twig" %}
+    {% include "admin/navbar.html.twig" %}
+    <div id="wrapper">
+        {% include "admin/sidebar.html.twig" %}
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+        {% block body %}
+        {% endblock %}
+            </div>
+           </div> 
+    </div>
+    {% block javascripts %}
+    <!-- Bootstrap core JavaScript -->
+        <script src="{{asset('bundles/app/jquery/jquery.min.js')}}"></script>
+        <script src="{{asset('bundles/app/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+        <!-- Menu Toggle Script -->
+        <script>
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+        $(document).ready(function(){
+            $("#menu-toggle").click();
+            $("#menu-toggle").hide();
+        })
+        </script>
+    {% endblock %}
+</body>
+
+</html>

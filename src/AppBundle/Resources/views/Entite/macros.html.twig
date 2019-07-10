@@ -1,0 +1,37 @@
+{% macro list(entites) %}
+    {% import ':Macro:alerts.html.twig'  as alerts      %}
+    {% import ':Macro:buttons.html.twig' as buttons     %}
+    {% import ':Macro:misc.html.twig'    as misc        %}
+
+    {% if entites|length > 0 %}
+        <table id="entites" class="table table-datatable do-datatable">
+            <thead>
+            <tr>
+                {#<th class="text-center">{{ sylius_resource_sort('id', 'pomp.id'|trans) }}</th>#}
+                <th class="text-center">Nom</th>
+                <th class="text-center">Abréviation</th>
+                <th class="text-center">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for entite in entites %}
+                <tr id="{{ entite.id }}">
+                   
+                    <td>{{ entite.nom }}</td>
+                    <td>{{ entite.abreviation }}</td>
+                    <td>
+                        {{ buttons.update({ url :path('arssam_entity_edit', {'id': entite.id}) }) }}
+                        {# {{ buttons.delete({ url: path('arssam_entity_delete', {'id': entite.id}) }) }} #}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {# <div class="navigation">
+            {{ knp_pagination_render(users) }}
+        </div> #}
+    {% else %}
+        <hr>
+        {{ alerts.info('Pas de résultat') }}
+    {% endif %}
+{% endmacro %}

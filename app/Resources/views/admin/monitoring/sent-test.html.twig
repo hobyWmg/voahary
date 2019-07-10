@@ -1,0 +1,21 @@
+ {% import ':Macro:misc.html.twig'    as misc        %}
+ {% import ':Macro:alerts.html.twig'  as alerts      %}
+<h5>Demande envoyée <span class="label label-danger" id='nb_sent_{{entite.abreviation}}'></span></h5>
+<table class="table table-hover" id="table_monitoring_sent_{{entite.abreviation}}">
+        <thead style="background-color: #96968e;">
+            <tr>
+                <th width="15%">A :</th>
+                <th width="40%" class="no-sort text-center">Typologie</th>
+                <th width="35%">Date de l'envoi</th>
+                <th width="10%">Status</th>
+            </tr>
+        </thead>
+</table>
+<input type="hidden" id="sent_valueId_{{entite.abreviation}}" value="{{entite.id}}"/>
+{# <div class="navigation">
+            {{ knp_pagination_render(received) }}
+</div> #}
+{# {% else %}
+        {{ alerts.warning('Pas de résultat'|trans) }}
+{% endif %} #}
+               

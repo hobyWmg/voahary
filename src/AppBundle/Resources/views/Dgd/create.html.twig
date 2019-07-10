@@ -1,0 +1,82 @@
+{% extends '::base.html.twig' %}
+
+{% block header %}
+    <h1>
+        Douane
+    </h1>
+{% endblock %}
+
+{% block content %}
+    {% embed ':Embed:box.html.twig' %}
+        {% block title %}
+            <i class="fa fa-plus-circle"></i>
+            Ajout information pour la douane
+        {% endblock %}
+        {% block boxContent %}
+            <form action="{{ path('arssam_dgd_create') }}" method="post" class="form-horizontal" enctype ="multipart/form-data">
+                <i class="validateTips">Tous les champs avec un astérisque (<span class="form-required" title="Ce champ est requis."> * </span>) sont obligatoires</i><br><br>
+                <div class="form-group {% if form.contrevenants.vars.errors|length %}has-error {% endif %}">
+                    <label class="col-sm-2  ">{{ form_label(form.contrevenants) }} <span class="form-required" title="Ce champ est requis.">*</span></label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.contrevenants, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(form.contrevenants) }}
+                    </div>
+                </div>
+                <div class="form-group {% if form.numero.vars.errors|length %}has-error {% endif %}">
+                    <label class="col-sm-2  ">{{ form_label(form.numero) }} <span class="form-required" title="Ce champ est requis.">*</span></label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.numero, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(form.numero) }}
+                    </div>
+                </div>
+
+                <div class="form-group {% if form.infraction.vars.errors|length %}has-error {% endif %}">
+                    <label class="col-sm-2  ">{{ form_label(form.infraction) }} </label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.infraction, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(form.infraction) }}
+                    </div>
+                </div>
+                <div class="form-group {% if form.valeurCaf.vars.errors|length %}has-error {% endif %}">
+                    <label class="col-sm-2  ">{{ form_label(form.valeurCaf) }} </label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.valeurCaf, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(form.valeurCaf) }}
+                    </div>
+                </div>
+                <div class="form-group {% if form.dcDe.vars.errors|length %}has-error {% endif %}">
+                    <label class="col-sm-2  ">{{ form_label(form.dcDe) }}</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.dcDe, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(form.dcDe) }}
+                    </div>
+                </div>
+
+                <div class="form-group {% if form.situation.vars.errors|length %}has-error {% endif %}">
+                    <label class="col-sm-2  ">{{ form_label(form.situation) }}</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.situation, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(form.situation) }}
+                    </div>
+                </div>
+                <div class="form-group {% if form.marchandises.vars.errors|length %}has-error {% endif %}">
+                    <label class="col-sm-2  ">{{ form_label(form.marchandises) }} </label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.marchandises, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(form.marchandises) }}
+                    </div>
+                </div>
+                {% import ':Macro:buttons.html.twig' as buttons %}
+                {% import ':Macro:formButtons.html.twig' as formButtons %}
+                {{ formButtons.create() }}
+                {{ buttons.back({
+                    url : path('arssam_dgd_list'),
+                }) }}
+
+                <div class="hide">
+                    {{ form_rest(form) }}
+                </div>
+            </form>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

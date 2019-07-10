@@ -1,0 +1,7 @@
+{% macro manage(path, resource) %}
+    {% if resource.id is defined %}
+        {{ path(path, { id: resource.id }) }}
+    {% else %}
+        {{ path(path) }}
+    {% endif %}
+{% endmacro %}

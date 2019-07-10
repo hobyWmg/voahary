@@ -1,0 +1,19 @@
+
+{% trans_default_domain 'messages' %}
+    {% for type in ['success', 'danger' ,'error', 'info', 'warning'] %}
+        {% for message in app.session.flashbag.get(type) %}
+            {% set type = type == 'warning' ? 'block' : type %}
+            {#<div style="display: block; width: 100%; padding:15px 15px 0 15px;">#}
+			<div class="content-flash">
+			  <div class="alert alert-{{ type }} " style="margin-bottom: 0 !important">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true" style="margin-left: 15px;">&times;</button>
+                    {% if message["message"] is defined %}
+                        {{ message["message"]|trans }}
+                    {% else %}
+                        {{ message|trans }}
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+   

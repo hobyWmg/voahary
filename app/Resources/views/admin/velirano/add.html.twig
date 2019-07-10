@@ -1,0 +1,53 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block body %}
+<div class="card">
+    <div class="card-header">
+        <p>Velirano Add</p>
+    </div>
+    <div class="card-body">
+        <form action="{{ path('velirano_add') }}" method="post" class="form-horizontal">
+            <div class="form-group">
+                    <label class="col-sm-2">
+                        {{ form_label(form.promise) }}
+                    </label>
+                    <div class="col-sm-8 {% if form.promise.vars.errors|length %}has-error {% endif %}">
+                        {{ form_widget(form.promise, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(form.promise) }}
+                    </div>
+            </div>
+            <div class="form-group">
+                    <div class="col-sm-2">
+                        {{ form_label(form.comment) }}
+                    </div>
+                    <div class="col-sm-8 {% if form.comment.vars.errors|length %}has-error {% endif %}">
+                        {{ form_widget(form.comment, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(form.comment) }}
+                    </div>
+            </div>
+            {# <div class="form-group">
+                    <div class="col-sm-2">
+                        {{ form_label(form.percent) }}
+                    </div>
+                    <div class="col-sm-4 {% if form.percent.vars.errors|length %}has-error {% endif %}">
+                        {{ form_widget(form.percent, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(form.percent) }}
+                    </div>
+            </div> #}
+            <div class="form-group">
+                    <div class="col-sm-2">
+                        {{ form_label(form.status) }}
+                    </div>
+                    <div class="col-sm-4 {% if form.status.vars.errors|length %}has-error {% endif %}">
+                        {{ form_widget(form.status, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(form.status) }}
+                    </div>
+            </div>
+            <div style="display:none;">{{ form_rest(form) }}</div>
+            <button type="submit" class="btn  btn-success pull-right">
+                    Ajouter
+            </button>
+        </form>   
+    </div>
+</div>
+{% endblock %}

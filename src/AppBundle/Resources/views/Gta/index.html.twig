@@ -1,0 +1,194 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+{{parent()}}
+    <style>
+        .form-group input[type="checkbox"] {
+            display: none;
+        }
+
+        .form-group input[type="checkbox"] + .btn-group > label span {
+            width: 20px;
+        }
+
+        .form-group input[type="checkbox"] + .btn-group > label span:first-child {
+            display: none;
+        }
+        .form-group input[type="checkbox"] + .btn-group > label span:last-child {
+            display: inline-block;
+        }
+
+        .form-group input[type="checkbox"]:checked + .btn-group > label span:first-child {
+            display: inline-block;
+        }
+        .form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
+            display: none;
+        }
+    </style>
+{% endblock %}
+{% block header %}
+    <h1>
+       Gendarmerie
+    </h1>
+{% endblock %}
+
+{% block content %}
+{% embed 'Embed/box.html.twig' %}
+    {% block title %}
+        <i class="fa fa-list"></i>
+        Liste des infos de la gendarmerie
+     {% endblock %}
+    {% block boxContent %}
+        <div class="form-filter">
+            <div class="col-md-8"></div>
+            <div class="col-md-4">
+                {% import ':Macro:buttons.html.twig' as buttons %}
+                <div class="pull-right">
+                    {{ buttons.create({
+                        url: path('arssam_gta_create')
+                    }) }}
+                </div>
+            </div>
+        </div>
+        {% if gtas|length > 0 %}
+        <form id="form-gendarmerie" method="post" action="{{ path("arssam_exportxls_gendarmerie") }}">
+            <div class="[ col-xs-12 col-sm-4 ]">
+                <div class="[ form-group ]">
+                    <input type="checkbox" name="fancy-checkbox-numero" id="fancy-checkbox-numero" autocomplete="off"/>
+                    <div class="[ btn-group ]">
+                        <label for="fancy-checkbox-numero" class="[ btn btn-primary ]">
+                            <span class="[ glyphicon glyphicon-ok ]"></span>
+                            <span> </span>
+                        </label>
+                        <label for="fancy-checkbox-numero" class="[ btn btn-default active]">
+                            Numéro
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="[ col-xs-12 col-sm-4 ]">
+                <div class="[ form-group ]">
+                    <input type="checkbox" name="fancy-checkbox-date" id="fancy-checkbox-date" autocomplete="off" />
+                    <div class="[ btn-group ]">
+                        <label for="fancy-checkbox-date" class="[ btn btn-primary ]">
+                            <span class="[ glyphicon glyphicon-ok ]"></span>
+                            <span> </span>
+                        </label>
+                        <label for="fancy-checkbox-date" class="[ btn btn-default active ]">
+                            Date
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="[ col-xs-12 col-sm-4 ]">
+                <div class="[ form-group ]">
+                    <input type="checkbox" name="fancy-checkbox-heure" id="fancy-checkbox-heure" autocomplete="off" />
+                    <div class="[ btn-group ]">
+                        <label for="fancy-checkbox-heure" class="[ btn btn-primary ]">
+                            <span class="[ glyphicon glyphicon-ok ]"></span>
+                            <span> </span>
+                        </label>
+                        <label for="fancy-checkbox-heure" class="[ btn btn-default active ]">
+                            Heure
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="[ col-xs-12 col-sm-4 ]">
+                <div class="[ form-group ]">
+                    <input type="checkbox" name="fancy-checkbox-infraction" id="fancy-checkbox-infraction" autocomplete="off" />
+                    <div class="[ btn-group ]">
+                        <label for="fancy-checkbox-infraction" class="[ btn btn-primary ]">
+                            <span class="[ glyphicon glyphicon-ok ]"></span>
+                            <span> </span>
+                        </label>
+                        <label for="fancy-checkbox-infraction" class="[ btn btn-default active ]">
+                            Infractions
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="[ col-xs-12 col-sm-6 ]">
+                <div class="[ form-group ]">
+                    <input type="checkbox" name="fancy-checkbox-suspect" id="fancy-checkbox-suspect" autocomplete="off" />
+                    <div class="[ btn-group ]">
+                        <label for="fancy-checkbox-suspect" class="[ btn btn-primary ]">
+                            <span class="[ glyphicon glyphicon-ok ]"></span>
+                            <span> </span>
+                        </label>
+                        <label for="fancy-checkbox-suspect" class="[ btn btn-default active ]">
+                            Véhicule suspect
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="[ col-xs-12 col-sm-4 ]">
+                <label>Date</label>
+            </div>
+            <div class="[ col-xs-12 col-sm-4 ]">
+                <div class="[ form-group ]">
+                    <input type="text" class="form-control doDatepicker" name="dateDeb" value="" placeholder="Du" id="dateDeb">
+                </div>
+            </div>
+            <div class="[ col-xs-12 col-sm-4 ]">
+                <div class="[ form-group ]">
+                    <input type="text" class="form-control doDatepicker" name="dateFin" value="" placeholder="Au" id="dateFin">
+                </div>
+            </div>
+
+            <div class="[ col-xs-12 col-sm-3 ]">
+                <label>Infraction</label>
+            </div>
+            <div class="[ col-xs-12 col-sm-3 ]">
+                <select class="form-control" id="selInfraction" name="selInfraction">
+                    <option value="-1">Tous</option>
+                    <option value="1">Oui</option>
+                    <option value="0">Non</option>
+                </select>
+            </div>
+            <div class="[ col-xs-12 col-sm-3 ]">
+                <label>Véhicule suspect</label>
+            </div>
+            <div class="[ col-xs-12 col-sm-3 ]">
+                <select class="form-control" id="selVehicule" name="selVehicule">
+                    <option value="-1">Tous</option>
+                    <option value="1">Oui</option>
+                    <option value="0">Non</option>
+                </select>
+            </div>
+            <div class="[ col-xs-12 col-sm-4 ]">
+                <input type="submit" class="btn btn-info" value="Exporter">
+            </div>
+            <div class="[ col-xs-12 col-sm-8 ]">
+                &nbsp;
+            </div>
+                <table class="table table-datatable do-datatable">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Numéro du plaque</th>
+                            <th class="text-center">Date</th>
+                            <th class="text-center">Heure</th>
+                            <th class="text-center">Infractions</th>
+                            <th class="text-center">Véhicule suspect</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for gtum in gtas %}
+                        <tr>
+                            <td>{{ gtum.numPlaque }}</td>
+                            <td>{% if gtum.daty %}{{ gtum.daty|date('d/m/Y') }}{% endif %}</td>
+                            <td>{{ gtum.lera }}</td>
+                            <td>{{ gtum.infractions }}</td>
+                            <td>{% if gtum.suspect %}<span class="label label-success">oui</span>{% else %}<span class="label label-danger">non</span>{% endif %}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+        </form>
+            {% else %}
+                {{ alerts.info('Pas de résultat') }}
+            {% endif %}
+
+    {% endblock %}
+{% endembed %}
+{% endblock %}

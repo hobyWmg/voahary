@@ -1,0 +1,21 @@
+<div class="{% block boxClass %}box{% endblock %}">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            {% block title %}{% endblock %}
+        </h3>
+        <div class="box-tools pull-right">
+            {% block boxTools %}
+                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            {% endblock %}
+        </div>
+    </div>
+    <div class="box-body">
+        {% block boxContent %}
+        {% endblock %}
+    </div>
+    {% block footer %}
+        {# by default, no footer #}
+    {% endblock %}
+</div>

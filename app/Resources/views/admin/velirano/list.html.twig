@@ -1,0 +1,51 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block body %}
+<div class="card">
+<div class="card-header">
+<span class="title"><i class="fas fa-list-alt"></i> Les velirano</span>
+<a class="btn btn-primary" href="{{path('velirano_add')}}" style="float:right;"><span class="glyphicon glyphicon-plus"></span> Plus</a>
+</div>
+<div class="card-body">
+    <table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Promise</th>
+            <th scope="col">Status</th>
+            <th scope="col">Percent</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for v in veliranoList %}
+        <tr>
+            <td>{{v.promise}}</td>
+            <td>{{v.status}}</td>
+            <td>{{v.percent}}%</td>
+            <td width="20%">
+                <a class="btn btn-info" href="{{path('velirano_edit',{id:v.id})}}">Edit</a>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirm_delete_{{v.id}}">Delete</button>
+            </td>
+        </tr>
+        <div class="modal fade" id="confirm_delete_{{v.id}}" tabindex="-1" role="dialog" aria-labelledby="confirm_delete_{{v.id}}" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header red">
+                        <h5 class="modal-title" id="exampleModalLabel">Êtes-vous sûr de vouloir supprimer this VELIRANO ?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">NON</button>
+                        <a class="btn btn-danger" href="{{path('velirano_delete',{'id':v.id})}}">OUI</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    {% endfor %}   
+    </tbody>
+</table>
+</div>
+</div>
+{% endblock %}

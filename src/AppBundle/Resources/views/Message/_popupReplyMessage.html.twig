@@ -1,0 +1,54 @@
+<div class="modal fade" id="modalReplyMessage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div id="popupReplyMessage" class="modal-content">
+            <div class="modal-header" style="padding: 30px 30px 0px; color:#1d3399; border-radius: 10px; border: none !important;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title modal-titleh1" id="myModalLabel">Réponse</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{{path('arssam_message_reply',{'id':messages.id})}}" role="form" class="form-horizontal" enctype ="multipart/form-data">
+                    <div class="box-body">
+                        {# <h2 class="nomargin">Nouveau message</h2> #}
+                        {# <div class="form-group">
+                            <div class="col-md-12">
+                                {{ form_widget(formR.sujet, {'attr': {'class': 'form-control', 'placeholder': "Sujet : *" }}) }}
+                            </div>
+                        </div> #}
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                {{ form_widget(formR.text, {'attr': {'class': 'form-control', 'placeholder': "Texte : *"}}) }}
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-sm-2  ">{{ form_label(formR.file) }}</label>
+                            <div class="col-sm-6">
+                            {{ form_widget(formR.file) }}
+                                {# <p class="note-image"><small>Note: Ajouter une photo au format jpg / jpeg / png</small></p> #}
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="col-sm-offset-2 col-sm-6">
+                                <hr/>
+                                <p>{{ form_widget(formR.papier) }}
+                                Un document papier a été envoyé en guise de réponse</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        {{ form_widget(formR._token) }}
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                          <div class="pull-right">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o fa-margin"></i> Envoyer</button>
+                            <button type="reset" class="btn orange"><i class="fa fa-times fa-margin"></i> Annuler</button>
+                          </div>
+
+                        </div>
+                        <!-- /.box-footer -->
+                    </div>
+                   </form>
+            </div>
+        </div>
+    </div>
+</div> 

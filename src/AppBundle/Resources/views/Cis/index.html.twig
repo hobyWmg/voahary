@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{parent()}}
+{% endblock %}
+{% block header %}
+    <h1>
+        Voyageurs
+    </h1>
+{% endblock %}
+
+{% block content %}
+    {% embed 'Embed/box.html.twig' %}
+        {% block title %}
+            <i class="fa fa-list"></i>
+            Liste des infos des voyageurs
+        {% endblock %}
+        {% block boxContent %}
+            <div class="form-filter">
+                <div class="col-md-8"></div>
+                <div class="col-md-4">
+                    {% import ':Macro:buttons.html.twig' as buttons %}
+                    <div class="pull-right">
+                        {{ buttons.create({
+                            url: path('arssam_cis_create')
+                        }) }}
+                    </div>
+                </div>
+            </div>
+            {% if cis|length > 0 %}
+            <form id="form-voyageur" method="post" action="{{ path("arssam_exportxls_voyageur") }}">
+                <div class="[ col-xs-12 col-sm-4 ]">
+                    <label>Date</label>
+                </div>
+                <div class="[ col-xs-12 col-sm-4 ]">
+                    <div class="[ form-group ]">
+                        <input type="text" class="form-control doDatepicker" name="dateDeb" value="" placeholder="Du" id="dateDeb">
+                    </div>
+                </div>
+                <div class="[ col-xs-12 col-sm-4 ]">
+                    <div class="[ form-group ]">
+                        <input type="text" class="form-control doDatepicker" name="dateFin" value="" placeholder="Au" id="dateFin">
+                    </div>
+                </div>
+
+                <div class="[ col-xs-12 col-sm-4 ]">
+                    <label>Enqête en cours</label>
+                </div>
+                <div class="[ col-xs-12 col-sm-4 ]">
+                    <select class="form-control" id="selStatus" name="selStatus">
+                        <option value="-1">Tous</option>
+                        <option value="1">Oui</option>
+                        <option value="0">Non</option>
+                    </select>
+                </div>
+                <div class="[ col-xs-12 col-sm-4 ]">
+                    &nbsp;
+                </div>
+                <div class="[ col-xs-12 col-sm-12 ]">
+                    <input type="submit" class="btn btn-info" value="Exporter">
+                </div>
+            </form>
+
+                    <table class="table table-datatable">
+                        <thead>
+                        <tr>
+                            <th class="text-center">Date de création</th>
+                            <th class="text-center">Nom</th>
+                            <th class="text-center">Prénom</th>
+                            <th class="text-center">Autre infomation</th>
+                            <th class="text-center">Réseaux</th>
+                            <th class="text-center">Enquête en cours</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for c in cis %}
+                            <tr>
+                                <td>{{ c.createdAt|date('d/m/Y') }}</td>
+                                <td>{{ c.nom }}</td>
+                                <td>{{ c.prenom }}</td>
+                                <td>{{ c.autre }}</td>
+                                <td>{{ c.reseaux }}</td>
+                                <td>{% if c.status %}<span class="label label-success">Oui</span>{% else %}<span class="label label-danger">Non</span>{% endif %}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                     <div class="navigation">
+                                        {{ knp_pagination_render(cis) }}
+                                 </div>
+                {% else %}
+                <hr>
+                    {{ alerts.info('Pas de résultat') }}
+                {% endif %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

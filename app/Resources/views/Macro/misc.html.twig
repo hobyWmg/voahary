@@ -1,0 +1,60 @@
+{# {% macro pagination(paginator, options) %}
+{% if paginator.haveToPaginate()|default(false) %}
+<div class="row">
+    <div class="col-xs-9">
+        {{ pagerfanta(paginator, 'twitter_bootstrap3_translated', options|default({})) }}
+    </div>
+
+    <div class="col-xs-3">
+        <div class="pull-right">
+            <div class="btn-group paginator">
+                {{ sylius_resource_paginate(paginator, [10,20,30]) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endmacro %} #}
+
+{% macro state_label(state) %}
+{% if state == 'true' %}
+    {% set label = 'pomp.yes' %}
+    {% set class = 'label-success' %}
+{% elseif state == 'default'%}
+    {% set label = 'pomp.default' %}
+    {% set class = 'label-success' %}
+{% else %}
+    {% set label = 'pomp.no' %}
+    {% set class = 'label-danger' %}
+{% endif %}
+
+<span class="label {{ class }}">{{ label|trans }}</span>
+{% endmacro %}
+
+{% macro state_demande(state) %}
+{% if state == 'true' %}
+    {% set label = 'Traité' %}
+    {% set class = 'label-success' %}
+{% else %}
+    {% set label = 'Non traité' %}
+    {% set class = 'label-danger' %}
+{% endif %}
+
+<span class="label {{ class }}">{{ label|trans }}</span>
+{% endmacro %}
+
+
+
+{% macro actif_label(state) %}
+    {% if state == 'true' %}
+        {% set label = 'actif' %}
+        {% set class = 'label-success' %}
+    {% elseif state == 'default'%}
+        {% set label = 'pomp.default' %}
+        {% set class = 'label-success' %}
+    {% else %}
+        {% set label = 'inactif' %}
+        {% set class = 'label-danger' %}
+    {% endif %}
+<span class="label {{ class }}">{{ label|trans }}</span>
+{% endmacro %}

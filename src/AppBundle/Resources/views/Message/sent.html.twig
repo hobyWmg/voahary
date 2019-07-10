@@ -1,0 +1,59 @@
+{% extends "base_message.html.twig" %}
+{% block vv %}
+{% embed 'Embed/box.html.twig' %}
+                {% block title %}
+                    <i class='fa fa-envelope'></i> Demandes envoyées
+                {% endblock %}
+                {% block boxContent %}
+                <div class="mailbox-messages">
+                          <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    {# <th class="no-sort text-center"></th> #}
+                                    <th>A :</th>
+                                    <th class="no-sort text-center">Sujet / Message</th>
+                                    <th class="no-sort" width="20%">Date de réception</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% if messages %}
+                            {% for m in messages %}
+                                <tr {% if m.vue == 0 %}class="active"{% endif %}>
+                                  {# <td class="text-center"><input type="checkbox" class="checkthis" name="element[]" value="{{ m.id }}" /></td> #}
+                                  <td class="mailbox-name align-vertical"><a href="#" class="msg_sent">{{ m.entiteReceiver.abreviation }}</a></td>
+                                  <td class="mailbox-subject align-vertical msg_sent"><a  class="msg_sent" href="{{ path('arssam_message_sent_show', {'id': m.id}) }}"><b>{{ m.sujet|truncate(30, true, '...') }}</b></a></td>
+                                  <td class="mailbox-date align-vertical">{{ m.createdAt|date("d/m/Y H:i") }}</td>
+                                </tr>
+                            {% endfor %}
+                             {% else %}
+                                 <tr>
+                                     <td colspan="4">Pas de résultat</td>
+                                 </tr>    
+                            {% endif %}
+                            </tbody>
+                          </table>
+                          <!-- /.table -->
+                            
+                           <div class="btn-group dropup action-group">
+                            {# <button class="btn btn-default btn-flat" aria-haspopup="true" data-toggle="dropdown" type="button">Actions groupées</button> #}
+                            {# <button aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" class="btn btn-default btn-flat dropdown-toggle" type="button">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Action</span>
+                            </button> #}
+                            {# <ul class="dropdown-menu">
+                                <li><a href="javascript:;" id="select-all"><i class="fa fa-fw fa-square-o"></i>Sélectionner tout</a></li>
+                                <li><a href="javascript:;" id="unselect-all"><i class="fa fa-fw fa-square-o"></i>Désélectionner tout</a></li>
+                                <li class="divider" role="separator"></li>
+                                <li><a href="javascript:;" id="delete-selected" onclick="return groupAction('delete', 'Êtes-vous sûr de vouloir supprimer ces messages?');"><i class="fa fa-fw fa-trash-o"></i>Supprimer la sélection</a></li>
+                            </ul> #}
+                        </div>
+                        {% if messages %}
+                                <div class="navigation">
+                                        {{ knp_pagination_render(messages) }}
+                                 </div>
+                            {% endif %}
+                    </form>        
+                </div>  
+                {% endblock %}
+        {% endembed %}
+{% endblock %}        

@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+{% import ':Macro:alerts.html.twig'  as alerts      %}
+{% block header %}
+     <h1>Historiques des imports</h1>
+{% endblock %}
+{% block content %}
+ {% embed 'Embed/box.html.twig' %}
+         {% block title %}
+            <i class="fa fa-list"></i>
+            Historiques list
+         {% endblock %}
+          {% block boxContent %}
+          {{ render(controller('AppBundle:Admin:filterLog')) }}
+          {% if activityLogs.getTotalItemCount %}
+            <table class="table table-datatable">
+                <thead>
+                    <tr>
+                        <th>Entité</th>
+                        <th>User</th>
+                        <th>Activité</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Error</th>
+                        <th>Date</th>
+                        {# <th>Updatedat</th> #}
+                        {# <th>Actions</th> #}
+                    </tr>
+                </thead>
+                <tbody>
+                {% for activityLog in activityLogs %}
+                    <tr>
+                        <td>{% if activityLog.user %}{{ activityLog.user.entite.abreviation }}{% else %}-{% endif %}</td>
+                        <td>{% if activityLog.user %}{{ activityLog.user.username }}{% else %}-{% endif %}</td>
+                        <td>{{ activityLog.action }}</td>
+                        <td>{{ activityLog.description }}</td>
+                        <td>{% if activityLog.success %}<span class="label label-success">success</span>{% else %}<span class="label label-danger">error</span>{% endif %}</td>
+                         <td>{{ activityLog.error }}</td>
+                        <td>{% if activityLog.createdAt %}{{ activityLog.createdAt|date('d/m/Y H:i') }}{% endif %}</td>
+                        {# <td>{% if activityLog.updatedAt %}{{ activityLog.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td> #}
+                        {# <td>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('adminarssam_activitylog_show', { 'id': activityLog.id }) }}">show</a>
+                                </li>
+                            </ul>
+                        </td> #}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="navigation">
+                    {{ knp_pagination_render(activityLogs) }}
+            </div>
+            {% else %}
+                {{ alerts.info('Pas de résultat') }}
+            {% endif %}
+         {% endblock %}
+    {% endembed %}
+    
+{% endblock %}
+{% block javascripts %}
+{{parent()}}
+<script>
+    $('#reset').click(function (e) {
+                $('#dateDeb').val('');
+                $('#entite').val('').trigger("change");
+                $('#form-filter-log').submit();
+            });
+</script>
+{% endblock %}

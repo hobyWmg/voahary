@@ -1,0 +1,114 @@
+{% macro button(options = {}) %}
+    {% set defaultParams = {
+        'btnClass' : 'btn-default',
+        'class'    : null,
+        'title'    : null,
+        'icon'     : null,
+        'badge'    : null,
+        'text'     : null,
+        'target'   : null,
+        'width'    : null
+    } %}
+    {% set params = defaultParams|merge(options) %}
+
+        <a href="{{ params.url }}" {% if params.target %} target="_blank" {% endif %} data-placement="top" title="{{ params.title }}"  class="btn orange {{ params.class }} {{ params.btnClass }}" style="{% if params.text %} width: {% if params.width %}{{ params.width }}{% else %}80{% endif %}%;{% endif %}margin: 0 0 5px 0; ">
+        {% if params.icon is not null %}
+            <i class="fa fa-{{ params.icon }}"{% if params.text %} style="text-align: center; float: left;"{% endif %}></i>
+            {% if params.text %}<div style="font-family: 'Lato',sans-serif;">{{ params.text }}</div>{% endif %}
+        {% endif %}
+        <span>{{ params.name|trans }}</span> 
+        {# {% if params.badge is integer %}
+            <span class="badge">{{ params.badge }}{% if params.text %}{{ params.text }}{% endif %}</span>
+        {% endif %} #}
+    </a>
+{% endmacro %}
+
+{% macro show(options = {}) %}
+    {% set defaultParams = {
+        'btnClass' : 'btn-default',
+        'name'     : 'Afficher',
+        'icon'     : 'eye',
+        'title'    : 'Afficher'|trans,
+        'text'     : null,
+        'target'   : null,
+    } %}
+    {% set params = defaultParams|merge(options) %}
+
+    {% import _self as buttons %}
+    {{ buttons.button(params) }}
+{% endmacro %}
+
+{% macro create(options = {}) %}
+    {% set defaultParams = {
+        'btnClass' : 'btn-success',
+        'name'     : 'Créer',
+        'icon'     : 'plus-square',
+        'text'     : null,
+        'target'   : null,
+        'title'    : 'Créer'|trans
+    } %}
+    {% set params = defaultParams|merge(options) %}
+
+    {% import _self as buttons %}
+    {{ buttons.button(params) }}
+{% endmacro %}
+
+{% macro update(options = {}) %}
+    {% set defaultParams = {
+        'btnClass' : 'btn-primary',
+        'name'     : 'Modifier',
+        'icon'     : 'pencil',
+        'title'    : 'Modifier'|trans,
+        'text'     : null,
+        'target'   : null,
+    } %}
+    {% set params = defaultParams|merge(options) %}
+
+    {% import _self as buttons %}
+    {{ buttons.button(params) }}
+{% endmacro %}
+
+{% macro manage(options = {}) %}
+    {% set defaultParams = {
+        'btnClass' : 'btn-primary',
+        'icon'     : 'folder-open',
+        'title'    : 'Gérer'|trans,
+        'name'     : null,
+        'text'     : null,
+        'target'   : null,
+    } %}
+    {% set params = defaultParams|merge(options) %}
+
+    {% import _self as buttons %}
+    {{ buttons.button(params) }}
+{% endmacro %}
+
+{% macro back(options = {}) %}
+    {% set defaultParams = {
+        'btnClass' : 'orange',
+        'name'     : 'Retour',
+        'icon'     : 'angle-left',
+        'title'    : 'Retour'|trans,
+        'text'     : null,
+        'target'   : null,
+    } %}
+    {% set params = defaultParams|merge(options) %}
+
+    {% import _self as buttons %}
+    {{ buttons.button(params) }}
+{% endmacro %}
+
+{% macro delete(options = {}) %}
+    {% set defaultParams = {
+        'btnClass' : 'btn-danger btn-confirm',
+        'name'     : 'Désactiver',
+        'icon'     : 'trash-o',
+        'title'    : 'Désactiver'|trans,
+        'text'     : null,
+        'target'   : null,
+    } %}
+    {% set params = defaultParams|merge(options) %}
+
+    {% import _self as buttons %}
+    {{ buttons.button(params) }}
+{% endmacro %}

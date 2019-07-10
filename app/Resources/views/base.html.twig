@@ -1,0 +1,272 @@
+{# Now private, kept for reference #}
+{% import ':Macro:alerts.html.twig'      as alerts      %}
+{% import ':Macro:paths.html.twig'       as paths       %}
+{% import ':Macro:buttons.html.twig'     as buttons     %}
+{% import ':Macro:formButtons.html.twig' as formButtons %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %}Backoffice{% endblock %}</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    {% block stylesheets %}
+        <!-- Loading Bootstrap from cdn -->
+        {# <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> #}
+        <link href="{{asset('bundles/app/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link href="{{asset('bundles/app/plugins/font-awesome-4/css/font-awesome.min.css')}}" rel="stylesheet">
+        {# <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"> #}
+        <!-- Ionicons -->
+        {# <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"> #}
+        {#<link href="//raw.githubusercontent.com/t0m/select2-bootstrap-css/bootstrap3/select2-bootstrap.css" rel="stylesheet" type="text/css" />#}
+        {# Loaded from cdn #}
+        {% stylesheets output='public/compiled/compiled.css' filter='cssrewrite'
+            '@AppBundle/Resources/public/plugins/jasny-bootstrap/css/jasny-bootstrap.min.css'
+            '@AppBundle/Resources/public/dist/css/AdminLTE.css'
+            '@AppBundle/Resources/public/dist/css/skins/skin-blue.css'
+            '@AppBundle/Resources/public/css/skins/flat/green.css'
+            'bundles/app/plugins/datepicker/datepicker3.css'
+            'bundles/app/dist/css/alt/AdminLTE-select2.min.css'
+            '@AppBundle/Resources/public/css/main.css'
+        %}
+        <link rel="stylesheet" href="{{ asset('bundles/app/css/stylebo.css?k='~random('123456789')) }}" />
+        {# <link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css" type="text/css" /> #}
+        <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+        {% endstylesheets %}
+        <link rel="stylesheet" type="text/css" href="{{asset('bundles/app/css/datatable.css')}}"/>
+        <style>
+            hr {
+                    border: none;
+                    border-top: 1px solid #c5c3c3;;
+                    color: #c5c3c3;;
+                    overflow: visible;
+                    text-align: center;
+                    height: 5px;
+                }
+
+                /*hr:after {
+                    background: #fff;
+                    content: 'OU';
+                    padding: 0 4px;
+                    position: relative;
+                    top: -13px;
+                }*/
+            .is_read{
+                color: #ccc !Important;
+            }   
+            .header-notif{
+                padding:5px;
+                text-align:center;
+                border-bottom: 1px solid #f4f4f4;
+            } 
+            .main-sidebar{       
+                background-color: #1a2226 !Important;
+            }
+            .wrapper{
+                background-color: #ecf0f5 !Important;
+            }
+            .msg_sent{
+                color : #ccc !Important;
+            }
+            .cache-loader{
+                width: 100%;
+                background-color: #413c3c;
+                height: 100%;
+                position: absolute;
+                z-index: 9000;
+                opacity: 0.6;
+                background-image: url("{{ asset('bundles/app/img/cache-loader.gif') }}");
+                background-repeat: no-repeat;
+                background-position: 50% 28%;
+                background-size: 4%;
+            }
+        </style>
+    {% endblock %}
+	<link rel="icon" href="{{ asset('bundles/app/img/cropped-logo_FB_profile-1-32x32.png') }}" sizes="32x32" />
+    </head>
+
+{% block body %}
+<div class="cache-loader hide"></div>
+{% set routeName = app.request.attributes.get('_route') %}
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+    <!-- Main Header -->
+    <header class="main-header">
+
+        <!-- Logo -->
+        <a href="{{ path('velirano_admin_homepage') }}" class="logo">
+           Centre de Coordination
+        </a>
+        <!-- Header Navbar -->
+        {% block navbar %}
+            {% include ':Menu:navbar.html.twig' with {'routeName':routeName } %}
+        {% endblock %}
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    {% block sidebar %}
+        {% include ':Menu:sidebar.html.twig' with {'routeName': routeName } %}
+    {% endblock %}
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        {% block flashMessages %}
+            {% include ':Menu:flashes.html.twig' %}
+        {% endblock %}
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            {% block header %}
+                <h1>
+                    Extend
+                    <small>me</small>
+                </h1>
+            {% endblock %}
+            {% block breadcrumb %}
+                
+            {% endblock %}
+        </section>
+        <section class="content">
+            {% block content %}
+                Extend me!
+            {% endblock %}
+            {% include ':Macro:confirmModal.html.twig' %}
+        </section>
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    <footer class="main-footer" style="clear: both">
+        <!-- To the right -->
+        <div class="pull-right hidden-xs">
+
+        </div>
+        <!-- Default to the left -->
+        <strong>Copyright &copy; {{ "now"|date("Y") }} <a href="#">{{plateform_name}}</a>.</strong> All rights reserved.
+    </footer>
+
+    <!-- Control Sidebar -->
+    {% block controlSidebar %}
+        {#{% include ':menu:controlSidebar.html.twig' %}#}
+    {% endblock %}
+    <!-- /.control-sidebar -->
+    <!-- Add the sidebar's background. This div must be placed
+         immediately after the control sidebar -->
+    <div class="control-sidebar-bg"></div>
+    {% include ':admin:_popupImportNotDid.html.twig' %}
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED JS SCRIPTS -->
+
+{% block javascripts %}
+    {# <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script> #}
+    {% javascripts output='public/compiled/compiled.js'
+        'bundles/app/plugins/jQuery/jquery-3.2.1.min.js'
+        'bundles/app/plugins/jQueryUI/jquery-ui.min.js'
+    '@AppBundle/Resources/public/bootstrap/js/bootstrap.min.js'
+    '@AppBundle/Resources/public/plugins/jasny-bootstrap/js/jasny-bootstrap.min.js'
+    'bundles/app/plugins/daterangepicker/moment.min.js'
+    'bundles/app/plugins/fullcalendar/fullcalendar.min.js'
+    'bundles/app/plugins/select2/select2.min.js'
+    'bundles/app/dist/js/app.min.js'
+    '@AppBundle/Resources/public/js/main.js'
+    %}
+    {# <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script> #}
+
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script src="{{ asset('bundles/app/plugins/datepicker/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ asset('bundles/app/plugins/datepicker/locales/bootstrap-datepicker.fr.js') }}"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    <script type="text/javascript" charset="utf8" src="{{asset('bundles/app/js/datatable.js')}}"></script>
+    <script type="text/javascript">
+    function addCache(){
+            $('.cache-loader').removeClass('hide');
+        }
+        function removeCache(){
+            $('.cache-loader').addClass('hide');
+        }
+    $(document).ready(function(){
+        $('.do-datatable').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": true,
+                    "ordering": true,
+                    "info": false,
+                    "autoWidth": true,
+                    "language": {
+                        "sSearch": "Recherche:",
+                        "oPaginate": {
+                        "sFirst": "Premier", "sLast": "Dernier", "sNext": "Suivant", "sPrevious": "Précédent"
+                        },
+                    }
+
+                    });
+        $(".doDatepicker").datepicker({
+                   language : 'fr',
+                   endDate: new Date(),
+                });                    
+    });
+    {% if is_granted('ROLE_SUPER_ADMIN') == false %}
+        $(document).ready(function(){
+                $.ajax({
+                    type: "POST",
+                    dataType: "html",
+                    url: "{{ path('arssam_update_display') }}",
+                    cache: false,
+                    success: function(data){
+                        $(".messages-menu").html(data);
+                    },
+                    error:function(jqXHR, textStatus, errorThrown) {
+                        console.log("Error: "+textStatus+" "+errorThrown);
+                    }
+                });
+            });
+            setInterval(function() {
+                var route = "{{ path('arssam_update_display') }}";
+                $.ajax({
+                    type: "POST",
+                    dataType: "html",
+                    url: route,
+                    cache: false,
+                    success: function(data){
+                        $(".messages-menu").html(data);
+                    },
+                    error:function(jqXHR, textStatus, errorThrown) {
+                        console.log("Error: "+textStatus+" "+errorThrown);
+                    }
+                });
+            },30000);
+            {% if "now"|date('H:i') >= '17:00' %}
+          var interval =   setInterval(function() {
+                var routeC = "{{ path('arssam_check_import') }}";
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: routeC,
+                    data : "&entite="+{{app.user.entite.id}},
+                    cache: false,
+                    success: function(data){
+                       if(data.result==false){
+                           $('#import-not-did').modal('show')
+                       }else{
+                           clearInterval(interval);
+                       }
+                    },
+                    error:function(jqXHR, textStatus, errorThrown) {
+                        console.log("Error: "+textStatus+" "+errorThrown);
+                    }
+                });
+            },30000);
+            {% endif %}
+    {% endif %}
+    </script>
+{% endblock %}
+</body>
+{% endblock %}
+</html>

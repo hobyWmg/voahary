@@ -1,0 +1,184 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+{{parent()}}
+    <style>
+        .form-group input[type="checkbox"] {
+            display: none;
+        }
+
+        .form-group input[type="checkbox"] + .btn-group > label span {
+            width: 20px;
+        }
+
+        .form-group input[type="checkbox"] + .btn-group > label span:first-child {
+            display: none;
+        }
+        .form-group input[type="checkbox"] + .btn-group > label span:last-child {
+            display: inline-block;
+        }
+
+        .form-group input[type="checkbox"]:checked + .btn-group > label span:first-child {
+            display: inline-block;
+        }
+        .form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
+            display: none;
+        }
+    </style>
+{% endblock %}
+{% block header %}
+    <h1>
+       Douanes
+    </h1>
+{% endblock %}
+
+{% block content %}
+   {% embed 'Embed/box.html.twig' %}
+    {% block title %}
+        <i class="fa fa-list"></i>
+        Liste des infractions
+     {% endblock %}
+    {% block boxContent %}
+        <div class="form-filter">
+            <div class="col-md-8"></div>
+            <div class="col-md-4">
+                {% import ':Macro:buttons.html.twig' as buttons %}
+                <div class="pull-right">
+                    {{ buttons.create({
+                        url: path('arssam_dgd_create')
+                    }) }}
+                </div>
+            </div>
+        </div>
+        {% if dgds|length > 0 %}
+        <form id="form-douane" method="post" action="{{ path("arssam_exportxls_douane") }}">
+            <div class="[ col-xs-12 col-sm-4 ]">
+                <div class="[ form-group ]">
+                    <input type="checkbox" name="fancy-checkbox-contrevenant" id="fancy-checkbox-contrevenant" autocomplete="off"/>
+                    <div class="[ btn-group ]">
+                        <label for="fancy-checkbox-contrevenant" class="[ btn btn-primary ]">
+                            <span class="[ glyphicon glyphicon-ok ]"></span>
+                            <span> </span>
+                        </label>
+                        <label for="fancy-checkbox-contrevenant" class="[ btn btn-default active]">
+                            Contrevenant
+                        </label>
+                    </div>
+                </div>
+                <div class="[ form-group ]">
+                    <input type="checkbox" name="fancy-checkbox-numero" id="fancy-checkbox-numero" autocomplete="off" />
+                    <div class="[ btn-group ]">
+                        <label for="fancy-checkbox-numero" class="[ btn btn-primary ]">
+                            <span class="[ glyphicon glyphicon-ok ]"></span>
+                            <span> </span>
+                        </label>
+                        <label for="fancy-checkbox-numero" class="[ btn btn-default active ]">
+                            Numéro
+                        </label>
+                    </div>
+                </div>
+                <div class="[ form-group ]">
+                    <input type="checkbox" name="fancy-checkbox-infraction" id="fancy-checkbox-infraction" autocomplete="off" />
+                    <div class="[ btn-group ]">
+                        <label for="fancy-checkbox-infraction" class="[ btn btn-primary ]">
+                            <span class="[ glyphicon glyphicon-ok ]"></span>
+                            <span> </span>
+                        </label>
+                        <label for="fancy-checkbox-infraction" class="[ btn btn-default active ]">
+                            Infraction
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="[ col-xs-12 col-sm-4 ]">
+                <div class="[ form-group ]">
+                    <input type="checkbox" name="fancy-checkbox-caf" id="fancy-checkbox-caf" autocomplete="off" />
+                    <div class="[ btn-group ]">
+                        <label for="fancy-checkbox-caf" class="[ btn btn-primary ]">
+                            <span class="[ glyphicon glyphicon-ok ]"></span>
+                            <span> </span>
+                        </label>
+                        <label for="fancy-checkbox-caf" class="[ btn btn-default active ]">
+                            Valeur CAF
+                        </label>
+                    </div>
+                </div>
+                <div class="[ form-group ]">
+                    <input type="checkbox" name="fancy-checkbox-dcde" id="fancy-checkbox-dcde" autocomplete="off" />
+                    <div class="[ btn-group ]">
+                        <label for="fancy-checkbox-dcde" class="[ btn btn-primary ]">
+                            <span class="[ glyphicon glyphicon-ok ]"></span>
+                            <span> </span>
+                        </label>
+                        <label for="fancy-checkbox-dcde" class="[ btn btn-default active ]">
+                            DC / DE
+                        </label>
+                    </div>
+                </div>
+                <div class="[ form-group ]">
+                    <input type="checkbox" name="fancy-checkbox-situation" id="fancy-checkbox-situation" autocomplete="off" />
+                    <div class="[ btn-group ]">
+                        <label for="fancy-checkbox-situation" class="[ btn btn-primary ]">
+                            <span class="[ glyphicon glyphicon-ok ]"></span>
+                            <span> </span>
+                        </label>
+                        <label for="fancy-checkbox-situation" class="[ btn btn-default active ]">
+                            Situation
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="[ col-xs-12 col-sm-4 ]">
+
+                <div class="[ form-group ]">
+                    <input type="checkbox" name="fancy-checkbox-marchandises" id="fancy-checkbox-marchandises" autocomplete="off" />
+                    <div class="[ btn-group ]">
+                        <label for="fancy-checkbox-marchandises" class="[ btn btn-primary ]">
+                            <span class="[ glyphicon glyphicon-ok ]"></span>
+                            <span> </span>
+                        </label>
+                        <label for="fancy-checkbox-marchandises" class="[ btn btn-default active ]">
+                            Marchandises
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="[ col-xs-12 col-sm-6 ]">
+               <!-- <button type="button" class="btn btn-success">Rechercher</button>-->
+            </div>
+            <div class="[ col-xs-12 col-sm-6 ]">
+                <input type="submit" class="btn btn-info" value="Exporter">
+            </div>
+            <table class="table table-datatable do-datatable">
+                <thead>
+                    <tr>
+                        <th class="text-center">Contrevenants</th>
+                        <th class="text-center">Numero</th>
+                        <th class="text-center">Infraction</th>
+                        <th class="text-center">Valeur CAF</th>
+                        <th class="text-center">DC / DE</th>
+                        <th class="text-center">Situation</th>
+                        <th class="text-center">Marchandises</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for dgd in dgds %}
+                    <tr>
+                        <td>{{ dgd.contrevenants }}</td>
+                        <td>{{ dgd.numero }}</td>
+                        <td>{{ dgd.infraction }}</td>
+                        <td>{{ dgd.valeurCaf }}</td>
+                        <td>{{ dgd.dcDe }}</td>
+                        <td>{{ dgd.situation }}</td>
+                        <td>{{ dgd.marchandises }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+        <hr>
+             {{ alerts.info('Pas de résultat') }}
+        {% endif %}
+        </form>
+    {% endblock %}
+ {% endembed %}
+{% endblock %}

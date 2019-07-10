@@ -1,0 +1,5 @@
+services:
+    arssam.twig.role_extension:
+        class: AppBundle\Twig\Extension\RoleExtension
+        tags:
+            - { name: twig.extension }

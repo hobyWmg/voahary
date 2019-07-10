@@ -1,0 +1,17 @@
+{% block sidebarUserInfos %}
+    <div class="pull-left image">
+    {% if app.user.photo %}
+        <img src="{{ asset('uploads/images/photoProfil/'~ app.user.photo) }}" height="50" width="50" class="img-circle" alt="User Image">
+    {% else %}
+        <img src="{{ asset(default_photo) }}" height="50" width="50" class="img-circle" alt="User Image">
+    {% endif %}
+    </div>
+    <div class="pull-left info">
+        <p>{{ app.user.username }}</p>
+        <!-- Status -->
+        <a href="#"><i class="fa fa-circle text-success"></i> {{ display_role(app.user) }}</a>
+        {% if app.user.entite %}
+            <p>{{ app.user.entite.abreviation }}</p>
+        {% endif %}
+    </div>
+{% endblock %}

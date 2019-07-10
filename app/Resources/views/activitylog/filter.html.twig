@@ -1,0 +1,20 @@
+{% set session_filter = app.session.get('filter-log') %}
+{#{{ dump(session_filter.specialitys) }}#}
+<form id="form-filter-log" method = "POST" action = "{{ path('adminarssam_activitylog_index') }}" autocomplete="off" class="form-horizontal">
+        <div class="col-lg-12">
+            <div class="col-md-3">
+                <input type="text" class="form-control doDatepicker" name="dateDeb" value="{% if session_filter.dateDeb is defined and session_filter.dateDeb != '' %}{{session_filter.dateDeb|date('d/m/Y')}}{% endif %}" placeholder="Du" id="dateDeb" />
+            </div>
+            {# <div class="col-md-3">
+                <input type="text" class="form-control doDatepicker" name="dateFin" value="{% if session_filter.dateFin is defined and session_filter.dateFin != '' %}{{session_filter.dateFin|date('d/m/Y')}}{% endif %}" placeholder="Au" id="dateFin" />
+            </div> #}
+        </div>
+        <div class="col-lg-12" style="margin-top: 10px;">
+			<div class="col-sm-12">
+            {#<a href="javascript:void(0);" id="doReset">ok</a>#}
+            <input type="button" id="reset" value="Vider" class="btn btn-danger pull-left">
+            <input type="submit" class="pull-right btn btn-success" value="Filtrer" >
+			</div>
+        </div>
+</form>
+<h3 style="visibility:hidden">Historiques</h3>

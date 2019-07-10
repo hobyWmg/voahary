@@ -1,0 +1,243 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+{{parent()}}
+<style>
+.form-group input[type="checkbox"] {
+    display: none;
+}
+
+.form-group input[type="checkbox"] + .btn-group > label span {
+    width: 20px;
+}
+
+.form-group input[type="checkbox"] + .btn-group > label span:first-child {
+    display: none;
+}
+.form-group input[type="checkbox"] + .btn-group > label span:last-child {
+    display: inline-block;   
+}
+
+.form-group input[type="checkbox"]:checked + .btn-group > label span:first-child {
+    display: inline-block;
+}
+.form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
+    display: none;   
+}
+</style>
+{% endblock %}
+{% block header %}
+    <h1>
+       Passagers
+    </h1>
+{% endblock %}
+
+{% block content %}
+{% embed 'Embed/box.html.twig' %}
+    {% block title %}
+        <i class="fa fa-list"></i>
+        Liste des passagers
+     {% endblock %}
+    {% block boxContent %}
+	{% if passengers|length > 0 %}
+	<form id="form-passenger" method="post" action="{{ path("arssam_exportxls_passenger") }}">
+		<div class="[ col-xs-12 col-sm-3 ]">
+			<div class="[ form-group ]">
+				<input type="checkbox" name="fancy-checkbox-nationalite" id="fancy-checkbox-nationalite" autocomplete="off"/>
+				<div class="[ btn-group ]">
+					<label for="fancy-checkbox-nationalite" class="[ btn btn-primary ]">
+						<span class="[ glyphicon glyphicon-ok ]"></span>
+						<span> </span>
+					</label>
+					<label for="fancy-checkbox-nationalite" class="[ btn btn-default active]">
+						Nationalité
+					</label>
+				</div>
+			</div>
+			<div class="[ form-group ]">
+				<input type="checkbox" name="fancy-checkbox-numero" id="fancy-checkbox-numero" autocomplete="off" />
+				<div class="[ btn-group ]">
+					<label for="fancy-checkbox-numero" class="[ btn btn-primary ]">
+						<span class="[ glyphicon glyphicon-ok ]"></span>
+						<span> </span>
+					</label>
+					<label for="fancy-checkbox-numero" class="[ btn btn-default active ]">
+						Numéro
+					</label>
+				</div>
+			</div>
+			<div class="[ form-group ]">
+				<input type="checkbox" name="fancy-checkbox-nom" id="fancy-checkbox-nom" autocomplete="off" />
+				<div class="[ btn-group ]">
+					<label for="fancy-checkbox-nom" class="[ btn btn-primary ]">
+						<span class="[ glyphicon glyphicon-ok ]"></span>
+						<span> </span>
+					</label>
+					<label for="fancy-checkbox-nom" class="[ btn btn-default active ]">
+						Nom
+					</label>
+				</div>
+			</div>	
+		</div>
+		<div class="[ col-xs-12 col-sm-3 ]">		
+			<div class="[ form-group ]">
+				<input type="checkbox" name="fancy-checkbox-prenom" id="fancy-checkbox-prenom" autocomplete="off" />
+				<div class="[ btn-group ]">
+					<label for="fancy-checkbox-prenom" class="[ btn btn-primary ]">
+						<span class="[ glyphicon glyphicon-ok ]"></span>
+						<span> </span>
+					</label>
+					<label for="fancy-checkbox-prenom" class="[ btn btn-default active ]">
+						Prénom
+					</label>
+				</div>
+			</div>	
+			<div class="[ form-group ]">
+				<input type="checkbox" name="fancy-checkbox-naissance" id="fancy-checkbox-naissance" autocomplete="off" />
+				<div class="[ btn-group ]">
+					<label for="fancy-checkbox-naissance" class="[ btn btn-primary ]">
+						<span class="[ glyphicon glyphicon-ok ]"></span>
+						<span> </span>
+					</label>
+					<label for="fancy-checkbox-naissance" class="[ btn btn-default active ]">
+						Date de naissance
+					</label>
+				</div>
+			</div>
+			<div class="[ form-group ]">
+				<input type="checkbox" name="fancy-checkbox-sexe" id="fancy-checkbox-sexe" autocomplete="off" />
+				<div class="[ btn-group ]">
+					<label for="fancy-checkbox-sexe" class="[ btn btn-primary ]">
+						<span class="[ glyphicon glyphicon-ok ]"></span>
+						<span> </span>
+					</label>
+					<label for="fancy-checkbox-sexe" class="[ btn btn-default active ]">
+						Sexe
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="[ col-xs-12 col-sm-3 ]">
+			
+			<div class="[ form-group ]">
+				<input type="checkbox" name="fancy-checkbox-voyage" id="fancy-checkbox-voyage" autocomplete="off" />
+				<div class="[ btn-group ]">
+					<label for="fancy-checkbox-voyage" class="[ btn btn-primary ]">
+						<span class="[ glyphicon glyphicon-ok ]"></span>
+						<span> </span>
+					</label>
+					<label for="fancy-checkbox-voyage" class="[ btn btn-default active ]">
+						Date du voyage
+					</label>
+				</div>
+			</div>
+			<div class="[ form-group ]">
+				<input type="checkbox" name="fancy-checkbox-transport" id="fancy-checkbox-transport" autocomplete="off" />
+				<div class="[ btn-group ]">
+					<label for="fancy-checkbox-transport" class="[ btn btn-primary ]">
+						<span class="[ glyphicon glyphicon-ok ]"></span>
+						<span> </span>
+					</label>
+					<label for="fancy-checkbox-transport" class="[ btn btn-default active ]">
+						Transport
+					</label>
+				</div>
+			</div>
+			<div class="[ form-group ]">
+				<input type="checkbox" name="fancy-checkbox-sens" id="fancy-checkbox-sens" autocomplete="off" />
+				<div class="[ btn-group ]">
+					<label for="fancy-checkbox-sens" class="[ btn btn-primary ]">
+						<span class="[ glyphicon glyphicon-ok ]"></span>
+						<span> </span>
+					</label>
+					<label for="fancy-checkbox-sens" class="[ btn btn-default active ]">
+						Sens
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="[ col-xs-12 col-sm-3 ]">
+			<div class="[ form-group ]">
+				<input type="checkbox" name="fancy-checkbox-poste" id="fancy-checkbox-poste" autocomplete="off" />
+				<div class="[ btn-group ]">
+					<label for="fancy-checkbox-poste" class="[ btn btn-primary ]">
+						<span class="[ glyphicon glyphicon-ok ]"></span>
+						<span> </span>
+					</label>
+					<label for="fancy-checkbox-poste" class="[ btn btn-default active ]">
+						Poste de frontière
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="[ col-xs-12 col-sm-4 ]">
+			<label>Date de naissance</label>
+		</div>
+		<div class="[ col-xs-12 col-sm-4 ]">
+			<div class="[ form-group ]">
+				<input type="text" class="form-control doDatepicker" name="dateDebNais" value="" placeholder="Du" id="dateDebNais">
+			</div>
+		</div>
+		<div class="[ col-xs-12 col-sm-4 ]">
+			<div class="[ form-group ]">
+				<input type="text" class="form-control doDatepicker" name="dateFinNais" value="" placeholder="Au" id="dateFinNais">
+			</div>
+		</div>
+		<div class="[ col-xs-12 col-sm-4 ]">
+			<label>Date du voyage</label>
+		</div>
+		<div class="[ col-xs-12 col-sm-4 ]">
+			<div class="[ form-group ]">
+				<input type="text" class="form-control doDatepicker" name="dateDebVoyage" value="" placeholder="Du" id="dateDebVoyage">
+			</div>
+		</div>
+		<div class="[ col-xs-12 col-sm-4 ]">
+			<div class="[ form-group ]">
+				<input type="text" class="form-control doDatepicker" name="dateFinVoyage" value="" placeholder="Au" id="dateFinVoyage">
+			</div>
+		</div>
+		<div class="[ col-xs-12 col-sm-6 ]">
+			<!--<button type="button" class="btn btn-success">Rechercher</button>-->
+		</div>
+		<div class="[ col-xs-12 col-sm-6 ]">
+			<input type="submit" class="btn btn-info" value="Exporter">
+		</div>
+	</form>
+            <table class="table table-datatable do-datatable">
+                <thead>
+                    <tr>
+                        <th>Nationalite</th>
+                        <th>Numero</th>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>Date de naissance</th>
+                        <th>Sexe</th>
+                        <th>Date du voyage</th>
+                        <th>Transport</th>
+                        <th>Sens</th>
+                        <th>Poste de frontiere</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for passenger in passengers %}
+                    <tr>
+                        <td>{{ passenger.nationalite }}</td>
+                        <td>{{ passenger.numero }}</td>
+                        <td>{{ passenger.nom }}</td>
+                        <td>{{ passenger.prenom }}</td>
+                        <td>{% if passenger.dateNaissance %}{{ passenger.dateNaissance|date('d/m/Y') }}{% endif %}</td>
+                        <td>{{ passenger.sexe }}</td>
+                        <td>{% if passenger.dateVoyage %}{{ passenger.dateVoyage|date('d/m/Y') }}{% endif %}</td>
+                        <td>{{ passenger.transport }}</td>
+                        <td>{{ passenger.sens }}</td>
+                        <td>{{ passenger.posteFrontiere }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+		<hr>
+            {{ alerts.info('Pas de résultat') }}
+        {% endif %}
+    {% endblock %}
+  {% endembed %}
+{% endblock %}

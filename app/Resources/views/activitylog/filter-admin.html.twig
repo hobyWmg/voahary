@@ -1,0 +1,38 @@
+{% set session_filter = app.session.get('filter-log') %}
+{#{{ dump(session_filter.specialitys) }}#}
+<div style="margin-bottom:15px;">
+<form id="form-filter-log" method = "POST" action = "{{ path('adminarssam_activitylog_index') }}" autocomplete="off" class="form-horizontal">
+        <div class="col-lg-12">
+            <div class="col-md-3">
+                <input type="text" class="form-control doDatepicker" name="dateDeb" value="{% if session_filter.dateDeb is defined and session_filter.dateDeb != '' %}{{session_filter.dateDeb|date('d/m/Y')}}{% endif %}" placeholder="Du" id="dateDeb" />
+            </div>
+            {# <div class="col-md-3">
+                <input type="text" class="form-control doDatepicker" name="dateFin" value="{% if session_filter.dateFin is defined and session_filter.dateFin != '' %}{{session_filter.dateFin|date('d/m/Y')}}{% endif %}" placeholder="Au" id="dateFin" />
+            </div> #}
+            <div class="col-md-3">
+                <select name="entite" id="entite" class="form-control" style="width: 100%;">
+                    <option disabled selected  value="">Entité</option>
+                    {% for e in entite %}
+                        <option value="{{e.id}}" {% if session_filter.entite is defined and session_filter.entite !="" and e.id == session_filter.entite  %}selected="selected"{% endif %}>{{e.abreviation}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            {# <div class="col-md-3">
+                <select name="status" id="status" class="form-control" style="width: 100%;" aria-multiselectable="true">
+                    <option disabled selected  value="">Status</option>
+                    {% for s in status %}
+                        <option value="{{s.id}}" {% if session_filter.status is defined and session_filter.status !="" and s.id == session_filter.status %}selected="selected"{% endif %}>{{s.name}}</option>
+                    {% endfor %}
+                </select>
+            </div> #}
+        </div>
+        <div class="col-lg-12" style="margin-top: 10px;">
+			<div class="col-sm-12">
+            {#<a href="javascript:void(0);" id="doReset">ok</a>#}
+            <input type="button" id="reset" value="Vider" class="btn btn-danger pull-left">
+            <input type="submit" class="pull-right btn btn-success" value="Filtrer" >
+			</div>
+        </div>
+</form>
+</div>
+<h3 style="visibility:hidden">Historiques</h3>

@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% block header %}
+    <h1>
+       Utilisateur
+    </h1>
+{% endblock %}
+
+{% block content %}
+ {% embed 'Embed/box.html.twig' %}
+		 {% block title %}
+            <i class="fa fa-list"></i>
+            Liste des utilisateurs
+         {% endblock %}
+        {% block boxContent %}
+            <div class="form-filter">
+                <div class="col-md-8"></div>
+                <div class="col-md-4">
+                    {% import ':Macro:buttons.html.twig' as buttons %}
+                    <div class="pull-right">
+                        {{ buttons.create({
+                            url: path('arssam_user_create')
+                        }) }}
+                    </div>
+                </div>
+            </div>
+            {% from '@App/User/macros.html.twig' import list  %}
+            {% import ':Macro:misc.html.twig' as misc %}
+            {{ list(users) }}
+            {% endblock %}
+    {% endembed %}
+{% endblock %}

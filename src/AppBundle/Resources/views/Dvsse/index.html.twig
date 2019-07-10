@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{parent()}}
+{% endblock %}
+{% block header %}
+    <h1>
+        Epidémie
+    </h1>
+{% endblock %}
+
+{% block content %}
+    {% embed 'Embed/box.html.twig' %}
+        {% block title %}
+            <i class="fa fa-list"></i>
+            Liste des infos des épidémies
+        {% endblock %}
+        {% block boxContent %}
+            <div class="form-filter">
+                <div class="col-md-8"></div>
+                <div class="col-md-4">
+                    {% import ':Macro:buttons.html.twig' as buttons %}
+                    <div class="pull-right">
+                        {{ buttons.create({
+                            url: path('arssam_dvsse_create')
+                        }) }}
+                    </div>
+                </div>
+            </div>
+
+            {% if dvsses|length > 0 %}
+                <form id="form-epidemie" method="post" action="{{ path("arssam_exportxls_epidemie") }}">
+                    <div class="[ col-xs-12 col-sm-4 ]">
+                        <label>Date</label>
+                    </div>
+                    <div class="[ col-xs-12 col-sm-4 ]">
+                        <div class="[ form-group ]">
+                            <input type="text" class="form-control doDatepicker" name="dateDeb" value="" placeholder="Du" id="dateDeb">
+                        </div>
+                    </div>
+                    <div class="[ col-xs-12 col-sm-4 ]">
+                        <div class="[ form-group ]">
+                            <input type="text" class="form-control doDatepicker" name="dateFin" value="" placeholder="Au" id="dateFin">
+                        </div>
+                    </div>
+
+                    <div class="[ col-xs-12 col-sm-4 ]">
+                        <label>Niveau</label>
+                    </div>
+                    <div class="[ col-xs-12 col-sm-4 ]">
+                        <select class="form-control" id="selNiveau" name="selNiveau">
+                            <option value="-1">Tous</option>
+                            <option value="0">National</option>
+                            <option value="1">International</option>
+                        </select>
+                    </div>
+                    <div class="[ col-xs-12 col-sm-4 ]">
+                        &nbsp;
+                    </div>
+                    <div class="[ col-xs-12 col-sm-12 ]">
+                        <input type="submit" class="btn btn-info" value="Exporter">
+                    </div>
+                </form>
+                <table class="table table-datatable do-datatable">
+                    <thead>
+                    <tr>
+                        <th class="text-center">Date de création</th>
+                        <th class="text-center">Pathologies</th>
+                        <th class="text-center">Pays</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for d in dvsses %}
+                        {% set code = d.pays %}
+                        <tr>
+                            <td>{{ d.createdAt|date('d/m/Y') }}</td>
+                            <td>{{ d.info }}</td>
+                            <td>{{ listePays[code] }}</td>
+                            <td><a href="{{ path('arssam_dvsse_show', { 'id': d.id }) }}" title="Voir détail" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-search"></span></a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+            <hr>
+                {{ alerts.info('Pas de résultat') }}
+            {% endif %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

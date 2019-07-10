@@ -1,0 +1,587 @@
+@media screen and (max-width: 1370px) {
+  .btn.searchbtn, .list {  width: 50%; right: 25%; }
+}
+
+@media screen and (max-width: 1024px) {
+
+  html {overflow-x: hidden;}
+  .Home h6 { left: 20px; }
+  .carousel-caption p {line-height: 35px; }
+  .homepage .resultat_praticien { height: 260px; }
+  .upself_logo h6 { top: 0%; }
+  .formulaire { top: 5%; width: 100%; left: 5%; }
+  .recherche { height: 70px; }
+  .formulaire_home { width: 90%; left: 10%; top: 55%; }
+  .btn.searchbtn, .list { width: 60%; right: 20%; }
+  .recherche_home { position: relative; top: 0; }
+  /*.trouver_p { font-size: 28px; }
+  .trouver_prat { top: 215px; float: left; left: 250px; }*/
+
+   /*Slider responsive HP */
+   .slick-content > p { font-size: 15px; }
+   .slick-content { padding: 20px; }
+   .slick-img-cont > .text-center { bottom: 3%; }
+   /* end */
+   /*.back > p { font-size: 11px; line-height: 2; }*/
+   .back > p { line-height: 2; }
+   .trouver_prat { float: left; left: 0%; }
+   .foot-margin { margin-right: 2%; margin-left: 2%; }
+
+   h3.nom_prenom.h3tagsearch { font-size: 16px; }
+}
+
+@media (max-width: 991px) {
+
+  .notification { top: 22px;}
+  .like_praticien { max-width: 100%!important; margin-top: 15px; position: unset!important; }
+  .like_praticien_container { padding-left: 0px!important; padding-right: 0px!important; margin-bottom: 0px!important;}
+  .reduction { border: 1px solid #FF6600!important; }
+  .buttonssearch { margin-bottom: 25px!important; }
+
+}
+@media screen and (max-width:830px){ 
+
+   .entreprise_prat {height: 60px;}
+   .recherche_home { position: relative; top: 0; }
+   .formulaire_home { top: 230px; left: 8%; width: 95%; }
+   .upself_logo h6 { top: 0; }
+   .formulaire { width: 100%; left: 20px; }
+   .btn.searchbtn, .list { width: 80%; right: 10%; }
+   .carousel-caption p { line-height: 25px; font-size: 18px; }
+   .img_slide h6 { margin-left: 43%; }
+   .search_home2 { margin-left: 2%; margin-top: -20%;}
+   .homepage .resultat_praticien { height: 100%; }
+   .like_praticien { top: 15px;}
+/*.entreprise { height: 60px; }*/
+   .trouver_prat { top: 100px; }
+   /*.back > p { font-size: 12px; line-height: 2.5;}*/
+   .back > p { line-height: 2.5;}
+   .btn.orange2 { width: 50%; }
+    
+}
+@media screen and (max-width:768px){
+  
+  .notification { position: absolute; }
+  .me_connecter .btn.orange {
+    padding: 4px 12px;
+  }
+  .me_connecter .btn {
+    margin-right: 1rem;
+    margin-top: 1rem;
+  }
+  .contenu_prat{
+    padding-top: 15%;
+    padding-left: 5%;
+  }
+  .recherche_home { margin-top: 0;  height: 490px; }
+  .recherche { height: 70px; }
+  .formulaire{ left: 5%; top: 5%; width: 100%;  }
+  .col-sm-4 .discipline{
+    margin-bottom: 10px;
+  }
+  .rdv:nth-child(1) a {
+    position: relative;
+    top: 0;
+    left: 8rem;
+    color: #fff;
+    font-weight: 800;
+    background-image: url(../img/icone_rdv.png);
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: contain;
+  }
+  .img_slide h6 {
+    margin-left: 40%;
+  }
+  .rdv:nth-child(1) img{
+    display: none;
+  }
+  .img_slide h1 {
+    top: 30%;
+    margin-left: 30%;
+  }
+  .search_home{
+    margin-left: 18%;
+    margin-top: -30%;
+  }
+  .img_prat{
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .upself_logo h1{
+    font-size: 53px !important;
+    top:0;
+  }
+  .search_home
+  {
+    /*background: url(../img/header_img.png);*/
+    width: 140px;
+    background-repeat: no-repeat;
+    height: 145px;
+    border: none;
+    vertical-align: middle;
+    right: 20px;
+    z-index: 0;
+  }
+  .btn.searchbtn, .list { width: 60%; right: 20%; } 
+  .social{
+    top:80% !important;
+  }
+  .dropdown{
+    top:inherit;
+  }
+  /*Home*/
+  .discipline {
+    background-position: 98%;
+  }
+  .recherche_home { top: 0; }
+  .search_home2{
+    margin-top: -33px;
+    margin-left: 5px;
+  }
+  .search_home:hover{
+    margin-top: inherit;
+    margin-left: 18%;
+    width: 140px;
+  }
+  .ajout_praticien{
+    text-align: center;
+  }
+  .formulaire_home { position: absolute; width: 100%; left: 5%; top: 50%; }
+  .trouver_prat { position: relative; top: 100px; }
+  .jbold { font-weight: 500; font-size: 18px; }
+  .carousel-caption .btn {
+    font-size: 14px;
+  }
+
+  .carousel-caption p{
+    font-size: 18px;
+    line-height: 30px;
+  }
+  .bienvenue{
+    display: none; /*Miova**/
+  }
+  .discipline{
+        margin-bottom: 10px;
+  }
+  /*#h_home h1{ margin-top: 20rem;  }*/
+   #h_home h6 { top: 0; left: 25px; z-index: 8; }
+  .img_home_modifj img { width: 20%; }
+  .iconbg { margin-top: 10px; }
+  .upself_logo h6 { top: 0px; left: 15px; }
+
+  .trouver_p { font-size: 28px; }
+  /**Footer**/
+  .foot{
+    background-size:contain;
+  }
+  /****Liste praticien*****/
+  .specialite_liste{
+    margin-top:-2%;
+  }
+  .liste_praticien .container {
+    border: 2px solid #0099FF;
+    margin-bottom: 10%;
+  }
+  .me_connecter_liste{
+    margin-top:3em;
+  }
+  .homepage .container{
+    margin-bottom: 5%;
+  }
+  .upself_logo h1 {
+    margin-top: 10rem;
+  }
+  .me_connecter {
+    /*margin-top: 4rem;
+    right: inherit;*/
+    margin-top: 0rem;
+    right: 0%;
+  }
+  .me_connecter_prat .btn {
+    margin-top: 1rem;
+  }
+  .me_connecter_prat{
+    left: 0;
+    text-align: left;
+    margin-top: 3rem;
+  }
+  #h{
+    background-position: center top;
+    background-size: contain;
+  }
+  .search_home2:hover{
+    margin-top:inherit;
+    margin-left: inherit;
+  }
+
+  /**Page provisoire*/
+  .parcours_description1{
+    position: inherit !important;
+  }
+  .parcours_description2, .parcours_description3{
+    top:inherit !important;
+  }
+  .section_content .col-md-12:nth-child(1),.section_content .col-md-12:nth-child(2){
+    margin-bottom: 10%;
+  }
+  .caption{
+    width: 100%;
+    top: 0 !important;
+  }
+  .caption h1,.caption p{
+    margin:inherit !important;
+  }
+  .caption .form-control{
+    font-size: inherit !important;
+  }
+  .homepage .resultat_praticien { height: 100%; }
+   /*Slider responsive HP */
+   .slick-content > p { font-size: 14px; }
+   .slick-content { padding: 15px; }
+   .slick-img-cont > .text-center { bottom: 3%; }
+   /* end */
+   .hp-space { display: none; }
+   .space.col-lg-12.b-mb-md { margin-bottom: 0px; }
+   .back { height: 260px!important; }
+   .front { height: 260px!important; }
+}
+
+@media screen and (max-width: 767px) {
+    
+    .box2 {border: none;}
+    .upself_logo h6 { top: 0; left: 15px; }
+    .formulaire { left: 17%; top: 5%; width: 65%; }
+    .recherche { height: 270px; }
+    #h_home h6 { top: 0; left: 25px; z-index: 8; }
+    .iconbg { margin-top: 0; }
+    .trouver_p { font-size: 28px; }
+    #h_home h1 { margin-top: 7rem; }
+    .formulaire_home { left: 20%; top: 35%; width: 60%; }
+    .btn.searchbtn, .list { width: 100%; left: 0%; }
+    .trouver_prat { top: 25px; margin-top: -5rem; }
+    .img_prat { margin-left: 0; margin-right: 0; }
+    .rdv:nth-child(1) a { top: 0; left: 8rem; color: #fff; 
+    background-image: url(../img/icone_rdv.png);
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: contain; }
+    .contenu_prat { padding-top: 15%; }
+    .img_slide h6 { margin-left: 30%; }
+    .search_home2 { margin-top: 0; margin-left: 5px; }
+    .like_praticien { top: 15px;}
+
+}
+@media screen and (max-width: 668px) {
+    
+     .box2 {border: none;}
+    .upself_logo h6 { top: 3%; left: 15px; }
+    .formulaire { left: 17%; top: 5%; width: 65%; }
+    .recherche { height: 270px; }
+    #h_home h6 { top: 0; left: 20px; z-index: 8; }
+    .formulaire_home { left: 25%; top: 35%; width: 50%; }
+    .btn.searchbtn, .list { width: 100%; left: 0%;}
+    .trouver_prat {  top: 0px; margin-top: -3rem; }
+    #h_home { background-position: 5% 0%; }
+    .iconbg { margin-top: 0; }
+    .me_connecter, .me_connecter_prat { top: 30px; }
+    .trouver_p { font-size: 28px; }
+    .search_home2 { margin-top: 2px; margin-left: 5px; }
+    .search_home { margin-left: 15%; margin-top: 2%; }
+    .img_prat { margin-left: -2%; }
+    .img_slide h6 { margin-left: 30%; }
+    .rdv:nth-child(1) a { top: 0rem; left: 11rem; color: #fff; background-image: url(../img/icone_rdv.png); }
+    .like_praticien { top: 15px;}
+    .upself_logo h6 { top: 0; left: 13px; }
+    #filter-btn { width: 100%!important; margin: 0 15px; }
+    .box-body2 { padding: 0px!important; margin: 0px!important; }
+    .table-responsive-img > img { width: 80px!important; height: 80px!important; object-fit: cover; }
+
+}
+
+@media screen and (max-width:568px) {
+
+  .box2 {border: none;}
+  .entreprise p { float: left; padding: 0 0 0 40px; }
+  .iconbg { margin-top: 0; }
+  .me_connecter { top: 30px; }
+  .trouver_prat { top: 30px; }
+  .trouver_p { font-size: 25px; }
+  .btn.searchbtn, .list { width: 100%; margin-left: 0; }
+  .img_home_modifj img { width: 20%; }
+  #h_home h6 { top: 0; left: 12px; z-index: 8; }
+  .search_home { margin-left: 18%; margin-top: 0; }
+  .formulaire { left: 18%; top: 5%; }
+  .formulaire_home { position: absolute; width: 50%; left: 25%; top: 40%; }
+  .like_praticien { top: 15px;}
+  .upself_logo h6 { top: 0; left: 13px; }
+  /*Override jquery position */
+  .ui-widget.ui-widget-content { width: 83vw!important; }
+}
+
+@media screen and (max-width:460px)
+{
+  .box2 {border: none;}
+  .sociaux{
+    padding: 2rem;
+  }
+  .sociaux a{
+    font-size: 15px;
+    line-height: 25px;
+  }
+  .img_prat{
+    margin-left:12% !important;
+    margin-right:12% !important;
+    height: 180px;
+    width: 180px;
+    top: -45%;
+  }
+  .btn.searchbtn, .list { width: 100%; margin-left: 0; left: 0%; }
+  .entreprise_prat p { float: left; padding: 0 0 0 40px; }
+  .search_home2 { margin-left: 25px; margin-top: 3px; }
+  .search_home { margin-left: 18%; margin-top: 0; }
+  .me_connecter { top: 16%;  right: 0%; }
+  .trouver_prat { top: 0; }
+  /*#h_home h1 { margin-top: 20rem; }*/
+  #h_home h6 { top: 0; left: 12px; z-index: 8; }
+  .formulaire_home { top: 40%; }
+  .trouver_p { font-size: 28px; }
+  .img_home_modifj img { width: 30%; }
+  .btn.orange2 { margin: 1rem; width: 80%;}
+  .img_slide h6 { margin-left: 20%; }
+  .img_slide span.nom { font-size: 18px; }
+  .rdv:nth-child(1) a {
+    position: relative;
+    top: 18rem;
+    color: #FF6600;
+    font-weight: 800;
+    background-image: url(../img/icone_rdv2.png);
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: contain;
+    left: 0rem;
+  }
+  .img_slide span.nom { font-size: 18px; }
+  .img_slide h6 { margin-left: 10%; }
+  .img_prat { top: -90%; }
+  .img_home img { width: 25%; }
+  .like_praticien { max-width: 100%!important; margin-top: 15px; position: unset!important; }
+  .like_praticien_container { padding-left: 0px!important; padding-right: 0px!important;}
+  .formulaire { left: 18%; top: 5%; }
+  .upself_logo h6 { top: 0; left: 13px; z-index: 8; }
+  .navbar-custom-menu > .navbar-nav > li > .dropdown-menu { right: 0px; }
+  .container { padding-right: 0px; padding-left: 0px; }
+  /*Slider responsive HP */
+  .slider-container { margin-left: 0%; margin-right: 0%; }
+  .slick-content > p { font-size: 14px; }
+  .slick-content > span { font-size: 25px; }
+  .slick-content { padding: 15px; }
+  .slick-img-cont > .text-center { bottom: 0%; width: 95%; }
+  /* end */
+  .loginmargin { text-align: center; }
+  #filter-btn { width: 100%!important; margin: 0 15px; }
+}
+
+
+@media screen and (max-width: 380px) {
+
+
+  .box2 {border: none;}
+  .btn.orange-right { position: relative; left: 0; }
+  .presentation { width: 100%; }
+  .entreprise_prat p { float: left; padding: 0 0 0 30px; }
+  .btn.searchbtn, .list { width: 100%; margin-left: 0; left: 0%; }
+  .recherche_home { height: 500px; }
+  .recherche { height: 270px; }
+  .formulaire { left: 17%; top: 5%; width: 65%; }
+  .upself_logo h6 { top: 0; left: 10px; z-index: 8; }
+  .trouver_prat { top: 80px; }
+  .formulaire_home { left: 25%; top: 40%; }
+  .search_home2 { margin-left: 30px; margin-top: 2px;}
+  .search_home { margin-left: 18%; margin-top: 0%; }
+  #h_home { min-height: 100px; }
+  #h_home h6 { top: 0; left: 7px; z-index: 8; }
+  .trouver_p { font-size: 28px; }
+  .me_connecter { top: 14%; right: 0;}
+  .entreprise p { float: left; padding: 0 0 0 30px; }
+  .iconbg { background-size: 25px; margin-top: 0; }
+  .btn.orange2 { margin: 1rem; }
+  .carousel-caption p { line-height: 20px; }
+   .img_prat { height: 180px; width: 180px; top: -90%; }
+  #h_home h1 { font-size: 20px; margin-top: 0; }
+  .img_slide h6 { margin-left: 20%; }
+  .img_slide span.nom { font-size: 20px; }
+  .img_home img { width: 25%; }
+  .rdv:nth-child(1) a {
+    position: relative;
+    top: 18rem;
+    color: #FF6600;
+    font-weight: 800;
+    background-image: url(../img/icone_rdv2.png);
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: contain;
+    left: 0rem;
+  }
+  .social { top: 65% !important; }
+  .like_praticien { max-width: 285px; margin-top: 10px; }
+  .navbar-custom-menu > .navbar-nav > li > .dropdown-menu { right: 0px; }
+  .container { padding-right: 0px; padding-left: 0px; }
+  /*Slider responsive HP */
+  .slider-container { margin-left: 0%; margin-right: 0%; }
+  .slick-content > p { font-size: 14px; }
+  .slick-content > span { font-size: 25px;}
+  .slick-content { padding: 15px; }
+  .slick-img-cont > .text-center { bottom: 0%; width: 95%; }
+  /* end */
+  .copyright p { font-size: 14px; }
+  .back { height: 260px!important; }
+  .front { height: 260px!important; }
+}
+
+@media screen and (max-width: 360px) {
+  .box2 {border: none;}
+  #h_home h1 { font-size: 20px; margin-top: 0; }
+  .recherche { height: 270px; }
+  .formulaire { left: 17%; top: 5%; width: 65%; }
+  .trouver_prat { top: 10%; }
+  .formulaire_home { left: 25%; top: 35%; }
+  #h_home h6 { top: 0; left: 2rem; z-index: 8; }
+  .me_connecter { margin-top: 4rem; }
+  .carousel-caption p { line-height: 20px; }
+  .search_home2 { margin-left: 25px;}
+  .trouver_p { font-size: 28px; }
+  .search_home { margin-left: 25%; margin-top: 0%; }
+   .img_home img { width: 30%; }
+   .dropdown-content { right: 5px; }
+}
+
+@media screen and (max-width:320px){ 
+  .box2 {border: none;}
+  .dropdown { top: 18px; }
+  .newlogo { width: 205px; top: 15px; }
+  .trouver_p { font-size: 26px; }
+  .trouver_prat { top: 25%; }
+  .img_home_modifj img { width: 50%; }
+  #h_home h6 { top: 0; left: 7px; z-index: 8; }
+  /*#h_home h1 { margin-top: 10rem; }*/
+  .upself_logo h6 { top: 0; left: 13px; }
+  .formulaire_home { width: 50%; left: 25%; top: 45%; }
+  .formulaire { left: 18%; top: 5%; width: 65%; }
+  .recherche { height: 270px; }
+  .caption { width: 100%; }
+  .carousel-caption p { line-height: 20px; }
+    .img_prat {
+    height: 180px;
+    width: 180px;
+    top: -45%;
+  }
+  .presentation { height: 125px; }
+  .presentation2 { height: 195px; }
+  .position { height: 45px; }
+  .img_slide h6 { margin-left: 20%; }
+  .img_slide span.nom { font-size: 18px; }
+  .img_home img { width: 40%; }
+  .like_praticien { max-width: 230px; top: 15px;}
+  .search_home2 { margin-top: 10px; }
+  .search_home { margin-left: 25%; margin-top: 10px; }
+  .me_connecter { margin-top: 3rem; top: 85px; }
+  .homepage .resultat_praticien2 { height: 100%; }
+  .dropdown-content { width: 310px; right: 5px; }
+  .navbar-custom-menu > .navbar-nav > li > .dropdown-menu { z-index: 1000; right: 0px; width: 265px; }
+  .nav > li > a.bgtoggle { padding: 13px 6px; }
+  .footercontainer h3 { font-size: 20px; }
+  .sociaux a { font-size: 14px; line-height: 20px; }
+  .container { padding-right: 0px; padding-left: 0px; }
+  /*Slider responsive HP */
+  .slick-content > span { font-size: 20px; }
+  .slick-content > p { font-size: 13px; padding-top: 0px!important; }
+  .slick-content { padding: 15px; }
+  .slick-img-cont > .text-center { width: 95%; bottom: 0%; }
+  /* end */
+  #login-remember { padding-left: 0px!important; font-size: 12px; }
+  .btn_facebook i { width: 0px; padding: 0 9px 0 0; }
+}
+
+@media screen and (min-width:260px) and (max-width:620px)
+{
+  .contenu_prat {
+    padding-top: 45%;
+  }
+  .rdv:nth-child(1) a {
+    position: relative;
+    top: 15rem;
+  }
+}
+@media screen and (min-width:260px) and (max-width:530px)
+{
+  .upself_logo h1 {
+    margin-left: 36%;
+    margin-right: 36%;
+  }
+  .section_content h2{
+    left:22% !important;
+  }
+  .parcours {
+    height: 280px !important;
+  }
+}
+
+
+@media screen and (min-width:531px) and (max-width:768px)
+{
+  .upself_logo h1 {
+    margin-left: 40%;
+    margin-right: 40%;
+  }
+}
+@media screen and (min-width:769px) and (max-width:980px)
+{
+  .rdv:nth-child(1) a{
+        margin-left: 25%;
+  }
+  .upself_logo h1 {
+    font-size: 5em !important;
+    /*top: 8%;*/
+  }
+  .specialite_liste{
+    margin-top:-2%;
+  }
+  .caption{
+    width:70%;
+    top: 0 !important;
+  }
+  /**Page provisoire*/
+  .parcours_description1{
+    position: inherit !important;
+  }
+  .parcours_description2, .parcours_description3{
+    top:inherit !important;
+  }
+  .section_content .col-md-12:nth-child(1),.section_content .col-md-12:nth-child(2){
+    margin-bottom: 10%;
+  }
+  .caption{
+    width:70%;
+    top: 0;
+  }
+  .caption .form-control{
+    font-size: inherit !important;
+  }
+}
+@media screen and (min-width:769px) and (max-width:1280px){
+
+  .search_home{
+      margin-top: -7% !important;
+  }
+  .search_home2 { margin-top: -15%; margin-left: 2%; }
+  .upself_logo h6 { left: 35px; }
+  /*.formulaire { left: 265px; }*/
+}
+
+/* iPads (landscape) Optimize search result display ----------- */
+@media screen and (height : 768px) and (width : 1024px) {
+  p.position { font-size: 13px!important; }
+  a.rdvhyper { font-size: 10px!important; }
+  .presentation { height: 72px; }
+}

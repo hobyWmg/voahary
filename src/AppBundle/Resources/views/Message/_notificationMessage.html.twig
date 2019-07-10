@@ -1,0 +1,36 @@
+<a href="#" class="bgtoggle dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="padding-bottom: 13px !important;">
+    <i class="fa fa-envelope-o fa-margin"></i>
+    <span class="label label-success">{{ countMessagesUnreadByUser }}</span>
+</a>
+<ul class="dropdown-menu">
+  <li class="header-notif">Vous avez {{ countMessagesUnreadByUser }} {% if countMessagesUnreadByUser >1 %}nouveaux messages{%else%} nouveau message{%endif%}</li>
+  <li>
+    {% if messagesUnreadByUser > 0 %}
+    <!-- inner menu: contains the actual data -->
+    <ul class="menu padcontent">
+      {% for n in messagesUnreadByUser %}
+      <li>
+        <a href="{{ path('arssam_message_show', {'id': n.id}) }}"  class="colorupself">
+              <div class="pull-left">
+                {% set anarany = n.userSender.entite.abreviation %}  
+				{{ (anarany|length > 22 ? anarany|slice(0, 22) ~ '...' : anarany)  }}
+              </div>
+              <small class="pull-right"><i class="fa fa-clock-o fa-margin"></i> {{ n.createdAt|date("d/m/Y H:i") }}</small>
+              <br/>
+              <h4 class="padcontent">{{ n.sujet|truncate(30, true, '...') }}</h4>
+              <p class="padcontent"><i class="fa fa-comment-o fa-margin"></i> {{ n.text|striptags|truncate(30, true, '...')|raw }}</p>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </li>
+  <li class="footer">
+      <a href="{{ path('arssam_message_index') }}">Afficher tous les messages</a>
+  </li>
+  {# {% if messagesUnreadByUser|length > 0 %}
+    <li class="footer">
+        <a rel="nofollow" data-user="{{ user.id }}" data-remote="true" data-method="delete" id="remove-notifications" href="#" onclick="openConfirm()">Supprimer toutes les notifications</a>
+    </li>
+  {% endif %} #}
+</ul>

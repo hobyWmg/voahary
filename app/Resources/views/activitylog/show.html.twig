@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Activitylog</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ activityLog.id }}</td>
+            </tr>
+            <tr>
+                <th>Action</th>
+                <td>{{ activityLog.action }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ activityLog.description }}</td>
+            </tr>
+            <tr>
+                <th>Error</th>
+                <td>{{ activityLog.error }}</td>
+            </tr>
+            <tr>
+                <th>Success</th>
+                <td>{% if activityLog.success %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{% if activityLog.createdAt %}{{ activityLog.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Updatedat</th>
+                <td>{% if activityLog.updatedAt %}{{ activityLog.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('adminarssam_activitylog_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

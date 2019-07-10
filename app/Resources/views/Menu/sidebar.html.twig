@@ -1,0 +1,52 @@
+{% block sidebar %}
+<aside class="main-sidebar">
+
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel">
+            {% include ':Menu:sidebarUserInfos.html.twig' %}
+        </div>
+
+        <!-- search form (Optional) -->
+            {#{% include ':menu:searchForm.html.twig' %}#}
+        <!-- /.search form -->
+
+        <!-- Sidebar Menu -->
+        <ul class="sidebar-menu">
+        {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_FOCAL') or is_granted('ROLE_OFFICIER') %}
+            <li class="header">ADMIN AREA</li>
+                <li class="{% if 'arssam_user_' in routeName %}active{% endif %}"><a href="{{path('arssam_user_list')}}"><i class="fa fa-users"></i> <span>Gestion des utilisateurs</span></a></li>
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                <li class="{% if 'arssam_entity_' in routeName %}active{% endif %}"><a href="{{path('arssam_entity_list')}}"><i class="fa fa-cubes"></i> <span>Gestion des entités</span></a></li> 
+                 {% endif %}   
+                {% if is_granted('ROLE_SUPER_ADMIN') or (app.user.entite and app.user.entite.abreviation=='PAF')%}
+                    <li class="{% if 'arssam_passenger_' in routeName %}active{% endif %}"><a href="{{path('arssam_passenger_list')}}"><i class="glyphicon glyphicon-plane"></i> <span>Passagers</span></a></li>
+                 {% endif %}  
+                 {% if is_granted('ROLE_SUPER_ADMIN') or (app.user.entite and app.user.entite.abreviation=='DGD')%} 
+                    <li class="{% if 'arssam_dgd_' in routeName %}active{% endif %}"><a href="{{path('arssam_dgd_list')}}"><i class="glyphicon glyphicon-random"></i> <span>Infraction douane</span></a></li>
+                 {% endif %} 
+                 {% if is_granted('ROLE_SUPER_ADMIN') or (app.user.entite and app.user.entite.abreviation=='GTA')%}     
+                    <li class="{% if 'arssam_gta_' in routeName %}active{% endif %}"><a href="{{path('arssam_gta_list')}}"><i class="glyphicon glyphicon-blackboard"></i> <span>Gendarmerie</span></a></li>
+                  {% endif %}
+                {% if is_granted('ROLE_SUPER_ADMIN') or (app.user.entite and app.user.entite.abreviation=='CIS')%}
+                    <li class="{% if 'arssam_cis_' in routeName %}active{% endif %}"><a href="{{path('arssam_cis_list')}}"><i class="glyphicon glyphicon-bullhorn"></i> <span>Voyageurs</span></a></li>
+                {% endif %}
+                {% if is_granted('ROLE_SUPER_ADMIN') or (app.user.entite and app.user.entite.abreviation=='DVSSE')%}
+                    <li class="{% if 'arssam_dvsse_' in routeName %}active{% endif %}"><a href="{{path('arssam_dvsse_list')}}"><i class="glyphicon glyphicon-cloud"></i> <span>Epidémies</span></a></li>
+                {% endif %}
+            {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_FOCAL') %}
+                    <li class="{% if 'adminarssam_activitylog_' in routeName %}active{% endif %}"><a href="{{path('adminarssam_activitylog_index')}}"><i class="fa fa-book"></i> <span>Historiques des imports</span></a></li>     
+                  {% endif %}      
+        {% endif %}
+        {% if not is_granted('ROLE_SUPER_ADMIN') %}
+         <li class="header">RESSOURCES</li>
+         <li class="{% if 'arssam_message_' in routeName %}active{% endif %}"><a href="{{path('arssam_message_index')}}"><i class="fa fa-envelope"></i> <span>Demande</span></a></li>            
+        {% endif %}
+        </ul>
+        <!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+</aside>
+{% endblock %}

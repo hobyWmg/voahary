@@ -1,0 +1,77 @@
+{% macro list(users) %}
+    {% import ':Macro:alerts.html.twig'  as alerts      %}
+    {% import ':Macro:buttons.html.twig' as buttons     %}
+    {% import ':Macro:misc.html.twig'    as misc        %}
+
+    {% if users|length > 0 %}
+        <table id="users" class="table table-datatable do-datatable">
+            <thead>
+            <tr>
+                {#<th class="text-center">{{ sylius_resource_sort('id', 'pomp.id'|trans) }}</th>#}
+                <th class="text-center">Nom</th>
+                <th class="text-center">Prénom</th>
+                <th class="text-center">Matricule</th>
+                <th class="text-center">Nom d'utilisateur</th>
+                <th class="text-center">Role</th>
+                {#<th class="text-center">{{ sylius_resource_sort('lastLogin', 'pomp.last_login'|trans) }}</th>#}
+                <th class="text-center">Status</th>
+                <th class="text-center">Entité</th>
+                <th class="text-center">Photo de profil</th>
+                <th class="text-center">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr id="{{ user.id }}">
+                    {#<td>
+                        <a href="{{ path('pomp_user_index', {'id': user.id}) }}">
+                            {{ user.id }}
+                        </a>
+                    </td>#}
+                    
+                    <td>{{ user.lastname }}</td>
+                    <td>{{ user.firstname }}</td>
+                    <td>{{ user.matricule }}</td>
+                    <td>{{ user.username }}</td>
+                    {# <td>{{ user.phone }}</td> #}
+                    <td>{{ display_role(user) }}</td>
+                    {# <td>{{dump(user.roles)}}</td> #}
+                    {#<td>{% if user.lastLogin is not null%}{{ user.lastLogin|date('d/m/Y') }}{% endif %}</td>#}
+                    <td>{{ misc.actif_label(user.enabled) }}</td>
+                    <td>{% if user.entite %}{{ user.entite.abreviation }}{%else%}-{%endif%}</td>
+                    <td>
+                        {% if user.photo is defined and user.photo != '' %}
+                            <div class="col-sm-offset-2" id="pdp">
+                                <p>
+                                    {#<img src="http://localhost{% if asset('') != "/" %}{{asset('')}}{% endif %}uploads/images/{{ user.photo }}" width="100" />#}
+                                    <img src="{{ asset('uploads/images/photoProfil/'~user.photo) }}" alt="pdp" width="100">
+                                <p>
+                            </div>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ buttons.update({ url :path('arssam_user_edit', {'id': user.id}) }) }}
+                        {% if app.user.id != user.id %}
+                        {% if user.enabled %}
+                            {{ buttons.delete({ url: path('arssam_user_delete', {'id': user.id}) }) }}
+                        {% else %}
+                            <a class="btn btn-success" href="{{ path('arssam_user_reactive', {'id': user.id}) }}">
+                                <i class="fa fa-unlock-alt"> 
+                                </i>
+                                 Réactiver
+                            </a>
+                        {% endif %}
+                    {% endif %}    
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {# <div class="navigation">
+            {{ knp_pagination_render(users) }}
+        </div> #}
+    {% else %}
+        {# <hr> #}
+        {{ alerts.info('Pas de résultat') }}
+    {% endif %}
+{% endmacro %}

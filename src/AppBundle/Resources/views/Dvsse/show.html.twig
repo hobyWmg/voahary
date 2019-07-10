@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Epidémie - Cas{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block header %}
+    <h1>
+        Epidémie - Cas
+    </h1>
+{% endblock %}
+
+{% block content %}
+    <section class="content">
+        <div class="row">
+            <!-- column -->
+            <div class="col-md-12">
+                <!-- Horizontal Form -->
+                <div class="box">
+                    <div class="box-header with-border text-uppercase">
+                        <h3 class="box-title"><i class="glyphicon glyphicon-globe"></i> Epidémie</h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="row">
+                            <label class="col-sm-6 control-label">Date</label>
+                            <div class="col-sm-6">
+                                {{ dvsse.createdAt|date('d/m/Y') }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-6 control-label">Pathologie</label>
+                            <div class="col-sm-6">
+                                {{ dvsse.info }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <label class="col-sm-6 control-label">Pays</label>
+                            <div class="col-sm-6">
+                                {% set code = dvsse.pays %}
+                                {{ listePays[code] }}
+                            </div>
+                        </div>
+                    </div><!-- /.box-body -->
+                    {% if dvsse.cas|length == 0 %}
+                        <div class="box-footer">
+                            <div class="col-xs-8">
+                                <a href="{{ path('arssam_dvsse_list') }}" class="btn btn-info btn-flat">Retour</a>
+                            </div>
+                            <div class="col-xs-4">
+                                <a href="{{ path('arssam_dvsse_casnew', { 'dvsse_id': dvsse.id }) }}" class="btn btn-success btn-sm btn-flat" data-toggle="tooltip" data-placement="left" title="Ajouter"><i class="fa fa-plus fa-lg"></i> Ajouter un cas</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div><!-- /.box -->
+                {% if dvsse.cas|length > 0 %}
+                    <!-- List des contenus de la page bon plan -->
+                    <div class="box">
+                        <div class="box-header with-border text-uppercase">
+                            <h3 class="box-title"><i class="glyphicon glyphicon-list"></i> Cas</h3>
+                            <div class="box-tools pull-right">
+                                <a href="{{ path('arssam_dvsse_casnew', { 'dvsse_id': dvsse.id }) }}" class="btn btn-success btn-sm btn-flat" data-toggle="tooltip" data-placement="left" title="Ajouter"><i class="fa fa-plus fa-lg"></i></a>
+                            </div>
+                        </div><!-- /.box-header -->
+                        <table id="contenu-bon-plan-list" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>Titre</th>
+                                <th>Nombre</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for c in cas %}
+                                <tr>
+                                    <td>{{ c.titre }}</td>
+                                    <td>{{ c.nombre }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <div class="box-footer">
+                            <div class="col-xs-8">
+                                <a href="{{ path('arssam_dvsse_list') }}" class="btn btn-info btn-flat">Retour</a>
+                            </div>
+                        </div><!-- /.box-footer -->
+                    </div><!-- /.box -->
+                {% endif %}
+            </div><!--/.col (right) -->
+        </div>   <!-- /.row -->
+    </section>
+{% endblock content %}

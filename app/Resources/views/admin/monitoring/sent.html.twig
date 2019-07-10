@@ -1,0 +1,35 @@
+{% import ':Macro:misc.html.twig'    as misc        %}
+{% import ':Macro:alerts.html.twig'  as alerts      %}
+<h5>Demande envoyé <span class="label label-danger">{{nb}}</span></h5>
+    {% if nb !='0'%}
+    <table class="table table-hover">
+            <thead style="background-color: #96968e;">
+                <tr>
+                    <th width="10%">A :</th>
+                    <th width="30%" class="no-sort text-center">Typologie</th>
+                    <th width="25%">Date de l'envoie</th>
+                    <th width="10%">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for m in sent %}
+                <tr {% if m.vue == 0 %}class="active"{% endif %}>
+                    <td class="mailbox-name align-vertical"><a href="#" class="{% if m.vue %}is_read{% endif %}">{{ m.entiteReceiver.abreviation }}</a></td>
+                    <td class="mailbox-subject align-vertical {% if m.vue %}is_read{% endif %}"><a  class="{% if m.vue %}is_read{% endif %}" href="{{ path('arssam_message_sent_show', {'id': m.id}) }}"><b>{{ m.sujet|truncate(15, true, '...') }}</b></a></td>
+                    <td class="mailbox-date align-vertical">{{m.createdAt|date("d/m/Y H:i")}}</td>
+                    <td>{{ misc.state_demande(m.status) }}</td>
+                </tr>
+            {% endfor %}
+            {# {% else %}
+                <tr>
+                    <td colspan="4">Pas de résultat</td>
+                </tr>    
+            {% endif %} #}
+            </tbody>
+    </table>
+    <div class="navigation">
+                    {{ knp_pagination_render(sent) }}
+    </div>
+    {% else %}
+        {{ alerts.warning('Pas de résultat'|trans) }}
+    {% endif %}

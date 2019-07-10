@@ -1,0 +1,153 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+{{parent()}}
+{# <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css"/> #}
+{% endblock %}
+{% block header %}
+    <h1>
+       Demande
+    </h1>
+{% endblock %}
+
+{% block content %}
+{% if not is_granted('ROLE_SUPER_ADMIN') %}
+    <div class="col-md-3 col-lg-3">
+        <button  class="btn btn-primary" style="width:100%;" data-toggle="modal" data-target="#modalNouveauMessage"><i class='fa fa-plus'></i> Nouveau message</button>
+        <div class="box box-solid" style="margin-top:15px;">
+            <div class="box-header with-border">
+              <h3 class="box-title">Dossiers</h3>
+
+              <div class="box-tools">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="box-body no-padding" style="">
+              <ul class="nav nav-pills nav-stacked">
+                <li><a href="{{path('arssam_message_index')}}"><i class="fa fa-inbox"></i> Boîte de réception
+                  <span class="label label-primary pull-right"></span></a></li>
+                <li><a href="{{path('arssam_message_sent')}}"><i class="fa fa-envelope-o"></i>Messages envoyés</a></li>
+                {# <li><a href="#"><i class="fa fa-file-text-o"></i> Drafts</a></li>
+                <li><a href="#"><i class="fa fa-filter"></i> Junk <span class="label label-warning pull-right">65</span></a>
+                </li>
+                <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li> #}
+              </ul>
+            </div>
+            <!-- /.box-body -->
+          </div>
+    </div>
+   {% endif %} 
+    <div class="col-md-9 col-lg-9">
+    {% block vv %}
+        
+    {% endblock %}   
+    {% include "@App/Message/_popupNewMessage.html.twig" %}  
+    </div>   
+     
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+    $('#modalNouveauMessage').on('shown.bs.modal',function(){
+        var typologieSelect = $("#appbundle_c_message_typologie");
+        typologieSelect.html('');
+        typologieSelect.append('<option value> Veuillez choisir une entité</option>');
+    })
+    $('#appbundle_c_message_entiteReceiver').on('change',function(){
+      var entitySelector = $(this);
+      if(entitySelector.val()!=''){
+        $.ajax({
+          url: "{{ path('entite_list_typologie') }}",
+          type: "GET",
+          dataType: "JSON",
+          data: {
+              entityId: entitySelector.val()
+          },
+          success: function (typologies) {
+              var typologieSelect = $("#appbundle_c_message_typologie");
+
+              // Remove current options
+              typologieSelect.html('');
+              
+              // Empty value ...
+             // typologieSelect.append('<option value> Select a typologie of ' + entitySelector.find("option:selected").text() + ' ...</option>');
+              
+              
+              $.each(typologies, function (key, typologie) {
+                  typologieSelect.append('<option value="' + typologie.id + '">' + typologie.name + '</option>');
+              });
+          },
+          error: function (err) {
+              alert("An error ocurred while loading data ...");
+          }
+        })
+      }else{
+        var typologieSelect = $("#appbundle_c_message_typologie");
+        typologieSelect.html('');
+        typologieSelect.append('<option value> Veuillez choisir une entité</option>');
+      }
+    })
+    function groupAction(action, message) {
+            $has_checked = false;
+
+            var group_actions = ["delete"];
+
+            if ($.inArray(action, group_actions) == -1) {
+                alert('Action non autorisée');
+                return false;
+            }
+
+            $('.checkthis').each(function() {
+                if ($(this).is(':checked')) {
+                    $has_checked = true;
+                }
+            });
+
+            if ($has_checked) {
+                if (confirm(message)) {
+                    var form = $('.action-group').closest('form#action_group');
+                    form.attr('action', Routing.generate('messages_action_group', {action: action}));
+
+                    form.submit();
+                }
+            } else {
+                return alert('Veuillez sélectionner au moins une ligne');
+            }
+        }
+         /**
+        * Actions groupées
+        */
+       // Sélectionner tout du table header
+       $("#select-all").click(function (e) {
+           updateTableCheck(e, true);
+       });
+
+       // Déselectionner tout du table header
+       $("#unselect-all").click(function (e) {
+           updateTableCheck(e, false);
+       });
+
+       /**
+        * Mis à jour sélection ligne table
+        * @param Event e      Evénement déclenché
+        * @param Bool  status true: Sélectionner tout | false: Désélectionner tout
+        */
+       function updateTableCheck(e, status) {
+           var table = $(e.target).closest('.btn-group').prev();
+          
+           $('td input:checkbox', table).prop('checked', status);
+           $('th input:checkbox', table).prop('checked', status);
+           if(status == true){
+             $("#select-all").find('i').removeClass('fa-square-o').addClass('fa-check-square-o');
+             $("#unselect-all").find('i').removeClass('fa-check-square-o').addClass('fa-square-o');
+           }else{
+             $("#unselect-all").find('i').removeClass('fa-square-o').addClass('fa-check-square-o');
+             $("#select-all").find('i').removeClass('fa-check-square-o').addClass('fa-square-o');
+           }
+       }
+    
+    </script>
+    {# <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script> #}
+   
+{% endblock %}

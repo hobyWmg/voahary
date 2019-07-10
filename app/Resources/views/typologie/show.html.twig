@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Typologie</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ typologie.id }}</td>
+            </tr>
+            <tr>
+                <th>Sujet</th>
+                <td>{{ typologie.sujet }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('adminarssam_typologie_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('adminarssam_typologie_edit', { 'id': typologie.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

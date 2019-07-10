@@ -1,0 +1,127 @@
+{% extends 'base_message.html.twig' %}
+{% block title %}Voir messagse{% endblock %}
+
+{% block vv %}
+    {% embed 'Embed/box.html.twig' %}
+            {% block title %}
+                <i class='fa fa-envelope'></i> Demande reçue par <b>{{messages.entiteReceiver.abreviation}}</b>
+            {% endblock %}
+            {% block boxContent %}
+                    <div class="row" style="border-bottom: 1px solid #f4f4f4;">
+                        <div class="col-md-12">
+                            <div class="col-sm-8">
+                            <h3> {{ messages.sujet}}</h3>
+                            <p><b>De:  {{ messages.userSender.firstname }} {{ messages.userSender.lastname }} - {{ messages.userSender.entite.abreviation}} </b></p>
+                            </div>
+                            <div class="col-sm-4" style='text-align:right;'>
+                                <span style="color:#b3adad;">
+                                    {{ messages.createdAt|date("d/m/Y H:i:s") }}
+                                </span>     
+                            </div>
+                        </div>
+                    </div>
+                    {% if parentMsg %}
+                    <div class="row content-parent-msg" style="border-bottom: 1px solid #f4f4f4;
+    color: #999;
+    margin: 15px 0px 0px 15px;">
+                        <div class="col-md-12">
+                            <div class="col-sm-8">
+                               <b> {{ parentMsg.userSender.firstname }} {{ parentMsg.userSender.lastname }} - {{ parentMsg.userSender.entite.abreviation}} </b>
+                            </div>
+                            <div class="col-sm-4" style="text-align: right;padding: 0px;">
+                                {{ parentMsg.createdAt|date("d/m/Y H:i:s") }}
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-sm-12" style="padding-top:15px;">
+                                  <h5> Du <b>{{parentMsg.startDate|localizeddate('medium', 'none', null, null, null)}}</b>{% if parentMsg.endDate %} - Au <b>{{parentMsg.endDate|localizeddate('medium', 'none', null, null, null)}}</b>{%endif%}<h5>
+                                {{ parentMsg.text|raw }}
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}	 
+                    <div class="row content-raw">
+                        <div class="col-md-12">
+                            <div class="col-sm-12" style="padding-top:15px;">
+                                {# {{messages.typologie.sujet}} #}
+                                {% if not messages.parentMessage %}
+                                  <h5> Du <b>{{messages.startDate|localizeddate('medium', 'none', null, null, null)}}</b> {% if messages.endDate %}- Au <b>{{messages.endDate|localizeddate('medium', 'none', null, null, null)}}</b>{%endif%}<h5>
+                                {% endif %}
+                                 <br/>{{ messages.text|raw }}
+                                {% if messages.papier %}
+                                <i style="color:#999">* Un document papier a été envoyé en guise de réponse</i>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% if messages.reponse %}
+                    <div class="row" style="border-bottom: 1px solid #f4f4f4;
+    color: #999;
+    margin: 15px 0px 0px 15px;">
+                        <div class="col-md-12">
+                            <div class="col-sm-8">
+                               <b> {{ messages.reponse.userSender.firstname }} {{ messages.reponse.userSender.lastname }} - {{ messages.reponse.userSender.entite.abreviation}} </b>
+                            </div>
+                            <div class="col-sm-4" style="text-align: right;padding: 0px;">
+                                {{ messages.reponse.createdAt|date("d/m/Y H:i:s") }}
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-sm-12" style="padding-top:15px;">
+                                {{ messages.reponse.text|raw }}
+                                 {% if messages.reponse.papier %}
+                                <i style="color:#999">* Un document papier a été envoyé en guise de réponse</i>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}	     
+            {% endblock %}
+            {% block footer %}
+            <div class="box-footer">
+            {% if (messages.path) %}
+              <ul class="mailbox-attachments clearfix">
+                <li>
+                  <span class="mailbox-attachment-icon"><i class="fa fa-file-excel-o"></i></span>
+
+                  <div class="mailbox-attachment-info">
+                    <a target="_blank" href="{{asset('uploads/documents/' ~ messages.path)}}" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> {{messages.filename}}</a>
+                        <span class="mailbox-attachment-size">
+                          <a href="{{asset('uploads/documents/' ~ messages.path)}}" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
+                        </span>
+                  </div>
+                </li>
+              </ul>
+              {% endif %}
+              {% if (messages.reponse) %}
+              {% if (messages.reponse.path) %}
+              <ul class="mailbox-attachments clearfix">
+                <li>
+                  <span class="mailbox-attachment-icon"><i class="fa fa-file-excel-o"></i></span>
+
+                  <div class="mailbox-attachment-info">
+                    <a target="_blank" href="{{asset('uploads/documents/' ~ messages.reponse.path)}}" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> {{messages.reponse.filename}}</a>
+                        <span class="mailbox-attachment-size">
+                          <a href="{{asset('uploads/documents/' ~ messages.reponse.path)}}" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
+                        </span>
+                  </div>
+                </li>
+              </ul>
+              {% endif %}
+              {% endif %}
+            </div>  
+            {% if not parentMsg and not messages.reponse and not is_granted('ROLE_SUPER_ADMIN')%}
+            <div class="box-footer">              
+                <button id="btn-reply" class="btn btn-primary" data-toggle="modal" data-target="#modalReplyMessage"><i class='fa fa-reply'></i> Répondre</button>
+            </div>  
+             {% endif %}
+            {% include "@App/Message/_popupReplyMessage.html.twig" %} 
+            {% endblock %}
+    {% endembed %}            
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+ <script>
+   
+    </script>
+{% endblock %}

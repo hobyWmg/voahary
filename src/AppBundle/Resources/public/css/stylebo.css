@@ -1,0 +1,51 @@
+/**forms réinitialser mot de passe**/
+input#fos_user_resetting_form_plainPassword_first, input#fos_user_resetting_form_plainPassword_second{
+  display: block;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    -webkit-border-radius:6px;
+    -moz-border-radius:6px;
+    box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
+    -moz-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
+    -webkit-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
+}
+#fos_user_resetting_form{
+  margin-bottom:20px;
+}
+.glyphicon-stop{
+	color:#3c9ebc;
+}
+a.logo:hover {
+	background-color: #1D3399 !important;
+}
+
+.box.box-info {
+    border-top-color: #3c9ebc;
+}
+
+.sidebar-menu li > a:hover {
+  background-color: #1D3399 !important;
+}
+
+div.trigger{
+    padding: 16px 24px 7px 9px;
+}
+.content-flash{
+  display: block;
+  width: auto;
+  float: right;
+  -webkit-box-shadow: -1px 2px 11px -3px rgba(0,0,0,0.75);
+  -moz-box-shadow: -1px 2px 11px -3px rgba(0,0,0,0.75);
+  box-shadow: -1px 2px 11px -3px rgba(0,0,0,0.75);
+  margin-right: 15px;
+  margin-top: 15px;
+  position: absolute;
+  right: 0;
+  z-index: 5;
+}
+
+/*  */

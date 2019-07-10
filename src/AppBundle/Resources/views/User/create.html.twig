@@ -1,0 +1,156 @@
+{% extends '::base.html.twig' %}
+
+{% block header %}
+    <h1>
+        Utilisateur
+    </h1>
+{% endblock %}
+
+{% block content %}
+    {% embed ':Embed:box.html.twig' %}
+        {% block title %}
+            <i class="fa fa-plus-circle"></i>
+            Création utilisateur
+        {% endblock %}
+        {% block boxContent %}
+            <form action="{{ path('arssam_user_create') }}" method="post" class="form-horizontal" enctype ="multipart/form-data">
+                <i class="validateTips">Tous les champs avec un astérisque (<span class="form-required" title="Ce champ est requis."> * </span>) sont obligatoires</i><br><br>
+                <div class="form-group {% if form.matricule.vars.errors|length %}has-error {% endif %}">
+                    <label class="col-sm-2  ">{{ form_label(form.matricule) }} </label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.matricule, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(form.matricule) }}
+                    </div>
+                </div>
+                <div class="form-group {% if form.lastname.vars.errors|length %}has-error {% endif %}">
+                    <label class="col-sm-2  ">{{ form_label(form.lastname) }} <span class="form-required" title="Ce champ est requis.">*</span></label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.lastname, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(form.lastname) }}
+                    </div>
+                </div>
+
+                <div class="form-group {% if form.firstname.vars.errors|length %}has-error {% endif %}">
+                    <label class="col-sm-2  ">{{ form_label(form.firstname) }} <span class="form-required" title="Ce champ est requis.">*</span></label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.firstname, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(form.firstname) }}
+                    </div>
+                </div>
+
+                {# <div class="form-group {% if form.username.vars.errors|length %}has-error {% endif %}">
+                    <label class="col-sm-2  ">{{ form_label(form.username) }}</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.username, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(form.username,{'attr':{'class':'form-error'}}) }}
+                    </div>
+                </div> #}
+
+                <div class="form-group {% if form.email.vars.errors|length %}has-error {% endif %}">
+                    <label class="col-sm-2  ">{{ form_label(form.email) }} <span class="form-required" title="Ce champ est requis.">*</span></label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.email, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(form.email) }}
+                    </div>
+                </div>
+
+                <div class="form-group {% if form.plainPassword.first.vars.errors|length %}has-error {% endif %}">
+                    <label class="col-sm-2 ">{{ form_label(form.plainPassword.first) }} <span class="form-required" title="Ce champ est requis.">*</span></label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(form.plainPassword.first) }}
+                    </div>
+                </div>
+
+                <div class="form-group {% if form.plainPassword.second.vars.errors|length %}has-error {% endif %}">
+                    <label class="col-sm-2   ">{{ form_label(form.plainPassword.second) }} <span class="form-required" title="Ce champ est requis.">*</span></label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(form.plainPassword.second) }}
+                    </div>
+                </div>
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <div class="form-group {% if form.roles.vars.errors|length %}has-error {% endif %}">
+                        <label class="col-sm-2  ">{{ form_label(form.roles) }}</label>
+                        <div class="col-sm-10">
+                            {{ form_widget(form.roles, { 'attr': {'class': 'form-control'} }) }}
+                            {{ form_errors(form.roles) }}
+                        </div>
+                    </div>
+                
+                    <div class="form-group {% if form.entite.vars.errors|length %}has-error {% endif %}">
+                        <label class="col-sm-2  ">{{ form_label(form.entite) }}</label>
+                        <div class="col-sm-10">
+                            {{ form_widget(form.entite, { 'attr': {'class': 'form-control'} }) }}
+                            {{ form_errors(form.entite) }}
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="form-group {% if form.enabled.vars.errors|length %}has-error {% endif %}">
+                    <label class="col-sm-2  ">{{ form_label(form.enabled) }}</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.enabled, { 'attr': {'class': ''} }) }}
+                        {{ form_errors(form.enabled) }}
+                    </div>
+                </div>
+
+
+                {# <div class="form-group {% if form.repertoire.vars.errors|length %}has-error {% endif %}">
+                    <label class="col-sm-2  ">{{ form_label(form.repertoire) }}</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.repertoire, { 'attr': {'class': ''} }) }}
+                        {{ form_errors(form.repertoire) }}
+                    </div>
+                </div> #}
+
+                {# <div class="form-group">
+                    <label class="col-sm-2  ">{{ form_label(form.filePhoto) }}</label>
+                    <div class="col-sm-6">
+                    {{ form_widget(form.filePhoto, {'attr': {'accept': 'image/*'}}) }}
+                    <p class="note-image"><small>Note: Ajouter une photo au format jpg / jpeg / png</small></p>
+                    </div>
+                </div> #}
+                <div class="form-group">
+                    <label class="col-sm-2">
+                        {{ form_label(form.filePhoto) }}
+                    </label>
+                    <div class="col-sm-6">
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail" style="width: 100px; height: 100px;">
+                                <img class="imageSource" data-src="holder.js/100%x100%" src="{{ asset(default_photo) }}" alt="">
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 100px; max-height: 100px;">
+                               {# {% if praticien is defined and praticien.photo is not null %}
+                                    <img class="imageSource" style="width: 100px; height: auto" data-src="holder.js/100%x100%" src="{{ asset(praticien.webPath ~ praticien.photo) }}" alt="">
+                                {% endif %}#}
+                            </div>
+                            <div>
+                                <span class="btn btn-default btn-file btn-flat">
+                                    <span class="fileinput-new">Choisir une image</span>
+                                    <span class="fileinput-exists">Changer</span>
+                                    {{ form_widget(form.filePhoto, {'attr': {'accept': 'image/*'}}) }}
+                                </span>
+                                <a href="#"  class="btn btn-warning" data-dismiss="fileinput">Supprimer</a>
+                            </div>
+                        </div>
+                        <p class="note-image"><small>Note: Ajouter une photo au format jpg / jpeg / png</small></p>
+                    </div>
+                    <div class="col-sm-4">
+                        {{ form_errors(form.filePhoto) }}
+                    </div>
+                </div>
+
+                {% import ':Macro:buttons.html.twig' as buttons %}
+                {% import ':Macro:formButtons.html.twig' as formButtons %}
+                {{ formButtons.create() }}
+                {{ buttons.back({
+                    url : path('arssam_user_list'),
+                }) }}
+
+                <div class="hide">
+                    {{ form_rest(form) }}
+                </div>
+            </form>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

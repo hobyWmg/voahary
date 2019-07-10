@@ -1,0 +1,70 @@
+{% extends '::base.html.twig' %}
+
+{% block header %}
+    <h1>
+        Voyageurs
+    </h1>
+{% endblock %}
+
+{% block content %}
+    {% embed ':Embed:box.html.twig' %}
+        {% block title %}
+            <i class="fa fa-plus-circle"></i>
+            Ajout information pour les voyageurs
+        {% endblock %}
+        {% block boxContent %}
+            <form action="{{ path('arssam_cis_create') }}" method="post" class="form-horizontal" enctype ="multipart/form-data">
+                <i class="validateTips">Tous les champs avec un astérisque (<span class="form-required" title="Ce champ est requis."> * </span>) sont obligatoires</i><br><br>
+                <div class="form-group {% if form.nom.vars.errors|length %}has-error {% endif %}">
+                    <label class="col-sm-2  ">{{ form_label(form.nom) }} <span class="form-required" title="Ce champ est requis.">*</span></label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.nom, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(form.nom) }}
+                    </div>
+                </div>
+
+                <div class="form-group {% if form.prenom.vars.errors|length %}has-error {% endif %}">
+                    <label class="col-sm-2  ">{{ form_label(form.prenom) }} </label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.prenom, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(form.prenom) }}
+                    </div>
+                </div>
+
+                <div class="form-group {% if form.autre.vars.errors|length %}has-error {% endif %}">
+                    <label class="col-sm-2  ">{{ form_label(form.autre) }} </label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.autre, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(form.autre) }}
+                    </div>
+                </div>
+
+                <div class="form-group {% if form.reseaux.vars.errors|length %}has-error {% endif %}">
+                    <label class="col-sm-2  ">{{ form_label(form.reseaux) }}</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.reseaux, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(form.reseaux) }}
+                    </div>
+                </div>
+                <div class="form-group {% if form.status.vars.errors|length %}has-error {% endif %}">
+                    {# <label class="col-sm-2  ">{{ form_label(form.status) }}</label> #}
+                     <label class="col-sm-2  ">Enquête en cours</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.status) }}
+                        {{ form_errors(form.status) }}
+                    </div>
+                </div>
+                {% import ':Macro:buttons.html.twig' as buttons %}
+                {% import ':Macro:formButtons.html.twig' as formButtons %}
+                {{ formButtons.create() }}
+                {{ buttons.back({
+                    url : path('arssam_cis_list'),
+                }) }}
+
+                <div class="hide">
+                    {{ form_rest(form) }}
+                </div>
+            </form>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
