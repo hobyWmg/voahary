@@ -87,12 +87,12 @@ class Message
      */
     private $reponse;
 
-    /**
-     *
-     * @ORM\ManyToOne(targetEntity="Typologie")
-     * @ORM\JoinColumn(name="typologie_id", referencedColumnName="id")
-     */
-    private $typologie;
+    // /**
+    //  *
+    //  * @ORM\ManyToOne(targetEntity="Typologie")
+    //  * @ORM\JoinColumn(name="typologie_id", referencedColumnName="id")
+    //  */
+    // private $typologie;
 
      /**
      * @var \DateTime
@@ -539,29 +539,29 @@ class Message
         return $this->status;
     }
 
-    /**
-     * Set typologie
-     *
-     * @param \AppBundle\Entity\Typologie $typologie
-     *
-     * @return Message
-     */
-    public function setTypologie(\AppBundle\Entity\Typologie $typologie = null)
-    {
-        $this->typologie = $typologie;
+    // /**
+    //  * Set typologie
+    //  *
+    //  * @param \AppBundle\Entity\Typologie $typologie
+    //  *
+    //  * @return Message
+    //  */
+    // public function setTypologie(\AppBundle\Entity\Typologie $typologie = null)
+    // {
+    //     $this->typologie = $typologie;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    /**
-     * Get typologie
-     *
-     * @return \AppBundle\Entity\Typologie
-     */
-    public function getTypologie()
-    {
-        return $this->typologie;
-    }
+    // /**
+    //  * Get typologie
+    //  *
+    //  * @return \AppBundle\Entity\Typologie
+    //  */
+    // public function getTypologie()
+    // {
+    //     return $this->typologie;
+    // }
 
     /**
      * Set startDate

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1 class="title">Parametres list</h1>
+    {% if not parametres %}
+    <a class="btn btn-success btn-add" href="{{ path('parametre_new') }}">Ajouter</a>
+    {% endif %}
+    <div class="bg-content">
+        <table class="table table-datatable">
+            <thead>
+                <tr>
+                    {# <th>Id</th> #}
+                    <th>Adresse</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Image de fond</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for parametre in parametres %}
+                <tr>
+                    {# <td><a href="{{ path('parametre_show', { 'id': parametre.id }) }}">{{ parametre.id }}</a></td> #}
+                    <td>{{ parametre.adresse }}</td>
+                    <td>{{ parametre.phone }}</td>
+                    <td>{{ parametre.email }}</td>
+                    <td><img style="width:100px; height:100px;" src="{{asset(parametre.imageFondContact.webPath~ parametre.imageFondContact.photo)}}"/></td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('parametre_edit', { 'id': parametre.id }) }}"><i class="fa fa-edit"></i></a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

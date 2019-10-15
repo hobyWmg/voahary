@@ -1,0 +1,23 @@
+<div class="inner">
+    <header class="major alt">
+        <p>Article du jour</p>
+        <h2 style="
+    color: #134185;
+">{{article.titre}}</h2>
+    </header>
+    <section class="posts">
+        <article>
+            <span class="image  animated bounceInRight" style="width:80rem !important">
+                <div class="img-article" style="background-image:url('{{asset(article.image.webPath  ~ article.image.photo)}}')">
+
+            </div>
+            </span>
+            <div class="content animated bounceInLeft">
+                <p>{{article.contenue|truncate(300)|raw}}</p>
+                <ul class="actions">
+                    <li><a href="{{path('voahary_article_lire',{'id':article.id})}}" class="button">Lire</a></li>
+                </ul>
+            </div>
+        </article>
+    </section>
+</div>

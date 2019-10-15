@@ -8,39 +8,24 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
- * @Route("/adminarssam")
+ * @Route("/voaharyadmin")
  */
 class AdminController extends Controller
 {
    /**
-     * @Route("/", name="velirano_admin_homepage")
+     * @Route("/", name="voahary_admin_homepage")
      */
     public function indexAction(Request $request)
     {
         // replace this example code with whatever you need
+       $em = $this->getDoctrine()->getManager();
+       if($this->getUser()){
+            $entites = $em->getRepository('AppBundle:Entite')->findAll();
+            return $this->render('admin/index.html.twig',['entites'=>$entites]);
+       }else{
+            return $this->redirectToRoute('fos_user_security_login');
+       }
         
-        $session = $request->getSession();
-        $em = $this->getDoctrine()->getManager();
-        if ($request->getMethod() === 'POST'){
-            $filter['dateDeb'] = (trim($request->get('dateDeb')) != "")? \DateTime::createFromFormat('d/m/Y H:i:s',$request->get('dateDeb').' 00:00:00'):"";
-            $filter['dateFin'] = (trim($request->get('dateFin')) != "")? \DateTime::createFromFormat('d/m/Y H:i:s',$request->get('dateFin').' 23:59:59'):"";
-            $filter['status'] = $request->get('status');
-            $filter['entite'] = $request->get('entite');
-            $filter['typologie'] =$request->get('typologie');
-            if($filter['dateDeb']!='' && $filter['dateFin']==''){
-                $filter['dateFin'] = \DateTime::createFromFormat('d/m/Y H:i:s',$request->get('dateDeb').' 23:59:59');
-            }
-            if($filter['dateFin']!='' && $filter['dateDeb']==''){
-                $filter['dateDeb'] = \DateTime::createFromFormat('d/m/Y H:i:s',$request->get('dateFin').' 00:00:00');
-            }
-            // if($filter['typologie']){
-            //     $typo = $em->getRepository('AppBundle:Typologie')->find($filter['typologie']);
-            //     $filter['typologie'] = $typo->getSujet();
-            // }
-            $session->set('filter',$filter);
-        }
-        $entites = $em->getRepository('AppBundle:Entite')->findAll();
-        return $this->render('admin/index.html.twig',['entites'=>$entites]);
     }
 
     /**

@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1 class="title">Carousels list</h1>
+    <a class="btn btn-success btn-add" href="{{ path('voaharyadmin_carousel_new') }}">Ajouter</a>
+    <div class="bg-content">
+        <table class='table table-datatable list-data table-hover table-list-dragdrop' id="photo-list-carousel">
+            <thead>
+                <tr>
+                    <th width="10%"></th>
+                    <th>Titre</th>
+                    <th>Description</th>
+                    <th>Ordre</th>
+                    <th>Image</th>
+                    {# <th>Createdat</th>
+                    <th>Updatedat</th> #}
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for carousel in carousels %}
+                <tr data-url="{{ path('voaharyadmin_update_position', {'id': carousel.id}) }}">
+                    <td data-num="{{ carousel.ordre }}" data-id="{{ carousel.id }}">
+                                    <button type="button" class="btn btn-default btn-flat drag-element btn-social">
+                                        <i class="fa fa-arrows fa-lg"></i>#<span class="sortable-index">{{ carousel.ordre + 1 }}</span>
+                                    </button>
+                    </td>
+                    <td>{{ carousel.titre }}</td>
+                    <td>{{ carousel.description }}</td>
+                    <td>{{ carousel.ordre }}</td>
+                    <td><img style="width:100px; height:auto;" src="{{asset(carousel.webPath~ carousel.image)}}"/></td>
+                    {# <td>{% if carousel.createdAt %}{{ carousel.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{% if carousel.updatedAt %}{{ carousel.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td> #}
+                    <td>
+                        <ul>
+                            <li>
+                            <a href="javascript:void(0)" class='delete-btn' data-url="{{path('voaharyadmin_carousel_delete', { 'id':carousel.id  } )  }}" ><i class="fa fa-trash"></i></a>
+                            </li>
+                            <li>
+                                {# <a href="{{ path('voaharyadmin_carousel_edit', { 'id': carousel.id }) }}">edit</a> #}
+                                <a href="{{ path('voaharyadmin_carousel_edit', { 'id': carousel.id }) }}"><i class="fa fa-edit"></i></a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+{{ parent() }}
+<script src="{{ asset('bundles/app/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('bundles/app/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
+<script src="{{ asset('bundles/app/plugins/iCheck/icheck.min.js') }}"></script>
+<script src="{{ asset('bundles/app/plugins/datatables/extensions/RowReorder/js/dataTables.rowReorder.min.js') }}"></script>
+<script src="{{ asset('bundles/app/js/jquery-sortable.js') }}"></script>
+<script>
+    $(document).ready(function(){
+        $('#photo-list-carousel').DataTable( {
+            rowReorder: true,
+            bPaginate: false,
+            bFilter: false,
+            bInfo: false
+        } );
+
+        $('.table-list-dragdrop').sortable({
+            handle: '.drag-element',
+            containerSelector: 'table',
+            itemPath: '> tbody',
+            itemSelector: 'tr',
+            placeholderClass: 'placeholder',
+            placeholder: '<tr class="placeholder"/>',
+            pullPlaceholder: true,
+            onDragStart: function ($item, container) {
+                if (!$('.callout.alert').hasClass('hidden')) {
+                    $('.callout.alert').addClass('hidden');
+                    $('.callout.alert').removeClass('callout-success alert-success');
+                }
+                $item.addClass(container.group.options.draggedClass);
+                $("body").addClass(container.group.options.bodyClass);
+            },
+            onDrop: function ($item, container) {
+                var number = $item.index();
+                $.ajax({
+                    url: $item.data('url'),
+                    dataType: 'json',
+                    type: 'POST',
+                    data: {
+                        ordre: number,
+                    },
+                    success: function (response) {
+                        $('.flashbag').addClass('hidden');
+                        $('.callout.alert').removeClass('hidden');
+                        if (response.message) {
+                            $('.callout.alert p').html(response.message);
+                            $('.callout.alert').addClass('callout-success alert-success');
+                        }
+                        if (response.error) {
+                            $('.callout.alert p').html(response.error);
+                            $('.callout.alert').addClass('callout-danger alert-danger');
+                        }
+                    }
+                });
+
+                $('.sortable-index').each(function(index){
+                    var index1 = index + 1;
+                    $(this).text(index1);
+                });
+
+                $item.removeClass(container.group.options.draggedClass).removeAttr("style");
+                $("body").removeClass(container.group.options.bodyClass);
+            }
+        });
+
+    });
+</script>
+
+{% endblock %}

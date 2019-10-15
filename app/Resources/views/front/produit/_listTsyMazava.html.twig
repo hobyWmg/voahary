@@ -1,0 +1,38 @@
+ {% set efaTato = false %}
+{% for k,p in produits %}
+
+    {% if reste == 1 %}
+        {% if efaTato == false %}
+            {% set tmpNbLigne = (produits|length -1)/5%}
+            {% set nbLigne =  tmpNbLigne+1 %}
+        {% endif %}
+    {% endif %}
+    
+
+    {% if(k is divisible by(nbLigne)) %}
+        <div class="col-lg-2" style="padding-left:10px !important">        
+    {% endif %}
+
+    <div class="content-image effect5 animated growIn slowest">
+        <img src= "{{ asset(p.imageEnAvant.webPath ~ p.imageEnAvant.photo) }}">
+        <a href="{{path('produit_details',{'id':p.id})}}">
+        <div class="info">
+            <h3>{{p.titre}}</h3>{{nbLigne}}
+        
+                <i class="fa fa-eye fa-2x"></i>
+        </div>
+        </a>
+    </div>
+    {% set inc = k+1 %}
+    {% if  inc is divisible by(nbLigne)%}    
+        </div>  
+    {% endif %}   
+    {% if (k+1 == nbLigne ) %}
+        {% if efaTato == false %}
+            {% set nbLigne = tmpNbLigne %}
+            <div class="col-lg-2" style="padding-left:10px !important"> 
+        {% endif %}
+
+        {% set efaTato = true %}
+    {% endif %}
+{% endfor %}

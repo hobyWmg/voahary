@@ -72,10 +72,10 @@ class User extends BaseUser
      */
     private $message;
 
-    /**
-     * @ORM\OneToMany(targetEntity="ActivityLog", mappedBy="user")
-     */
-    private $activityLog;
+    // /**
+    //  * @ORM\OneToMany(targetEntity="ActivityLog", mappedBy="user")
+    //  */
+    // private $activityLog;
 
     /**
      * @var string
@@ -390,37 +390,37 @@ class User extends BaseUser
         return $this->matricule;
     }
 
-    /**
-     * Add activityLog
-     *
-     * @param \AppBundle\Entity\ActivityLog $activityLog
-     *
-     * @return User
-     */
-    public function addActivityLog(\AppBundle\Entity\ActivityLog $activityLog)
-    {
-        $this->activityLog[] = $activityLog;
+    // /**
+    //  * Add activityLog
+    //  *
+    //  * @param \AppBundle\Entity\ActivityLog $activityLog
+    //  *
+    //  * @return User
+    //  */
+    // public function addActivityLog(\AppBundle\Entity\ActivityLog $activityLog)
+    // {
+    //     $this->activityLog[] = $activityLog;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    /**
-     * Remove activityLog
-     *
-     * @param \AppBundle\Entity\ActivityLog $activityLog
-     */
-    public function removeActivityLog(\AppBundle\Entity\ActivityLog $activityLog)
-    {
-        $this->activityLog->removeElement($activityLog);
-    }
+    // /**
+    //  * Remove activityLog
+    //  *
+    //  * @param \AppBundle\Entity\ActivityLog $activityLog
+    //  */
+    // public function removeActivityLog(\AppBundle\Entity\ActivityLog $activityLog)
+    // {
+    //     $this->activityLog->removeElement($activityLog);
+    // }
 
-    /**
-     * Get activityLog
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getActivityLog()
-    {
-        return $this->activityLog;
-    }
+    // /**
+    //  * Get activityLog
+    //  *
+    //  * @return \Doctrine\Common\Collections\Collection
+    //  */
+    // public function getActivityLog()
+    // {
+    //     return $this->activityLog;
+    // }
 }

@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1 class="title">Event edit</h1>
+
+    <div class="bg-content">
+    {{ form_start(form) }}
+        {# {{ form_widget(form) }} #}
+            <div class="row form-group {% if form.titre.vars.errors|length %}has-error {% endif %}">
+                        <label class="col-sm-2  ">{{ form_label(form.titre) }} <span class="form-required" title="Ce champ est requis.">*</span></label>
+                        <div class="col-sm-10">
+                            {{ form_widget(form.titre, { 'attr': {'class': 'form-control'} }) }}
+                            {{ form_errors(form.titre) }}
+                        </div>
+            </div>
+            <div class="row form-group {% if form.description.vars.errors|length %}has-error {% endif %}">
+                        <label class="col-sm-2  ">{{ form_label(form.description) }}</label>
+                        <div class="col-sm-10">
+                            {{ form_widget(form.description, { 'attr': {'class': 'form-control'} }) }}
+                            {{ form_errors(form.description) }}
+                        </div>
+            </div>
+            <div class="row form-group {% if form.lieu.vars.errors|length %}has-error {% endif %}">
+                        <label class="col-sm-2  ">{{ form_label(form.lieu) }}</label>
+                        <div class="col-sm-10">
+                            {{ form_widget(form.lieu, { 'attr': {'class': 'form-control'} }) }}
+                            {{ form_errors(form.lieu) }}
+                        </div>
+            </div>
+            <div class="row form-group {% if form.date.vars.errors|length %}has-error {% endif %}">
+                        <label class="col-sm-2  ">{{ form_label(form.date) }}</label>
+                        <div class="col-sm-10">
+                            {{ form_widget(form.date) }}
+                            {{ form_errors(form.date) }}
+                        </div>
+            </div>
+            <div class=" row form-group">
+                    <label class="col-sm-2">
+                       {{ form_label(form.filePhoto) }}
+                   </label>
+                    <div class="col-sm-6">
+                        <div class="fileinput fileinput-{% if event is defined and event.photo is not null %}exists{% else %}new{% endif %}" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail" style="width: 100px; height: 100px;">
+                                <img class="imageSource" data-src="holder.js/100%x100%" src="{{ asset(default_photo) }}" alt="">
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 100px; max-height: 100px;">
+                                {% if event is defined and event.photo is not null %}
+                                    <img class="imageSource" style="width: 100px; height: auto" data-src="holder.js/100%x100%" src="{{ asset(event.webPath ~ event.photo) }}" alt="">
+                                {% endif %}
+                            </div>
+                            <div>
+                                <span class="btn btn-default btn-file btn-flat">
+                                    <span class="fileinput-new">Choisir une image</span>
+                                    <span class="fileinput-exists">Changer</span>
+                                    {{ form_widget(form.filePhoto, {'attr': {'accept': 'image/*'}}) }}
+                                </span>
+                                <a href="#" id="delete-photo" data-id="{{ event.id }}" data-type="1" class="btn btn-warning" data-dismiss="fileinput">Supprimer</a>
+                            </div>
+                        </div>
+                        <p class="note-image"><small>Note: Ajouter une photo au format jpg / jpeg / png</small></p>
+                    </div>
+                    <div class="col-sm-4">
+                       {{ form_errors(form.filePhoto) }}
+                   </div>
+                </div>
+        <input type="submit" value="Update" />
+    {{ form_end(form) }}
+    </div>
+    <ul>
+        <li>
+            <a href="{{ path('event_index') }}">Retour</a>
+        </li>
+    </ul>
+    </ul>
+{% endblock %}

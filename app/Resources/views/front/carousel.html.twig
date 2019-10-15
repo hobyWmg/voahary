@@ -1,0 +1,8 @@
+<div class="owl-carousel slide ">
+    {% for img in carousels %}
+		<div class="" style="background-image: url('{{ asset(img.webPath ~ img.image) }}')">
+			{# <h1 >{{img.titre}}</h1>
+			<p >{{img.description}}</p> #}
+		</div>
+    {% endfor %}    
+</div>

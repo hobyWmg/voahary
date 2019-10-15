@@ -1,0 +1,13 @@
+{% extends 'base_interne.html.twig' %}
+{% block body %}
+<div class="row" style="justify-content:flex-end; margin-top:15px;">
+    <div class="col-lg-3">
+        <form method="POST" action="{{path('voahary_all_produits')}}" autocomplete="off">
+            <input type="text" id="search" class="form-control" placeholder="Recherche ..." name="search">
+        </form>
+    </div>
+</div>
+<div id="tata">
+{% include 'front/produit/list.html.twig' %}
+</div>
+{% endblock %}

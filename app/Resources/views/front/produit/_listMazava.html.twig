@@ -1,0 +1,19 @@
+{% for k,p in produits %}
+{% if(k is divisible by(nbLigne)) %}
+<div class="col-lg-2" style="padding-left:10px !important">
+{% endif %}
+ <div class="content-image effect5 animated growIn slowest">
+    <img src= "{{ asset(p.imageEnAvant.webPath ~ p.imageEnAvant.photo) }}">
+     <a href="{{path('produit_details',{'id':p.id})}}">
+    <div class="info">
+        <h3>{{p.titre}}</h3>
+       
+            <i class="fa fa-eye fa-2x"></i>
+    </div>
+    </a>
+ </div>
+ {% set inc = k+1 %}
+{% if  inc is divisible by(nbLigne)%}    
+</div>  
+{% endif %}   
+{% endfor %}

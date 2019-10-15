@@ -1,0 +1,18 @@
+{% extends 'base_interne.html.twig' %}
+{% block body %}
+<div class="animated bounceInRight" style="
+    margin-top: 1rem;
+    padding-top: 5px;">
+<h2>{{event.titre}}</h2></br>
+</div>
+<article class="row" style="justify-content: center;">
+<h3>{{event.lieu}} - {{event.date|date('d-m-Y')}}</h3> 
+           
+            <div class="img-article col-md-12" style="background-image:url('{{asset(event.webPath  ~ event.photo)}}')">
+
+            </div>
+            <div class="content animated bounceInLeft col-md-12">
+                <p>{{event.description|raw}}</p>
+            </div>
+        </article>
+{% endblock %}

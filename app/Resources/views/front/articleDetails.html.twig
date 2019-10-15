@@ -1,0 +1,19 @@
+{% extends 'base_interne.html.twig' %}
+{% block body %}
+<div class="animated bounceInRight" style="
+    margin-top: 1rem;
+    padding-top: 5px;">
+<h2>{{article.titre}}</h2>
+</div>
+<article>
+            {# <span class="image  animated bounceInRight">
+                <img src="{{asset(article.image.webPath  ~ article.image.photo)}}" alt="">
+            </span> #}
+            <div class="img-article" style="background-image:url('{{asset(article.image.webPath  ~ article.image.photo)}}')">
+
+            </div>
+            <div class="content animated bounceInLeft">
+                <p>{{article.contenue|raw}}</p>
+            </div>
+        </article>
+{% endblock %}

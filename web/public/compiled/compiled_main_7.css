@@ -75,22 +75,28 @@
     font-size: 10px;
 }
 .skin-blue .main-header .navbar{
-    background-color: #3c9ebc !important;
+    background-color: #b01d05  !important;
 }
 .skin-blue .main-header .logo {
-    background-color: #3c9ebc !important;
+    background-color: #b01d05  !important;
 }
 .skin-blue .sidebar-menu > li:hover > a, .skin-blue .sidebar-menu > li.active > a{
-    background-color: #3c9ebc !important;
+    background-color: #e1bd0d !important;
 }
 .skin-blue .main-header li.user-header{
-    background-color: #3c9ebc !important; 
+    background-color: #e1bd0d !important; 
 } 
+.skin-blue .sidebar-menu > li:hover > a, .skin-blue .sidebar-menu > li.active > a{
+    color: #ffffff;
+    background: #1e282c;
+    /* border-left-color: #3c8dbc; */
+    border-left-color: #b01d05;
+}
 td{
     text-align: center;
 }   
 table.table-datatable > thead{
-    background-color:  #3c9ebc;
+    background-color:  #e1bd0d;
     color: #fff;
 }
 div.has-error ul{

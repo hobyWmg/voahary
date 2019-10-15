@@ -1,0 +1,30 @@
+<div class="inner">
+    <header class="major">
+        <p>Evénements</p>
+        <h2>Aliquam tincidunt mauris eu risus</h2>
+    </header>
+<section class="timeline">
+{% for e in events %}
+    
+        <section class="animatedParent">
+            <header class="animated growIn slower go">
+                <p>{{e.date|date('d-m-Y')}}</p>
+                <h4> {{e.titre}} </h4>
+            </header>
+            <span class="image animated bounceInLeft slower go">
+                <img src="{{asset(e.webPath ~ e.photo)}}" alt="">
+            </span>
+            <div class="content animated bounceInRight slower go">
+                <p>
+                {{e.description|truncate('200')|raw}}
+                </p>
+                <ul class="actions">
+                    <li>
+                        <a href="{{path('voahary_event_voir',{'id':e.id})}}" class="button">Voir</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+{% endfor %}
+</section>
+</div>

@@ -1,0 +1,107 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1 class='title'>Produit edit</h1>
+    <div class='bg-content'>
+        {{ form_start(edit_form) }}
+            <div class="row form-group {% if edit_form.titre.vars.errors|length %}has-error {% endif %}">
+                        <label class="col-sm-2  ">{{ form_label(edit_form.titre) }} <span class="form-required" title="Ce champ est requis.">*</span></label>
+                        <div class="col-sm-10">
+                            {{ form_widget(edit_form.titre, { 'attr': {'class': 'form-control'} }) }}
+                            {{ form_errors(edit_form.titre) }}
+                        </div>
+            </div>
+             <div class="row form-group {% if edit_form.description.vars.errors|length %}has-error {% endif %}">
+                        <label class="col-sm-2  ">{{ form_label(edit_form.description) }} <span class="form-required" title="Ce champ est requis.">*</span></label>
+                        <div class="col-sm-10">
+                            {{ form_widget(edit_form.description, { 'attr': {'class': 'form-control'} }) }}
+                            {{ form_errors(edit_form.description) }}
+                        </div>
+            </div>
+            <div class=" row form-group">
+                    <label class="col-sm-2">
+                       {{ form_label(edit_form.imageEnAvant) }}
+                   </label>
+                    <div class="col-sm-6">
+                        <div class="fileinput fileinput-{% if produit is defined and produit.imageEnAvant is not null %}exists{% else %}new{% endif %}" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail" style="width: 100px; height: 100px;">
+                                <img class="imageSource" data-src="holder.js/100%x100%" src="{{ asset(default_photo) }}" alt="">
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 100px; max-height: 100px;">
+                                {% if produit is defined and produit.imageEnAvant is not null %}
+                                    <img class="imageSource" style="width: 100px; height: auto" data-src="holder.js/100%x100%" src="{{ asset(produit.imageEnAvant.webPath ~ produit.imageEnAvant.photo) }}" alt="">
+                                {% endif %}
+                            </div>
+                            <div>
+                                <span class="btn btn-default btn-file btn-flat">
+                                    <span class="fileinput-new">Choisir une image</span>
+                                    <span class="fileinput-exists">Changer</span>
+                                    {{ form_widget(edit_form.imageEnAvant, {'attr': {'accept': 'image/*'}}) }}
+                                </span>
+                                <a href="#" id="delete-photo" data-id="{{ produit.id }}" data-type="1" class="btn btn-warning" data-dismiss="fileinput">Supprimer</a>
+                            </div>
+                        </div>
+                        <p class="note-image"><small>Note: Ajouter une photo au format jpg / jpeg / png</small></p>
+                    </div>
+                    <div class="col-sm-4">
+                       {{ form_errors(edit_form.imageEnAvant) }}
+                   </div>
+                </div>
+            <input type="submit" value="Edit" />
+        {{ form_end(edit_form) }}
+    </div>
+
+    <div class='row' style="margin:15px;">
+        <div class='col-lg-12 bg-content'>
+            <div class="col-lg-6">
+                <h3>Autre photo</h3>
+            </div>
+            <div class="col-lg-6">
+                <button type="button" class="btn btn-success pull-right btn-sm" data-toggle="modal" data-target="#exampleModal">
+                Ajouter
+                </button>
+            </div>
+            <div class="col-lg-12">    
+                    {% for image in otherImages %}
+                            <div class="col-lg-2 content-thumb">
+                        
+                            <img class="thumb" src="{{asset(image.webPath ~ image.photo)}}"/>
+                            <a href="javascript:void(0);" class='delete-btn' data-url="{{path('voaharyadmin_produit_delete_other_image', { 'id':produit.id, 'imgId':image.id}) }}"><i class="fa fa-trash"></i></a>
+                            </div>    
+                       
+                    {% endfor %}
+            </div>       
+        </div>
+    </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ajout photo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="{{path('voaharyadmin_produit_add_other_image',{'id':produit.id})}}" method="post" class="form-horizontal" enctype ="multipart/form-data">
+      <div class="modal-body">
+       
+             {{ form_widget(other_image_form) }}
+             {{form_rest(other_image_form)}}
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+    <ul>
+        <li>
+            <a href="{{ path('voaharyadmin_produit_index') }}">Retour</a>
+        </li>
+    </ul>
+{% endblock %}

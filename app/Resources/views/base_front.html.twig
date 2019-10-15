@@ -2,19 +2,222 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Velirano!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-        <!-- Bootstrap core CSS -->
-        <link href="{{asset('bundles/app/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-        <link href="{{asset('bundles/app/offcanvas/css/offcanvas.css')}}" rel="stylesheet">
+        <title>{% block title %}Voahary - Handmade!{% endblock %}</title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('bundles/app/images/ico.png') }}" />
+        {% block stylesheets %}
+        <link rel="stylesheet" type="text/css" href="{{asset('bundles/app/bootstrap/css/bootstrap.min.css')}}">
+        {# <link rel="stylesheet" href="{{asset('bundles/app/plugins/font-awesome-4/css/font-awesome.min.css')}}"> #}
+        <link rel="stylesheet" type="text/css" href="{{asset('bundles/app/css/front/style.css')}}" >
+        <link rel="stylesheet" type="text/css" href="{{asset('bundles/app/plugins/owlcarousel/owl.carousel.min.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('bundles/app/plugins/owlcarousel/owl.theme.default.min.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('bundles/app/plugins/animate/css/animations.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('bundles/app/fonts/font-awesome.css')}}">
+        <style>
+            body{
+    overflow-x: hidden;
+  }
+.slide{
+  height: 500px;
+}
+.owl-item > div{
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+  text-align: center;
+  padding-top: 150px;
+}
+.owl-dots{
+  display: flex;
+  display:-ms-flexbox;
+  justify-content: center;
+  -webkit-justify-content: center;
+  align-items: center;
+  -webkit-align-items: center;
+
+}
+.owl-dot{
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-radius: 16px;
+  margin: 5px;
+  background: #bbb !important;
+}
+.owl-dots button.active {
+  background: transparent !important;
+  border: solid 1px #bbb;
+}
+.nav-bar ul{
+  display: inline-flex;
+  list-style: none;
+  margin-top: 30px;
+}
+.nav-bar ul a{
+  text-decoration: none;
+  color:#fff !important;
+}
+.nav-bar ul li{
+  margin-right: 15px;
+}
+.with-background{
+  background-color: #FFD700 !important;
+  /* border-bottom: solid 1px #39a288; */
+}
+.with-background .logo {
+  margin-left: 40px;
+  -moz-transition: width 2s;
+ -webkit-transition: width 2s;
+ -ms-transition: width 2s;
+ transition: width 2s;
+}
+.timeline .image img{
+  width: 250px;
+  height: auto;
+}
+#plus-produit{
+  float: right;
+background-color: #1d8d7d;
+padding: 10px;
+text-decoration: none;
+cursor: pointer;
+border-radius: 10px 0px 0px 10px;
+color: #fff;
+top: -4rem;
+position: relative;
+}
+        </style>
+        {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}
-        <script src="{{asset('bundles/app/jquery/jquery.min.js')}}"></script>
-        <script src="{{asset('bundles/app/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-        <script src="{{asset('bundles/app/count_down.js')}}"></script>
+    {% block flashMessages %}
+            {% include ':Menu:flashes.html.twig' %}
+        {% endblock %}
+        {% block body %}
+        <header id="header" class="alt animatedParent">
+	<span id="first" class="logo animated growIn slowest" style="margin-top:15px;height:50px;">
+    <a href="#"><img src="{{asset('bundles/app/images/logo.png')}}"></a>
+	</span>
+  <span id="second" class="logo animated growIn bounceInLeft hide">
+    <a href="#" ><img src="{{asset('bundles/app/images/voahary-white.png')}}"></a>
+	</span>
+  
+	<div class="nav-bar animated bounceInDown">
+            <ul class="clearfix">
+              <li> <a href="javascript:void(0);" onClick="goToTarget('one')">Nos produits</a>  </li>
+              <li class="active">
+                <a href="javascript:void(0);" onClick="goToTarget('two')">Nos atouts</a> 
+              </li>
+              <li> <a href="javascript:void(0);" onClick="goToTarget('three')">Evénements</a>  </li>
+              <li>
+                <a href="javascript:void(0);" onClick="goToTarget('footer')">Nous contacter</a> 
+                <span class="download"></span> 
+              </li>
+            </ul>
+          </div>
+	</header>
+<!--<section id="banner">
+	<div class="inner">
+		<p>Ipsum dolor sit amet</p>
+		<h1>Magna sed consequat</h1>
+		<ul class="actions special">
+			<li>
+				<a href="#one" class="button large primary scrolly">Get Started</a>
+			</li>
+		</ul>
+	</div>
+</section>-->
+
+<section id="top">
+	{{ render(controller('AppBundle:Front:carousel')) }}
+</section>
+
+<section id="one" class="section_one wrapper style2 animatedParent animateOnce">
+	<div class="inner  ">
+		<section class="spotlights">
+		{{ render(controller('AppBundle:Front:produitList')) }}
+	</section>	
+  </div>
+  <a id="plus-produit" class="animated bounceInRight " href="{{path('voahary_all_produits')}}">Voir plus</a>
+</section>
+
+<section id="two" class="section_two wrapper style1 special  animatedParent go">
+  {% include 'front/atout.html.twig' %}
+</section>
+
+<section id="three" class="section_three wrapper animatedParent">
+	{{ render(controller('AppBundle:Front:article')) }}
+  {# {% include 'front/article.html.twig' %} #}
+</section>
+
+<section id="four" class="section_four wrapper style2 alt ">
+ 	{{ render(controller('AppBundle:Front:event')) }}
+</section>
+
+<footer id="footer" class="section_footer animatedParent">
+  {{ render(controller('AppBundle:Front:footer')) }}
+</footer>
+
+{% endblock %}
+{% block javascripts %}
+
+        <script src="{{asset('bundles/app/plugins/jquery/jquery-3.2.1.min.js')}}"></script>
+        <script src="{{asset('bundles/app/bootstrap/js/bootstrap.min.js')}}"></script>
+        <script src="{{asset('bundles/app/plugins/owlcarousel/owl.carousel.min.js')}}"></script>
+        <script src="{{asset('bundles/app/plugins/animate/js/css3-animate-it.js')}}"></script>
+        <script type="text/javascript">	
+        $(document).ready(function(){
+        
+        $('.owl-carousel').owlCarousel({
+            loop:true,
+            margin:10,
+            nav:true,
+            items:1,
+            autoplay:true,
+            autoplayHoverPause:true,
+            nav:false,
+            transitionStyle : "fade",
+            autoplaySpeed:800,
+            navSpeed:2000,
+        })
+        $(function(){
+            $(window).scroll(function(){
+                var aTop = $('#top').height();
+                if($(this).scrollTop()>=aTop){
+                    $("#header").addClass("with-background");
+                    $("#first").addClass('hide');
+                    $("#second").removeClass('hide');
+                }else{
+                    $("#header").removeClass("with-background");
+                    $("#first").removeClass('hide');
+                    $("#second").addClass('hide');
+                }
+            });
+            // var config = {
+            // viewFactor : 0.15,
+            // duration   : 1200,
+            // distance   : "100px",
+            // origin: 'top',
+            // scale: 0,
+            // mobile: true,
+            // }
+
+            // window.sr = new ScrollReveal(config)
+            // sr.reveal('.animated');
+            // sr.reveal('.major');
+            // sr.reveal('.stcode_title6');
+            // sr.reveal('.logo_image',{duration: 300, delay:80}, 100);
+            // sr.reveal('.one_half', 200);
+            // sr.reveal('.one_half', { origin: 'left', distance:'300px' });
+            // sr.reveal('.one_half.last', { origin: 'right', distance:'300px' });
+        });
+           
+})
+function goToTarget(target){
+              $('html, body').animate({
+                scrollTop: $(".section_"+target).offset().top
+              }, 1000)
+          }
+        </script>
         {% endblock %}
     </body>
 </html>

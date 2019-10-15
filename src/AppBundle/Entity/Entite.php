@@ -45,10 +45,10 @@ class Entite
      */
     private $message;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Typologie", mappedBy="entite")
-     */
-    private $typologies;
+    // /**
+    //  * @ORM\OneToMany(targetEntity="Typologie", mappedBy="entite")
+    //  */
+    // private $typologies;
 
 
     /**
@@ -184,38 +184,38 @@ class Entite
         return $this->message;
     }
 
-    /**
-     * Add typology
-     *
-     * @param \AppBundle\Entity\Typologie $typology
-     *
-     * @return Entite
-     */
-    public function addTypology(\AppBundle\Entity\Typologie $typology)
-    {
-        $typology->setEntite($this);
-        $this->typologies[] = $typology;
+    // /**
+    //  * Add typology
+    //  *
+    //  * @param \AppBundle\Entity\Typologie $typology
+    //  *
+    //  * @return Entite
+    //  */
+    // public function addTypology(\AppBundle\Entity\Typologie $typology)
+    // {
+    //     $typology->setEntite($this);
+    //     $this->typologies[] = $typology;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    /**
-     * Remove typology
-     *
-     * @param \AppBundle\Entity\Typologie $typology
-     */
-    public function removeTypology(\AppBundle\Entity\Typologie $typology)
-    {
-        $this->typologies->removeElement($typology);
-    }
+    // /**
+    //  * Remove typology
+    //  *
+    //  * @param \AppBundle\Entity\Typologie $typology
+    //  */
+    // public function removeTypology(\AppBundle\Entity\Typologie $typology)
+    // {
+    //     $this->typologies->removeElement($typology);
+    // }
 
-    /**
-     * Get typologies
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getTypologies()
-    {
-        return $this->typologies;
-    }
+    // /**
+    //  * Get typologies
+    //  *
+    //  * @return \Doctrine\Common\Collections\Collection
+    //  */
+    // public function getTypologies()
+    // {
+    //     return $this->typologies;
+    // }
 }

@@ -15,35 +15,22 @@
 
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
-        {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_FOCAL') or is_granted('ROLE_OFFICIER') %}
+        {% if is_granted('ROLE_SUPER_ADMIN')  %}
             <li class="header">ADMIN AREA</li>
-                <li class="{% if 'arssam_user_' in routeName %}active{% endif %}"><a href="{{path('arssam_user_list')}}"><i class="fa fa-users"></i> <span>Gestion des utilisateurs</span></a></li>
-                {% if is_granted('ROLE_SUPER_ADMIN') %}
-                <li class="{% if 'arssam_entity_' in routeName %}active{% endif %}"><a href="{{path('arssam_entity_list')}}"><i class="fa fa-cubes"></i> <span>Gestion des entités</span></a></li> 
-                 {% endif %}   
-                {% if is_granted('ROLE_SUPER_ADMIN') or (app.user.entite and app.user.entite.abreviation=='PAF')%}
-                    <li class="{% if 'arssam_passenger_' in routeName %}active{% endif %}"><a href="{{path('arssam_passenger_list')}}"><i class="glyphicon glyphicon-plane"></i> <span>Passagers</span></a></li>
-                 {% endif %}  
-                 {% if is_granted('ROLE_SUPER_ADMIN') or (app.user.entite and app.user.entite.abreviation=='DGD')%} 
-                    <li class="{% if 'arssam_dgd_' in routeName %}active{% endif %}"><a href="{{path('arssam_dgd_list')}}"><i class="glyphicon glyphicon-random"></i> <span>Infraction douane</span></a></li>
-                 {% endif %} 
-                 {% if is_granted('ROLE_SUPER_ADMIN') or (app.user.entite and app.user.entite.abreviation=='GTA')%}     
-                    <li class="{% if 'arssam_gta_' in routeName %}active{% endif %}"><a href="{{path('arssam_gta_list')}}"><i class="glyphicon glyphicon-blackboard"></i> <span>Gendarmerie</span></a></li>
-                  {% endif %}
-                {% if is_granted('ROLE_SUPER_ADMIN') or (app.user.entite and app.user.entite.abreviation=='CIS')%}
-                    <li class="{% if 'arssam_cis_' in routeName %}active{% endif %}"><a href="{{path('arssam_cis_list')}}"><i class="glyphicon glyphicon-bullhorn"></i> <span>Voyageurs</span></a></li>
-                {% endif %}
-                {% if is_granted('ROLE_SUPER_ADMIN') or (app.user.entite and app.user.entite.abreviation=='DVSSE')%}
-                    <li class="{% if 'arssam_dvsse_' in routeName %}active{% endif %}"><a href="{{path('arssam_dvsse_list')}}"><i class="glyphicon glyphicon-cloud"></i> <span>Epidémies</span></a></li>
-                {% endif %}
-            {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_FOCAL') %}
-                    <li class="{% if 'adminarssam_activitylog_' in routeName %}active{% endif %}"><a href="{{path('adminarssam_activitylog_index')}}"><i class="fa fa-book"></i> <span>Historiques des imports</span></a></li>     
-                  {% endif %}      
+            <li class="{% if 'arssam_user_' in routeName %}active{% endif %}"><a href="{{path('arssam_user_list')}}"><i class="fa fa-users"></i> <span>Gestion des utilisateurs</span></a></li>
+        
+            <li class="{% if 'event_' in routeName %}active{% endif %}"><a href="{{path('event_index')}}"><i class="fa fa-calendar"></i> <span>Gestion des évènements</span></a></li> 
+
+            <li class="{% if 'parametre_' in routeName %}active{% endif %}"><a href="{{path('parametre_index')}}"><i class="fa fa-cogs"></i> <span>Paramétrage</span></a></li> 
+
+            <li class="{% if 'article_' in routeName %}active{% endif %}"><a href="{{path('article_index')}}"><i class="fa fa-newspaper-o"></i> <span>Article</span></a></li> 
+
+            <li class="{% if 'voaharyadmin_carousel_' in routeName %}active{% endif %}"><a href="{{path('voaharyadmin_carousel_index')}}"><i class="fa fa-slideshare"></i> <span>Slide</span></a></li> 
+
+            <li class="{% if 'voaharyadmin_produit_' in routeName %}active{% endif %}"><a href="{{path('voaharyadmin_produit_index')}}"><i class="fa fa-cubes"></i> <span>Produit</span></a></li> 
+                
         {% endif %}
-        {% if not is_granted('ROLE_SUPER_ADMIN') %}
-         <li class="header">RESSOURCES</li>
-         <li class="{% if 'arssam_message_' in routeName %}active{% endif %}"><a href="{{path('arssam_message_index')}}"><i class="fa fa-envelope"></i> <span>Demande</span></a></li>            
-        {% endif %}
+        
         </ul>
         <!-- /.sidebar-menu -->
     </section>

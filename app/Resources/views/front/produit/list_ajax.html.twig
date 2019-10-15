@@ -1,0 +1,13 @@
+<div class="row" style="justify-content:center;margin-top:30px;">
+{% for p in produits %}
+ <div class="col-lg-2 content-image effect5">
+    <img src= "{{ asset(p.imageEnAvant.webPath ~ p.imageEnAvant.photo) }}">
+    <div class="info">
+        <h3>{{p.titre}}</h3>
+        <a href="{{path('produit_details',{'id':p.id})}}">
+            <i class="fa fa-eye fa-2x"></i>
+        </a>
+    </div>
+</div>
+{% endfor %}
+</div>

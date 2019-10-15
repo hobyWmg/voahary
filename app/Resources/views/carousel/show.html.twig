@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Carousel</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ carousel.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ carousel.titre }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ carousel.description }}</td>
+            </tr>
+            <tr>
+                <th>Ordre</th>
+                <td>{{ carousel.ordre }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ carousel.image }}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{% if carousel.createdAt %}{{ carousel.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Updatedat</th>
+                <td>{% if carousel.updatedAt %}{{ carousel.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('voaharyadmin_carousel_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('voaharyadmin_carousel_edit', { 'id': carousel.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

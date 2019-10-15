@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{% block title %}Backoffice{% endblock %}</title>
+    <title>{% block title %}Voahary - Backoffice{% endblock %}</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -64,7 +64,7 @@
                 border-bottom: 1px solid #f4f4f4;
             } 
             .main-sidebar{       
-                background-color: #1a2226 !Important;
+                background-color: #1b8276 !Important;
             }
             .wrapper{
                 background-color: #ecf0f5 !Important;
@@ -84,6 +84,33 @@
                 background-position: 50% 28%;
                 background-size: 4%;
             }
+            .bg-content{
+                background-color: #ffffff;
+                padding: 15px;
+                margin-top:5%;
+            }
+            img.thumb{
+                width:100%;
+            }
+            .content-thumb{
+                padding: 5px;
+                box-shadow: cadetblue;
+                /* background-color: #e1bd0d; */
+                border: dotted 1px;
+                margin: 5px;
+            }
+            h1.title{
+                padding: 5px;
+                background-color: #fff;
+                text-align: center;
+            }
+            .btn-add{
+                float:right;
+                
+            }
+            th{
+                text-align:center;
+            }
         </style>
     {% endblock %}
 	<link rel="icon" href="{{ asset('bundles/app/img/cropped-logo_FB_profile-1-32x32.png') }}" sizes="32x32" />
@@ -100,8 +127,8 @@
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="{{ path('velirano_admin_homepage') }}" class="logo">
-           Centre de Coordination
+        <a href="{{ path('voahary_admin_homepage') }}" class="logo">
+           VOAHARY - BO
         </a>
         <!-- Header Navbar -->
         {% block navbar %}
@@ -120,10 +147,10 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             {% block header %}
-                <h1>
+                {# <h1>
                     Extend
                     <small>me</small>
-                </h1>
+                </h1> #}
             {% endblock %}
             {% block breadcrumb %}
                 
@@ -196,7 +223,7 @@
                     "paging": true,
                     "lengthChange": false,
                     "searching": true,
-                    "ordering": true,
+                    "ordering": false,
                     "info": false,
                     "autoWidth": true,
                     "language": {
@@ -209,7 +236,7 @@
                     });
         $(".doDatepicker").datepicker({
                    language : 'fr',
-                   endDate: new Date(),
+                  /* endDate: new Date(),*/
                 });                    
     });
     {% if is_granted('ROLE_SUPER_ADMIN') == false %}
@@ -265,6 +292,14 @@
             },30000);
             {% endif %}
     {% endif %}
+    $('.delete-btn').click(function(){
+        var xurl = $(this).data('url');
+       /* alert(xurl);*/
+        var r = confirm("Confirmation avant suppression");
+        if (r == true) {
+        window.location.href = xurl;
+        } 
+    });
     </script>
 {% endblock %}
 </body>

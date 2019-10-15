@@ -1,0 +1,13 @@
+<div class="row" style="justify-content:center;margin-top:30px;">
+
+    {% set reste = 0 %}
+
+    {% if produits|length % 6 == 0 %}
+        {% set nbLigne = produits|length / 6 %}
+        {% include 'front/produit/_listMazava.html.twig' %}
+    {% else %}
+        {% set reste = produits|length % 6 %}
+        {% include 'front/produit/_listTsyMazava.html.twig' %}
+    {% endif %}
+
+</div>

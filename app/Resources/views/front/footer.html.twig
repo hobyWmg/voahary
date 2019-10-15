@@ -1,0 +1,52 @@
+<style>
+
+#footer {
+            background-image: -moz-linear-gradient(to top, rgba(255, 233, 151, 0.6), rgba(255, 233, 151, 0.6)),url("{{asset(param.ImageFondContact.webPath~ param.ImageFondContact.photo)}}");
+            background-image: -webkit-linear-gradient(to top, rgba(255, 233, 151, 0.6), rgba(255, 233, 151, 0.6)), url("{{asset(param.ImageFondContact.webPath~ param.ImageFondContact.photo)}}");
+            background-image: linear-gradient(to top, rgba(255, 233, 151, 0.6), rgba(255, 233, 151, 0.6)), url("{{asset(param.ImageFondContact.webPath~ param.ImageFondContact.photo)}}");
+            background-attachment: fixed;
+            background-position: center center;
+            background-size: cover;
+            padding: 12em 0 2em;
+            }
+</style>
+<div class="inner animated bounceInDown go delay-250">
+    <ul class="contact">
+        <li class="icon solid fa-home">
+            <strong>Address</strong> {{param.adresse}}
+        </li>
+        <li class="icon solid fa-phone">
+            <strong>Phone</strong> {{param.phone}}
+        </li>
+        <li class="icon solid fa-envelope">
+            <strong>Email</strong> {{param.email}}
+        </li>
+    </ul>
+    <form action="{{path('voahary_contact')}}" method="post">
+        <h4>Get in touch</h4>
+        <div class="fields">
+            <div class="field half">
+                <label for="name">Nom</label>
+                <input name="name" id="name" type="text" placeholder="Nom" required="required">
+                </div><div class="field half"><label for="email">Email
+                </label><input name="email" id="email" type="email" placeholder="Email" required="required">
+                </div><div class="field"><label for="message">Message
+                </label><textarea name="message" id="message" rows="6" placeholder="Message" required="required">
+                </textarea>
+            </div>
+        </div>
+        <ul class="actions">
+            <li><input value="Envoyer" class="button large" type="submit">
+            </li>
+        </ul>
+    </form>
+</div>
+    <div class="copyright" style="margin-bottom:20px !important"> © VOAHARY {{date('now')|date('Y')}}. All rights reserved. 
+</div>
+<div class="row" style="justify-content:center">
+<div class="col-lg-1"><a href="#" target="_blank"><i class="fab fa-facebook fa-2x"></i></a></div>
+<div class="col-lg-1"><a href="#" target="_blank"><i class="fab fa-instagram fa-2x"></i></a></div>
+<div class="col-lg-1"><a href="#" target="_blank"><i class="fab fa-pinterest fa-2x"></i></a></div>
+<div class="col-lg-1"><a href="#" target="_blank"><i class="fab fa-etsy fa-2x"></i></a></div>
+    
+</div>

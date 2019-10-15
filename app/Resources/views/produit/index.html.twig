@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1 class='title'>Produits list -  {{produits|length}} produits</h1>
+    <a class='btn btn-success btn-add' href="{{ path('voaharyadmin_produit_new') }}">Ajouter</a>
+    <div class='bg-content'>
+        <table class='table table-datatable do-datatable'>
+            <thead>
+                <tr>
+                    {# <th>Id</th> #}
+                    <th>Titre</th>
+                    <th width="40%">Description</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for produit in produits %}
+                <tr>
+                    {# <td><a href="{{ path('voaharyadmin_produit_show', { 'id': produit.id }) }}">{{ produit.id }}</a></td> #}
+                    <td>{{ produit.titre }}</td>
+                    <td>{{ produit.description|truncate(200) }}</td>
+                     <td><img style="width:100px; height:100px;" src="{{asset(produit.imageEnAvant.webPath~ produit.imageEnAvant.photo)}}"/></td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="javascript:void(0)" class='delete-btn' data-url="{{path('voaharyadmin_produit_delete', { 'id':produit.id  } )  }}" ><i class="fa fa-trash"></i></a>
+                            </li>
+                            <li>
+                                <a href="{{ path('voaharyadmin_produit_edit', { 'id': produit.id }) }}"><i class="fa fa-edit"></i></a>
+                                {# <a href="{{ path('voaharyadmin_produit_edit', { 'id': produit.id }) }}">edit</a> #}
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

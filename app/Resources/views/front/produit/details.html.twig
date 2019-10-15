@@ -1,0 +1,123 @@
+{% extends 'base_interne.html.twig' %}
+
+{% block stylesheets %}
+{{parent()}}
+{# <link rel="stylesheet" type="text/css" href="{{asset('bundles/app/plugins/xZoom/css/main.css')}}"> #}
+<link rel="stylesheet" type="text/css" href="{{asset('bundles/app/plugins/magnify/dist/css/magnify.css')}}">
+<style>
+.icon-left {
+    transform: rotate(180deg);
+}
+.owl-carousel{
+    position: relative;
+    /* top: -5rem; */
+    /*background-color: #f2f2f2;*/
+    justify-content: center;
+    text-align: center;
+   /* border: dotted 1px #ccc;*/
+    color: black;
+}
+.owl-thumbs {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: table;
+    width: 100%;
+    text-align: center;
+    padding: 5%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: stretch;
+    flex-wrap: wrap;
+}
+.owl-thumb-item {
+    display: table-cell;
+   /* border: none;*/
+    background: none;
+    padding: 0;
+   /* opacity: .4;*/
+   margin-bottom: 30px;
+}
+.owl-thumb-item img{
+  width: 100px;
+}
+.owl-item > div {
+  padding-top:0px !important;
+}
+.vh-info {
+    color: #fff;
+    background-color: #d3a62a;
+    border-color: #d3a62a;
+}
+.vh-info:hover {
+    color: #fff;
+    background-color: #ffd700;
+    border-color: #ffd700;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+  <div class="row" style="
+    opacity: 0.5;
+">
+    <div class="col-md-6" style="
+    padding-left: 0px;
+">
+    {% if havePrev %}
+        <a href="{{path('produit_details',{'id':produit.id-1})}}" style="float:left;"><img src="{{asset('bundles/app/plugins/xZoom/images/online_icon_right@2x.png')}}" class="icon-left" alt="prev" id="prev-img"></a>
+        {% endif %}
+    </div> 
+    <div class="col-md-6">
+    {% if haveNext %}
+    <a href="{{path('produit_details',{'id':produit.id+1})}}" style="float:right;"><img src="{{asset('bundles/app/plugins/xZoom/images/online_icon_right@2x.png')}}" class="icon-right" alt="next" id="next-img"></a>
+    {% endif %}
+    </div> 
+  </div>
+  <div class="row" style="margin-top:30px;">
+    <div class="col-md-6">
+        <div class="owl-carousel slide" data-slider-id="1">
+          <div class="">
+            <img src="{{asset(produit.imageEnAvant.webPath ~ produit.imageEnAvant.photo)}}" data-magnify-src="{{asset(produit.imageEnAvant.webPath ~ produit.imageEnAvant.photo)}}">
+          </div>
+            {% for image in produit.otherImages %}
+            <div class="">
+              <img src="{{asset(image.webPath ~ image.photo)}}" data-magnify-src="{{asset(image.webPath ~ image.photo)}}" class="show-small-img" alt="">
+            </div>
+          {% endfor %}   
+        </div>     
+    </div>
+
+  <div class="info-p col-md-6" style="text-align:left">
+  <img id="sample-watch" src="https://i.imgur.com/jnRTmfe.jpg" alt="Sample image" class="zoom" data-magnify-src="https://i.imgur.com/jnRTmfe.jpg" style="display: block;">
+  <img  id ="sample-watch" alt="Sample image" src="{{asset(produit.imageEnAvant.webPath ~ produit.imageEnAvant.photo)}}" data-magnify-src="{{asset(produit.imageEnAvant.webPath ~ produit.imageEnAvant.photo)}}" class="zoom">
+  <h2>{{produit.titre}}</h2>
+  <p>{{produit.description}}</p>
+  <a href="javascript:void(0);" class="btn vh-info" style='text-decoration:none;'  id="vonaina" data-titre='{{produit.titre}}'>Plus d'info</a>
+  
+  </div>
+</div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{parent()}}
+{# <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> #}
+{# <script src="{{asset('bundles/app/plugins/xZoom/scripts/zoom-image.js')}}"></script> #}
+<script src="{{asset('bundles/app/plugins/magnify/dist/js/jquery.magnify.js')}}"></script>
+<script>
+$("#vonaina").click(function(){
+var msg ='Bonjour, je souhaite connaitre plus de details concernant cet article: ';
+  $('#message').val(msg + $(this).attr('data-titre'));
+  $('html, body').animate({
+                scrollTop: $("#footer").offset().top
+              }, 1000)
+})
+
+$(document).ready(function() {
+  // Initiate magnification powers
+  $('img.zoom').magnify();
+});
+
+</script>
+{% endblock %}

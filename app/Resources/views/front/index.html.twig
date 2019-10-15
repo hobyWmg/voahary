@@ -2,86 +2,15 @@
 
 {% block body %}
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-      <div class="container">
-        <a class="navbar-brand" href="#">ToDo List ho an'i Prezidà Andry Rajoelina</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      </div>
-    </nav>
-    <main role="main" class="container">
-
-      <div class="my-3 p-3 bg-white rounded box-shadow">
-        <h2 class="border-bottom border-gray pb-2 mb-0">Fotoana mbola ananantsika hatramin'ny 2024</h2>
-        <div class="media text-muted pt-3">
-          <div class="row" id="fotoana">
-            <div class="col-lg-3">
-                <div class="col-lg-12" id="andro">
-                    <h3></h3>
-                    <p>Andro</p>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="col-lg-12" id="ora">
-                    <h3></h3>
-                    <p>Ora</p>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="col-lg-12" id="minitra">
-                    <h3></h3>
-                    <p>Minitra</p>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="col-lg-12" id="segondra">
-                    <h3></h3>
-                    <p>Segondra</p>
-                </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="my-3 p-3 bg-white rounded box-shadow">
-        <div class="item-recap">
-            <span class="tite-recap">Mbola tsy natomboka</span>
-            <span class="info-recap">29/29</span>
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
-            </div>
-        </div>  
-        <div class="item-recap">
-            <span class="tite-recap">Efa manomboka</span>
-            <span class="info-recap">0/29</span>
-            <div class="progress">
-                <div class="progress-bar bg-warning" role="progressbar" style="width: 1%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-        </div> 
-        <div class="item-recap">
-            <span class="tite-recap">Efa vita</span>
-            <span class="info-recap">0/29</span>
-            <div class="progress">
-                <div class="progress-bar bg-success" role="progressbar" style="width: 1%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-        </div> 
-        <div class="item-recap">
-            <span class="tite-recap">Tsy tanteraka</span>
-            <span class="info-recap">0/29</span>
-            <div class="progress">
-                <div class="progress-bar bg-danger" role="progressbar" style="width: 1%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-        </div> 
-      </div>
-      <div class="my-3 p-3 bg-white rounded box-shadow">
-
-      </div>
-    </main>
+    {# <div>
+       <h1> Site en construction </h1>
+       <a href="{{path('produit_details',{'id':1})}}">details produit</a>
+    </div> #}
+    {{parent()}}
     
 {% endblock %}
 
-{# {% block javascripts %}
+{% block javascripts %}
     {{parent()}}
 
-{% endblock %} #}
+{% endblock %}

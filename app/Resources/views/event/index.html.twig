@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1 class="title">Events list</h1>
+    <a class="btn btn-success btn-add" href="{{ path('event_new') }}">Ajouter</a>
+    <div class="bg-content">
+        <table class="table table-datatable do-datatable">
+            <thead>
+                <tr>
+                    <th width="10%">Titre</th>
+                    <th>Description</th>
+                    <th>Lieu</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for event in events %}
+                <tr>
+                    <td>{{ event.titre }}</td>
+                    <td>{{ event.description|truncate(100)|raw }}</td>
+                    <td>{{ event.lieu }}</td>
+                    <td>{% if event.date %}{{ event.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>
+                        <ul>
+                            <li>
+                                {# <a href="{{ path('event_delete', { 'id': event.id }) }}" >supprimer</a> #}
+                                <a href="javascript:void(0)" class='delete-btn' data-url="{{path('event_delete', { 'id':event.id  } )  }}" ><i class="fa fa-trash"></i></a>
+                            </li>
+                            <li>
+                                <a href="{{ path('event_edit', { 'id': event.id }) }}"><i class="fa fa-edit"></i></a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+<script>
+
+</script>
+{% endblock %}
+
