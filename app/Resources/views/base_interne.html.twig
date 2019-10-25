@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Voahary - Handmade!{% endblock %}</title>
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('bundles/app/images/logo.png') }}" />
         {% block stylesheets %}
         <link rel="stylesheet" type="text/css" href="{{asset('bundles/app/bootstrap/css/bootstrap.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('bundles/app/css/front/style.css')}}" >
@@ -100,6 +100,8 @@ h1,h2{
 .owl-item img{
   max-height: 100%;
   width: auto !important;
+  max-width:100% !important;
+  display: inline-flex !important;
 }
         </style>
         {% endblock %}
@@ -131,7 +133,7 @@ h1,h2{
 </section>
 
 
-<footer id="footer" class="animatedParent">
+<footer id="footer" class="animatedParent section_footer">
   {{ render(controller('AppBundle:Front:footer')) }}
 </footer>
 
@@ -226,7 +228,11 @@ h1,h2{
           }
             
         });
-        
+        function goToTarget(target){
+              $('html, body').animate({
+                scrollTop: $(".section_"+target).offset().top
+              }, 1000)
+          }
         </script>
         {% endblock %}
     </body>

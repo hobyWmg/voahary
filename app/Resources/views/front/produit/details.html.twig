@@ -18,31 +18,45 @@
     color: black;
 }
 .owl-thumbs {
-    position: absolute;
-    bottom: 0;
-    left: 0;
+    position: relative;
+    margin-top: 1rem;
+    /* bottom: 0; */
+    /* left: 0; */
     display: table;
-    width: 100%;
+    /* width: 100%; */
     text-align: center;
-    padding: 5%;
+    /* padding: 5%; */
     display: flex;
-    justify-content: space-evenly;
-    align-items: stretch;
-    flex-wrap: wrap;
+    /* justify-content: space-evenly; */
+    /* align-items: stretch; */
+    /* flex-wrap: wrap; */
+    opacity: 0.8;
 }
 .owl-thumb-item {
-    display: table-cell;
-   /* border: none;*/
+   display: table-cell;
+    /* border: none; */
     background: none;
     padding: 0;
-   /* opacity: .4;*/
-   margin-bottom: 30px;
+    /* opacity: .4; */
+    margin-bottom: 30px;
+    margin-left: 10px;
+    height: 50px;
+    overflow: hidden;
+}
+.owl-thumb-item:first-child {
+    margin-left: 0;
 }
 .owl-thumb-item img{
   width: 100px;
 }
 .owl-item > div {
   padding-top:0px !important;
+  background-size: cover;
+  background-position: center;
+  height: auto !important;
+  max-height: 500px !important;
+  text-align: center;
+  padding-top: 150px;
 }
 .vh-info {
     color: #fff;
@@ -62,7 +76,7 @@
     opacity: 0.5;
 ">
     <div class="col-md-6" style="
-    padding-left: 0px;
+    padding-left: 10px;
 ">
     {% if havePrev %}
         <a href="{{path('produit_details',{'id':produit.id-1})}}" style="float:left;"><img src="{{asset('bundles/app/plugins/xZoom/images/online_icon_right@2x.png')}}" class="icon-left" alt="prev" id="prev-img"></a>
@@ -85,12 +99,12 @@
               <img src="{{asset(image.webPath ~ image.photo)}}" data-magnify-src="{{asset(image.webPath ~ image.photo)}}" class="show-small-img" alt="">
             </div>
           {% endfor %}   
-        </div>     
+        </div>    
     </div>
 
   <div class="info-p col-md-6" style="text-align:left">
-  <img id="sample-watch" src="https://i.imgur.com/jnRTmfe.jpg" alt="Sample image" class="zoom" data-magnify-src="https://i.imgur.com/jnRTmfe.jpg" style="display: block;">
-  <img  id ="sample-watch" alt="Sample image" src="{{asset(produit.imageEnAvant.webPath ~ produit.imageEnAvant.photo)}}" data-magnify-src="{{asset(produit.imageEnAvant.webPath ~ produit.imageEnAvant.photo)}}" class="zoom">
+  {# <img id="sample-watch" src="https://i.imgur.com/jnRTmfe.jpg" alt="Sample image" class="zoom" data-magnify-src="https://i.imgur.com/jnRTmfe.jpg" style="display: block;">
+  <img  id ="sample-watch" alt="Sample image" src="{{asset(produit.imageEnAvant.webPath ~ produit.imageEnAvant.photo)}}" data-magnify-src="{{asset(produit.imageEnAvant.webPath ~ produit.imageEnAvant.photo)}}" class="zoom"> #}
   <h2>{{produit.titre}}</h2>
   <p>{{produit.description}}</p>
   <a href="javascript:void(0);" class="btn vh-info" style='text-decoration:none;'  id="vonaina" data-titre='{{produit.titre}}'>Plus d'info</a>
@@ -118,6 +132,20 @@ $(document).ready(function() {
   // Initiate magnification powers
   $('img.zoom').magnify();
 });
+function zoomIn(event) {
+  var element = document.getElementById("overlay");
+  element.style.display = "inline-block";
+  var img = document.getElementById("imgZoom");
+  var posX = event.offsetX ? (event.offsetX) : event.pageX - img.offsetLeft;
+  var posY = event.offsetY ? (event.offsetY) : event.pageY - img.offsetTop;
+  element.style.backgroundPosition=(-posX*2)+"px "+(-posY*4)+"px";
+
+}
+
+function zoomOut() {
+  var element = document.getElementById("overlay");
+  element.style.display = "none";
+}
 
 </script>
 {% endblock %}

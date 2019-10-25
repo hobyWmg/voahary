@@ -51,6 +51,13 @@ class Image
      */
     private $photo;
 
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="photoSmall", type="string", length=255, nullable=true)
+     */
+    private $photoSmall;
+
     /**
      * @Assert\File(
      *     mimeTypes={"image/jpeg", "image/png", "image/jpg"},
@@ -65,6 +72,7 @@ class Image
      * Constant for path of directory's media image
      */
     const THUMB_PATH = 'uploads/images/all';
+    const THUMB_SMALL_PATH = 'uploads/images/all/small';
 
     private $temp;
 
@@ -137,6 +145,10 @@ class Image
         return self::THUMB_PATH;
     }
 
+    protected function getUploadSmallDir(){
+        return self::THUMB_SMALL_PATH;
+    }
+
     /**
      * @ORM\PrePersist()
      * @ORM\PreUpdate()
@@ -156,6 +168,7 @@ class Image
     {
         if (null !== $this->getFilePhoto()) {
             $this->uploadFile($this->filePhoto, 'photo');
+            /*$this->uploadFile($this->filePhoto, 'photoSmall');*/
         }
         $this->toDelete = array();
     }
@@ -183,6 +196,13 @@ class Image
         $image = $this->getUploadRootDir().'/'.$file->getClientOriginalName();
         if ($field=='photo') {
             $this->$field = ImageResizer::resizeImage($image, $this->getUploadRootDir(), 0, 0, $this->$field);
+        }elseif($field=='photoSmall') {
+            $size = getimagesize($image);
+            $width = $size[0];
+            $height = $size[1];
+            $newWidth = ($width*50)/100;
+            $newHeight = ($height*50)/100;
+            $this->$field = ImageResizer::resizeImage($image, $this->getUploadRootDir(), $newHeight, $newWidth, $this->$field);
         }
             // } else if ($field=='photo2'){
         //     $this->$field = ImageResizer::resizeImage($image, $this->getUploadRootDir(), 840, 420, $this->$field);
@@ -230,5 +250,29 @@ class Image
     public function getProduit()
     {
         return $this->produit;
+    }
+
+    /**
+     * Set photoSmall
+     *
+     * @param string $photoSmall
+     *
+     * @return Image
+     */
+    public function setPhotoSmall($photoSmall)
+    {
+        $this->photoSmall = $photoSmall;
+
+        return $this;
+    }
+
+    /**
+     * Get photoSmall
+     *
+     * @return string
+     */
+    public function getPhotoSmall()
+    {
+        return $this->photoSmall;
     }
 }

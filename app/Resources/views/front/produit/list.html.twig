@@ -11,13 +11,12 @@
     {% endif %} #}
 {% for k,p in produits %}
 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6" style="padding-left:10px !important">
- <div class="content-image effect5 animated growIn slowest">
+ <div class="content-image effect5 animated bounceInRight slowest">
     <img src= "{{ asset(p.imageEnAvant.webPath ~ p.imageEnAvant.photo) }}">
      <a href="{{path('produit_details',{'id':p.id})}}">
     <div class="info">
         <h3>{{p.titre}}</h3>
-       
-            <i class="fa fa-eye fa-2x"></i>
+        <i class="fa fa-eye fa-2x"></i>
     </div>
     </a>
  </div> 

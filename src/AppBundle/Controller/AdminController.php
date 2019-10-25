@@ -20,8 +20,8 @@ class AdminController extends Controller
         // replace this example code with whatever you need
        $em = $this->getDoctrine()->getManager();
        if($this->getUser()){
-            $entites = $em->getRepository('AppBundle:Entite')->findAll();
-            return $this->render('admin/index.html.twig',['entites'=>$entites]);
+            $counter = $em->getRepository('AppBundle:MpanisaVisitor')->findAll();
+            return $this->render('admin/index.html.twig',['counter'=>$counter]);
        }else{
             return $this->redirectToRoute('fos_user_security_login');
        }

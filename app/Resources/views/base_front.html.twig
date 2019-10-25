@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Voahary - Handmade!{% endblock %}</title>
-        <link rel="icon" type="image/x-icon" href="{{ asset('bundles/app/images/ico.png') }}" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('bundles/app/images/logo.png') }}" />
         {% block stylesheets %}
         <link rel="stylesheet" type="text/css" href="{{asset('bundles/app/bootstrap/css/bootstrap.min.css')}}">
         {# <link rel="stylesheet" href="{{asset('bundles/app/plugins/font-awesome-4/css/font-awesome.min.css')}}"> #}
@@ -20,8 +20,9 @@
   height: 500px;
 }
 .owl-item > div{
-  background-size: cover;
+  background-size: 120%;
   background-position: center;
+  background-repeat:no-repeat;
   height: 500px;
   text-align: center;
   padding-top: 150px;
@@ -47,6 +48,13 @@
   background: transparent !important;
   border: solid 1px #bbb;
 }
+.owl-item.active > div {
+    background-size : 100%;
+    -webkit-transition-property: background-size;
+    -webkit-transition-duration: 20s;
+    transition-property: background-size;
+    transition-duration: 20s;
+}
 .nav-bar ul{
   display: inline-flex;
   list-style: none;
@@ -54,7 +62,7 @@
 }
 .nav-bar ul a{
   text-decoration: none;
-  color:#fff !important;
+  color: #1d8d7d !important
 }
 .nav-bar ul li{
   margin-right: 15px;
@@ -69,6 +77,9 @@
  -webkit-transition: width 2s;
  -ms-transition: width 2s;
  transition: width 2s;
+}
+.with-background .nav-bar ul a{
+  color : #fff !important
 }
 .timeline .image img{
   width: 250px;
@@ -177,7 +188,7 @@ position: relative;
             nav:false,
             transitionStyle : "fade",
             autoplaySpeed:800,
-            navSpeed:2000,
+            navSpeed:3000,
         })
         $(function(){
             $(window).scroll(function(){
