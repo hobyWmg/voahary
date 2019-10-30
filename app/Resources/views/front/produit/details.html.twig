@@ -27,7 +27,7 @@
     text-align: center;
     /* padding: 5%; */
     display: flex;
-    /* justify-content: space-evenly; */
+    justify-content: center;
     /* align-items: stretch; */
     /* flex-wrap: wrap; */
     opacity: 0.8;
@@ -40,14 +40,15 @@
     /* opacity: .4; */
     margin-bottom: 30px;
     margin-left: 10px;
-    height: 50px;
+    height: 73px;
     overflow: hidden;
 }
-.owl-thumb-item:first-child {
+{# .owl-thumb-item:first-child {
     margin-left: 0;
-}
+} #}
 .owl-thumb-item img{
-  width: 100px;
+  width: auto;
+  max-height : 100%
 }
 .owl-item > div {
   padding-top:0px !important;
@@ -79,12 +80,12 @@
     padding-left: 10px;
 ">
     {% if havePrev %}
-        <a href="{{path('produit_details',{'id':produit.id-1})}}" style="float:left;"><img src="{{asset('bundles/app/plugins/xZoom/images/online_icon_right@2x.png')}}" class="icon-left" alt="prev" id="prev-img"></a>
+        <a href="{{path('produit_details',{'id':havePrev.id})}}" style="float:left;"><img src="{{asset('bundles/app/plugins/xZoom/images/online_icon_right@2x.png')}}" class="icon-left" alt="prev" id="prev-img"></a>
         {% endif %}
     </div> 
     <div class="col-md-6">
     {% if haveNext %}
-    <a href="{{path('produit_details',{'id':produit.id+1})}}" style="float:right;"><img src="{{asset('bundles/app/plugins/xZoom/images/online_icon_right@2x.png')}}" class="icon-right" alt="next" id="next-img"></a>
+    <a href="{{path('produit_details',{'id':haveNext.id})}}" style="float:right;"><img src="{{asset('bundles/app/plugins/xZoom/images/online_icon_right@2x.png')}}" class="icon-right" alt="next" id="next-img"></a>
     {% endif %}
     </div> 
   </div>

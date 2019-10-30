@@ -34,4 +34,30 @@ class ProduitRepository extends \Doctrine\ORM\EntityRepository
         }
         return $qb->getQuery()->getResult();
     }
+
+    public function getPreviousProduit($pId)
+    {
+        $qb = $this->createQueryBuilder('p')
+                ->select('p')
+                ->where('p.id < :pId')
+                ->setParameter(':pId', $pId)
+                ->orderBy('p.id', 'DESC')
+                ->setFirstResult(0)
+                ->setMaxResults(1)
+        ;
+        return  $qb->getQuery()->getOneOrNullResult();
+    }
+
+    public function getNextProduit($pId)
+    {
+        $qb = $this->createQueryBuilder('p')
+                ->select('p')
+                ->where('p.id > :pId')
+                ->setParameter(':pId', $pId)
+                ->orderBy('p.id', 'ASC')
+                ->setFirstResult(0)
+                ->setMaxResults(1)
+        ;
+        return  $qb->getQuery()->getOneOrNullResult();
+    }
 }

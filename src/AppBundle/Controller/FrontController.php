@@ -70,10 +70,12 @@ class FrontController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $repoP = $em->getRepository('AppBundle:Produit');
-        $next = $repoP->find($produit->getId()+1);
-        $prev = $repoP->find($produit->getId()+-1);
-        $haveNext =($next)?true:false;
-        $havePrev =($prev)?true:false;
+        // $next = $repoP->find($produit->getId()+1);
+        // $prev = $repoP->find($produit->getId()+-1);
+        $next = $repoP->getNextProduit($produit->getId());
+        $prev = $repoP->getPreviousProduit($produit->getId());
+        $haveNext =($next)?$next:false;
+        $havePrev =($prev)?$prev:false;
         return $this->render('front/produit/details.html.twig',['produit'=> $produit,'havePrev'=>$havePrev, 'haveNext'=> $haveNext]);
     }
     /**
