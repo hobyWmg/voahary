@@ -12,8 +12,21 @@
             <div class="img-article" style="background-image:url('{{asset(article.image.webPath  ~ article.image.photo)}}')">
 
             </div>
-            <div class="content animated bounceInLeft">
+            <div class="content animated bounceInLeft" style="text-align:left; padding:0 15% 5% 15%;">
                 <p>{{article.contenue|raw}}</p>
             </div>
         </article>
+        <div class="row" style="border-top:solid 1px #ccc; margin: 25px 0px 0px 5px; padding: 15px;">
+           {% for a in other %}
+            <div class="card col-lg-2" >
+            <a href="{{path('voahary_article_lire',{'id':a.id})}}" style="text-decoration:none;">
+                <div style="background-image:url('{{asset(a.image.webPath  ~ a.image.photo)}}'); height:5rem;background-size:cover"></div> 
+                <div class="card-body">
+                    <h4 class="card-title">{{a.titre}}</h4>
+                    {# <p style="font-size:0.7rem" class="card-text">{{a.contenue|truncate(100)|raw}}</p> #}
+                </div>
+            </a>    
+            </div>
+            {% endfor %}
+        </div>
 {% endblock %}

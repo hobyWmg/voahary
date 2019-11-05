@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
 class ProduitType extends AbstractType
 {
@@ -13,7 +14,8 @@ class ProduitType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('titre')->add('description')
+        $builder->add('titre')
+        ->add('description',CKEditorType::class)
         ->add('imageEnAvant',ImageType::class,array(
             'label' => 'Image en avant'
         ));

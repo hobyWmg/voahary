@@ -5,7 +5,7 @@
     <img src= "{{ asset(p.imageEnAvant.webPath ~ p.imageEnAvant.photo) }}">
      <a href="{{path('produit_details',{'id':p.id})}}">
     <div class="info">
-        <h3>{{p.titre}}</h3>
+       <h4 style="color:#fff;">{{p.titre|truncate(50)}}</h4>
        
             <i class="fa fa-eye fa-2x"></i>
     </div>

@@ -140,19 +140,25 @@ class FrontController extends Controller
      */
     public function articleDetailsAction(Request $request, Article $article)
     {
-        return $this->render('front/articleDetails.html.twig',['article'=> $article]);
+        $em = $this->getDoctrine()->getManager();
+        
+        $other = $em->getRepository('AppBundle:Article')->getOtherArticle($article);
+        return $this->render('front/articleDetails.html.twig',[
+            'article'=> $article,'other'=>$other
+            ]);
     }
 
     public function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE) {
         $output = NULL;
         if (filter_var($ip, FILTER_VALIDATE_IP) === FALSE) {
-            $ip = $_SERVER["REMOTE_ADDR"];
-            if ($deep_detect) {
-                if (filter_var(@$_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP))
-                    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-                if (filter_var(@$_SERVER['HTTP_CLIENT_IP'], FILTER_VALIDATE_IP))
-                    $ip = $_SERVER['HTTP_CLIENT_IP'];
-            }
+            // $ip = $_SERVER["REMOTE_ADDR"];
+            $ip = $this->container->get('request_stack')->getCurrentRequest()->getClientIp();
+            // if ($deep_detect) {
+            //     if (filter_var(@$_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP))
+            //         $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+            //     if (filter_var(@$_SERVER['HTTP_CLIENT_IP'], FILTER_VALIDATE_IP))
+            //         $ip = $_SERVER['HTTP_CLIENT_IP'];
+            // }
         }
         // $ip ="41.188.51.185";
         $purpose    = str_replace(array("name", "\n", "\t", " ", "-", "_"), NULL, strtolower(trim($purpose)));

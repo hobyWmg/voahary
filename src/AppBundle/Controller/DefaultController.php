@@ -36,8 +36,8 @@ class DefaultController extends Controller
 				->setBody($contenumail);
 				//->setContentType('text/html');
                $t =  $mailer->send($mail);
-               dump($t);die;
-            $this->addFlash('info','Votre email a bien été envoyé');
+            //    dump($t);die;
+            // $this->addFlash('info','Votre email a bien été envoyé');
       return $this->redirectToRoute('homepage');
             /** END SEND MAIL */
         /**  */

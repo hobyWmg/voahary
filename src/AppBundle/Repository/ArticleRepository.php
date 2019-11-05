@@ -16,4 +16,11 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
         ->setMaxResults('1');
         return $qb->getQuery()->getResult();
     }
+    public function getOtherArticle($a){
+        $qb = $this->createQueryBuilder('a')
+        ->where('a.id !=:id')
+        ->setMaxResults('5')
+        ->setParameter('id',$a->getId());
+        return $qb->getQuery()->getResult();
+    }
 }
