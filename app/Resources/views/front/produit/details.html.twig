@@ -229,8 +229,10 @@ img {
           <img src="{{asset(produit.imageEnAvant.webPath ~ produit.imageEnAvant.photo)}}" > 
         </a>
         {% for image in produit.otherImages %}
+          {% if image.photo %}
           <a href="{{asset(image.webPath ~ image.photo)}}" data-gallery="thumb">
           <img src="{{asset(image.webPath ~ image.photo)}}"> 
+          {% endif %}
         </a>
         {% endfor %}
     </div>
