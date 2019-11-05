@@ -3748,8 +3748,8 @@ body.is-preload #banner:after {
   width: 100%;
   left: 0;
   bottom: -100%;
-  background-color: #27221538;
-  transition: 500ms all;
+  /* background-color: #27221538; */
+  transition: 500ms ease-in-out;
   color: #fff;
   text-align: center;
   padding-top: 35px;
