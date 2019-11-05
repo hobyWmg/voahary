@@ -247,7 +247,7 @@ img {
   {# <img id="sample-watch" src="https://i.imgur.com/jnRTmfe.jpg" alt="Sample image" class="zoom" data-magnify-src="https://i.imgur.com/jnRTmfe.jpg" style="display: block;">
   <img  id ="sample-watch" alt="Sample image" src="{{asset(produit.imageEnAvant.webPath ~ produit.imageEnAvant.photo)}}" data-magnify-src="{{asset(produit.imageEnAvant.webPath ~ produit.imageEnAvant.photo)}}" class="zoom"> #}
   <h2>{{produit.titre}}</h2>
-  <p>{{produit.description}}</p>
+  <p>{{produit.description|raw}}</p>
   <a href="javascript:void(0);" class="btn vh-info" style='text-decoration:none;'  id="vonaina" data-titre='{{produit.titre}}'>Plus d'info</a>
   
   </div>
