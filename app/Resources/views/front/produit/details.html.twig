@@ -34,9 +34,9 @@ img {
  * Container Styles
  */
 .container {
-  max-width: 30em;
+  max-width: 35em;
   margin: 0 auto;
-  padding: 1em;
+  padding: 0em 1em 1em 1em;
 }
 
 /**
@@ -181,9 +181,7 @@ img {
 {% endblock %}
 
 {% block body %}
-  <div class="row" style="
-    opacity: 0.5;
-">
+  <div class="row" style="opacity: 0.5;margin:0px 15px 0px 5px;">
     <div class="col-md-6" style="
     padding-left: 10px;
 ">
@@ -199,16 +197,6 @@ img {
   </div>
   <div class="row" style="margin-top:30px;">
     <div class="col-md-6">
-        {# <div class="owl-carousel slide" data-slider-id="1">
-          <div class="">
-            <img src="{{asset(produit.imageEnAvant.webPath ~ produit.imageEnAvant.photo)}}" data-magnify-src="{{asset(produit.imageEnAvant.webPath ~ produit.imageEnAvant.photo)}}">
-          </div>
-            {% for image in produit.otherImages %}
-            <div class="">
-              <img src="{{asset(image.webPath ~ image.photo)}}" data-magnify-src="{{asset(image.webPath ~ image.photo)}}" class="show-small-img" alt="">
-            </div>
-          {% endfor %}   
-        </div>     #}
         <div class="container">
 
   <!-- Gallery -->
@@ -245,7 +233,7 @@ img {
  </div><!--.container-->
     </div>
 
-  <div class="info-p col-md-6" style="text-align:left">
+  <div class="info-p col-md-6" style="text-align:left;padding:0px 32px 0px 32px !important">
   {# <img id="sample-watch" src="https://i.imgur.com/jnRTmfe.jpg" alt="Sample image" class="zoom" data-magnify-src="https://i.imgur.com/jnRTmfe.jpg" style="display: block;">
   <img  id ="sample-watch" alt="Sample image" src="{{asset(produit.imageEnAvant.webPath ~ produit.imageEnAvant.photo)}}" data-magnify-src="{{asset(produit.imageEnAvant.webPath ~ produit.imageEnAvant.photo)}}" class="zoom"> #}
   <h2>{{produit.titre}}</h2>
@@ -254,6 +242,10 @@ img {
   
   </div>
 </div>
+</div>
+<div class="row" style="margin:25px 15px 0px 15px;border-top:solid 1px #e3e6ea;">
+<h2 class="eoah font-style">Autres produits</h2>
+{% include 'front/produit/list.html.twig' %}
 </div>
 {% endblock %}
 

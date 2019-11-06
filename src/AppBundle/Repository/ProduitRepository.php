@@ -60,4 +60,11 @@ class ProduitRepository extends \Doctrine\ORM\EntityRepository
         ;
         return  $qb->getQuery()->getOneOrNullResult();
     }
+    public function getOtherProduct($p){
+        $qb = $this->createQueryBuilder('p')
+        ->where('p.id !=:id')
+        ->setMaxResults('5')
+        ->setParameter('id',$p->getId());
+        return $qb->getQuery()->getResult();
+    }
 }

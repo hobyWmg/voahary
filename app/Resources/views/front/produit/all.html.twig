@@ -1,12 +1,15 @@
 {% extends 'base_interne.html.twig' %}
 {% block body %}
-<div class="row" style="justify-content:flex-end; margin-top:15px;">
+<div class="row" style="justify-content:flex-end; margin:15px 15px 0px 15px;">
     <div class="col-lg-3">
         <form method="POST" action="{{path('voahary_all_produits')}}" autocomplete="off">
             <input type="text" id="search" class="form-control" placeholder="Recherche ..." name="search">
         </form>
     </div>
 </div>
+<h2 class="eoah font-style col-lg-12" style="text-align:center">Nos Produits</h2>
+      <p class="space">Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500</p>
+
 <div id="tata" style="
     width: 90%;
     display: inline-flex;

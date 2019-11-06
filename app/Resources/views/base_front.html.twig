@@ -12,6 +12,7 @@
         <link rel="stylesheet" type="text/css" href="{{asset('bundles/app/plugins/owlcarousel/owl.theme.default.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('bundles/app/plugins/animate/css/animations.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('bundles/app/fonts/font-awesome.css')}}">
+        <link href='https://fonts.googleapis.com/css?family=Allura' rel='stylesheet'>
         <style>
             body{
     overflow-x: hidden;
@@ -62,7 +63,7 @@
 }
 .nav-bar ul a{
   text-decoration: none;
-  color: #1d8d7d !important
+  /*color: #1d8d7d !important*/
 }
 .nav-bar ul li{
   margin-right: 15px;
@@ -96,10 +97,44 @@ color: #fff;
 top: -4rem;
 position: relative;
 }
+.eoah{
+  color :#d3a62a !important;
+}
+.font-style{
+  font-family: 'Allura';
+  font-weight:bold;
+  font-size: 30px;
+}
+p.space{
+ color:#637485;
+font-size: 16px;
+line-height: 1.6;
+display: inline-block;
+width: 80%;
+word-spacing: 0px;
+letter-spacing: 0.1px;
+/*margin-bottom: 60px;*/
+}
+.clearfix li:hover a{
+  color:#637485;
+}
+.no-js #loader { display: none;  }
+.js #loader { display: block; position: absolute; left: 100px; top: 0; }
+.se-pre-con {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background: url(http://smallenvelop.com/wp-content/uploads/2014/08/Preloader_11.gif) center no-repeat #fff;
+}
+
         </style>
         {% endblock %}
     </head>
     <body>
+    {# <div class="se-pre-con"></div> #}
     {% block flashMessages %}
             {% include ':Menu:flashes.html.twig' %}
         {% endblock %}
@@ -113,7 +148,7 @@ position: relative;
 	</span>
   
 	<div class="nav-bar animated bounceInDown">
-            <ul class="clearfix">
+            <ul class="clearfix" style="font-weight:bold">
               <li> <a href="javascript:void(0);" onClick="goToTarget('one')">Nos produits</a>  </li>
               <li class="active">
                 <a href="javascript:void(0);" onClick="goToTarget('two')">Nos atouts</a> 
@@ -142,16 +177,20 @@ position: relative;
 	{{ render(controller('AppBundle:Front:carousel')) }}
 </section>
 
-<section id="one" class="section_one wrapper style2 animatedParent animateOnce">
-	<div class="inner  ">
-		<section class="spotlights">
+<section id="one" class="section_one wrapper style2 animatedParent animateOnce" style="margin: 25px 0px 30px 0px;">
+  <div class="inner">
+		<section class="spotlights" style="text-align: center;">
+      <h2 class="eoah font-style col-lg-12" style="text-align:center">Nos Produits</h2>
+      <p class="space">Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500</p>
 		{{ render(controller('AppBundle:Front:produitList')) }}
-	</section>	
+	  </section>
+    
   </div>
-  <a id="plus-produit" class="animated bounceInRight " href="{{path('voahary_all_produits')}}">Voir plus</a>
+  <a href="{{path('voahary_all_produits')}}" id="plus-produit" class="animated bounceInRight">Voir plus</a>
 </section>
 
 <section id="two" class="section_two wrapper style1 special  animatedParent go">
+  {# <h2 class="eoah font-style col-lg-12">Nos Produit</h2> #}
   {% include 'front/atout.html.twig' %}
 </section>
 
@@ -175,18 +214,22 @@ position: relative;
         <script src="{{asset('bundles/app/bootstrap/js/bootstrap.min.js')}}"></script>
         <script src="{{asset('bundles/app/plugins/owlcarousel/owl.carousel.min.js')}}"></script>
         <script src="{{asset('bundles/app/plugins/animate/js/css3-animate-it.js')}}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
         <script type="text/javascript">	
+        //paste this code under the head tag or in a separate js file.
+	// Wait for window load
+	{# $(window).load(function() {
+		// Animate loader off screen
+		$(".se-pre-con").fadeOut("slow");
+	}); #}
         $(document).ready(function(){
-        
         $('.owl-carousel').owlCarousel({
             loop:true,
             margin:10,
-            nav:true,
             items:1,
-            autoplay:true,
+            autoplay:false,
             autoplayHoverPause:true,
             nav:false,
-            transitionStyle : "fade",
             autoplaySpeed:800,
             navSpeed:3000,
         })

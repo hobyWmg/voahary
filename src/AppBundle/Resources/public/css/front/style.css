@@ -2463,7 +2463,7 @@ table.alt tbody tr td {
  color: #39a288;
 }
 .wrapper {
- padding: 6em 0 4em 0 ;
+ padding: 2em 0 2em 0 ;
  position: relative;
 }
 .wrapper:before,
@@ -2473,7 +2473,7 @@ table.alt tbody tr td {
 .wrapper > .inner {
  margin: 0 auto;
  max-width: 75em;
- width: 80%;
+ width: 90%;
 }
 .wrapper:before,
 .wrapper:after {
@@ -2911,7 +2911,7 @@ table.alt tbody tr td {
 }
 @media screen and (max-width: 1280px) {
  .wrapper {
-  padding: 5em 0 3em 0 ;
+  padding: 2em 0 2em 0 ;
  }
  .wrapper:before,
  .wrapper:after {

@@ -72,11 +72,12 @@ class FrontController extends Controller
         $repoP = $em->getRepository('AppBundle:Produit');
         // $next = $repoP->find($produit->getId()+1);
         // $prev = $repoP->find($produit->getId()+-1);
+        $produits = $repoP->getOtherProduct($produit);
         $next = $repoP->getNextProduit($produit->getId());
         $prev = $repoP->getPreviousProduit($produit->getId());
         $haveNext =($next)?$next:false;
         $havePrev =($prev)?$prev:false;
-        return $this->render('front/produit/details.html.twig',['produit'=> $produit,'havePrev'=>$havePrev, 'haveNext'=> $haveNext]);
+        return $this->render('front/produit/details.html.twig',['produit'=> $produit,'havePrev'=>$havePrev, 'haveNext'=> $haveNext, 'produits'=>$produits]);
     }
     /**
      * @Route("/produit-all", name="voahary_all_produits", methods={"GET","POST"})
