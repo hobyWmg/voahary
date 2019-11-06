@@ -2920,7 +2920,7 @@ table.alt tbody tr td {
 }
 @media screen and (max-width: 980px) {
  .wrapper {
-  padding: 4em 0 2em 0 ;
+  padding: 2em 0 2em 0 ;
  }
  .wrapper:before,
  .wrapper:after {
@@ -3720,7 +3720,7 @@ body.is-preload #banner:after {
   position: relative;
   padding: 0px !important;
   margin: 0 0px 5px 0;
-  height: 200px;
+  height: 230px;
   overflow: hidden;
   border-radius: .5rem;
   /*height: 10rem;
@@ -3733,7 +3733,7 @@ body.is-preload #banner:after {
     /* max-width: 200px; */
     /* height: auto; */
     /* border-radius: .5rem; */
-    min-height: 200px;
+    min-height: 230px;
     margin-bottom: -10px !important;
     max-height: 100%;
     margin: 0 auto;
