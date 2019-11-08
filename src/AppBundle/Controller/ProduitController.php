@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Produit controller.
@@ -28,6 +29,7 @@ class ProduitController extends Controller
         $em = $this->getDoctrine()->getManager();
         $param = [];
         $produits = $em->getRepository('AppBundle:Produit')->getAllProduct($param);
+        // dump($produits);die;
         return $this->render('produit/index.html.twig', array(
             'produits' => $produits,
         ));
@@ -181,6 +183,50 @@ class ProduitController extends Controller
         $this->addFlash('success', "");
          return $this->redirectToRoute('voaharyadmin_produit_edit',['id'=> $produit->getId()]);    
         }
+     /**
+     * Displays a form to edit an existing produit entity.
+     *
+     * @Route("/update_order/raw", name="voaharyadmin_update_order")
+     * @Method({"GET","POST"})
+     */
+    public function updateOrderAction(){
+        $em = $this->getDoctrine()->getManager();
+        $produits = $em->getRepository('AppBundle:Produit')->findAll();
+        foreach($produits as $k => $p){
+                $p->setOrdre($k);
+                $em->persist($p);
+        }
+        $em->flush();
+        $this->addFlash('success', "");
+        return $this->render('produit/index.html.twig', array(
+            'produits' => $produits,
+        ));
+    }  
+     /**
+     *
+     * @Route("/{id}/updateposition_produit", name="voaharyadmin_update_position_produit")
+     * @Method({"POST"})
+     */
+    public function updatePositionAction(Request $request, $id){
+        $em = $this->getDoctrine()->getManager();
+        $p  = $em->getRepository('AppBundle:Produit')->find($id);
+        $number = $request->request->get('ordre');
+
+        try {
+            $p->setOrdre($number);
+            $em->persist($p);
+            $em->flush();
+
+            $message = 'L\'ordre a été mis à jour';
+        } catch (\Exception $exc) {
+            $error = 'Il y a une erreur lors du mis à jour';
+        }
+        $response = new JsonResponse();
+        $response->setData(array(
+            'message' => isset($message) ? $message : '',
+            'error' => isset($error) ? $error : ''
+        ));
+        return $response;
+    } 
 
     }
-

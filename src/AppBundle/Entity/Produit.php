@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Produit
@@ -45,6 +47,14 @@ class Produit
      * @ORM\OneToMany(targetEntity="Image", mappedBy="produit", cascade={"remove"})
      */
     private $otherImages;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ordre", type="integer", nullable=true)
+     * @Gedmo\SortablePosition
+     */
+    private $ordre;
 
 
     /**
@@ -169,5 +179,29 @@ class Produit
     public function getOtherImages()
     {
         return $this->otherImages;
+    }
+
+    /**
+     * Set ordre
+     *
+     * @param integer $ordre
+     *
+     * @return Produit
+     */
+    public function setOrdre($ordre)
+    {
+        $this->ordre = $ordre;
+
+        return $this;
+    }
+
+    /**
+     * Get ordre
+     *
+     * @return integer
+     */
+    public function getOrdre()
+    {
+        return $this->ordre;
     }
 }

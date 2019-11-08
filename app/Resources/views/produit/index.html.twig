@@ -4,22 +4,29 @@
     <h1 class='title'>Produits list -  {{produits|length}} produits</h1>
     <a class='btn btn-success btn-add' href="{{ path('voaharyadmin_produit_new') }}">Ajouter</a>
     <div class='bg-content'>
-        <table class='table table-datatable do-datatable'>
+        <table class='table table-datatable list-data table-hover table-list-dragdrop' id='table-list-produit'>
             <thead>
                 <tr>
                     {# <th>Id</th> #}
+                    <th width="10%"></th>
                     <th>Titre</th>
                     <th width="40%">Description</th>
+                    <th>Ordre</th>
                     <th>Image</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
             {% for produit in produits %}
-                <tr>
-                    {# <td><a href="{{ path('voaharyadmin_produit_show', { 'id': produit.id }) }}">{{ produit.id }}</a></td> #}
+                <tr data-url="{{ path('voaharyadmin_update_position_produit', {'id': produit.id}) }}">
+                    <td data-num="{{ produit.ordre }}" data-id="{{ produit.id }}">
+                                    <button type="button" class="btn btn-default btn-flat drag-element btn-social">
+                                        <i class="fa fa-arrows fa-lg"></i>#<span class="sortable-index">{{ produit.ordre + 1 }}</span>
+                                    </button>
+                    </td>
                     <td>{{ produit.titre }}</td>
                     <td>{{ produit.description|truncate(200) }}</td>
+                     <td>{{ produit.ordre }}</td>
                      <td><img style="width:100px; height:100px;" src="{{asset(produit.imageEnAvant.webPath~ produit.imageEnAvant.photo)}}"/></td>
                     <td>
                         <ul>
@@ -37,4 +44,76 @@
             </tbody>
         </table>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+{{ parent() }}
+<script src="{{ asset('bundles/app/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('bundles/app/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
+<script src="{{ asset('bundles/app/plugins/iCheck/icheck.min.js') }}"></script>
+<script src="{{ asset('bundles/app/plugins/datatables/extensions/RowReorder/js/dataTables.rowReorder.min.js') }}"></script>
+<script src="{{ asset('bundles/app/js/jquery-sortable.js') }}"></script>
+<script>
+    $(document).ready(function(){
+        $('#table-list-produit').DataTable( {
+            rowReorder: true,
+            bPaginate: false,
+            bFilter: false,
+            bInfo: false,
+        } );
+
+        $('.table-list-dragdrop').sortable({
+            handle: '.drag-element',
+            containerSelector: 'table',
+            itemPath: '> tbody',
+            itemSelector: 'tr',
+            placeholderClass: 'placeholder',
+            placeholder: '<tr class="placeholder"/>',
+            pullPlaceholder: true,
+            onDragStart: function ($item, container) {
+                if (!$('.callout.alert').hasClass('hidden')) {
+                    $('.callout.alert').addClass('hidden');
+                    $('.callout.alert').removeClass('callout-success alert-success');
+                }
+                $item.addClass(container.group.options.draggedClass);
+                $("body").addClass(container.group.options.bodyClass);
+            },
+            onDrop: function ($item, container) {
+                var number = $item.index();
+                $.ajax({
+                    url: $item.data('url'),
+                    dataType: 'json',
+                    type: 'POST',
+                    data: {
+                        ordre: number,
+                    },
+                    success: function (response) {
+                        $('.flashbag').addClass('hidden');
+                        $('.callout.alert').removeClass('hidden');
+                        if (response.message) {
+                            $('.callout.alert p').html(response.message);
+                            $('.callout.alert').addClass('callout-success alert-success');
+                        }
+                        if (response.error) {
+                            $('.callout.alert p').html(response.error);
+                            $('.callout.alert').addClass('callout-danger alert-danger');
+                        }
+                    }
+                });
+
+                $('.sortable-index').each(function(index){
+                    var index1 = index + 1;
+                    $(this).text(index1);
+                });
+
+                $item.removeClass(container.group.options.draggedClass).removeAttr("style");
+                $("body").removeClass(container.group.options.bodyClass);
+            }
+        });
+
+    });
+</script>
+
 {% endblock %}

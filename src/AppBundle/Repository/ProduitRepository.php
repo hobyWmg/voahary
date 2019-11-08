@@ -12,15 +12,15 @@ class ProduitRepository extends \Doctrine\ORM\EntityRepository
 {
     public function getProduitEnAvant(){
             $qb = $this->createQueryBuilder('p')
-            ->addOrderBy('p.id','DESC')
+            ->addOrderBy('p.ordre','ASC')
             ->setMaxResults('16');
             return $qb->getQuery()->getResult();
     }
 
     public function getAllProduct($param){
         $qb = $this->createQueryBuilder('p')
-        ->addOrderBy('p.id','DESC');
-
+        ->addOrderBy('p.ordre','ASC');
+        // ->setMaxResults('3');
         if(isset($param['search'])){
                 $word = $param['search'];
                 $qb->where(
